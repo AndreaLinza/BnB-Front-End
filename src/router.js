@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from "./pages/Home.vue";
+import ApartmentShowPage from "./pages/ApartmentShow.vue";
 
 const routes = [
   {  //HOME
@@ -8,6 +9,12 @@ const routes = [
     name: "home",
     component: HomePage,
   },
+  { //SHOW
+    path:'/apartments/:slug',
+    name:'apartments.show',
+    component: ApartmentShowPage,
+  }
+
 
   //{ //NOT FOUND
   //  path: "/:pathMatch(.*)*",
