@@ -96,11 +96,10 @@ nav {
             &::placeholder {
                 color: white;
             }
+        }
 
-            &:focus {
-                border-color: transparent;
-                box-shadow: 0 0 0 0.25rem, transparent;
-            }
+        .form-control:focus {
+            box-shadow: none;
         }
     }
 
