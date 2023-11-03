@@ -58,7 +58,7 @@ export default {
     }
 
     .card-travel {
-        background-color: $CarribeanCurrent;
+        background-color: $secondary-color;
         border-radius: 5px;
 
         img {
@@ -72,7 +72,7 @@ export default {
 
         h5 {
             margin: 0;
-            color: $Silver;
+            color: $primary-color;
         }
     }
 }

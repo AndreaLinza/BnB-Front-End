@@ -45,8 +45,8 @@ export default {
 @use "../style/partials/variables" as *;
 
 .my-card-box {
-    background-color: $Eggplant;
-    color: $Silver;
+    background-color: $partial-primary-color;
+    color: $primary-color;
     height: 100%;
     width: 100%;
     cursor: pointer;
@@ -58,7 +58,7 @@ export default {
         padding: 1rem 0;
         font-weight: bold;
         font-size: 1rem;
-        color: $Arancione;
+        color: $partial-secondary-color;
     }
 
     &:hover {

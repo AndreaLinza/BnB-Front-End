@@ -126,8 +126,8 @@ export default {
 @use "../style/partials/variables" as *;
 
 .card {
-    border-color: $Silver;
-    background-color: $Silver;
+    border-color: $primary-color;
+    background-color: $primary-color;
     cursor: pointer;
     transition: all .5s;
 
@@ -140,11 +140,11 @@ export default {
     }
 
     h5 {
-        color: $CarribeanCurrent;
+        color: $secondary-color;
     }
 
     p {
-        color: $Eggplant;
+        color: $partial-primary-color;
     }
 
     &:hover {
