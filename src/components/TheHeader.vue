@@ -27,7 +27,7 @@ export default {
 
                     <!-- SearchBar -->
 
-                    <form class="d-flex input-group w-50 mx-auto shadow-lg" role="search">
+                    <form class="d-flex input-group w-50 mx-auto search-bar" role="search">
                         <button class="btn btn-outline-personal" type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -50,7 +50,7 @@ export default {
                                 aria-expanded="false">
                                 Account
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <ul class="dropdown-menu dropdown-menu-lg-end dd-bg">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li>
@@ -75,6 +75,34 @@ export default {
 
 
 nav {
+    .search-bar {
+        border-bottom: 2px solid white;
+
+        button {
+            background-color: transparent !important;
+            border-color: transparent;
+            border: none;
+
+            &:hover {
+                color: $partial-secondary-color;
+            }
+        }
+
+        .form-control {
+            background-color: transparent !important;
+            border-color: transparent;
+            color: white;
+
+            &::placeholder {
+                color: white;
+            }
+
+            &:focus {
+                border-color: transparent;
+                box-shadow: 0 0 0 0.25rem, transparent;
+            }
+        }
+    }
 
     position: fixed;
     width: 100%;
@@ -83,6 +111,25 @@ nav {
 
     a {
         color: white !important;
+        font-weight: bold;
+
+        &:hover {
+            color: $partial-secondary-color !important;
+        }
+    }
+
+    .dd-bg {
+        background-color: $secondary-color;
+        border-color: white;
+
+        & a {
+            font-weight: lighter;
+        }
+
+        & a:hover {
+            background-color: $partial-secondary-color !important;
+            color: white !important;
+        }
     }
 
     .navbar-toggler {
@@ -91,7 +138,7 @@ nav {
         border: var(--bs-border-width) solid white;
 
 
-        &:focus{
+        &:focus {
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
         }
     }
