@@ -1,27 +1,18 @@
 <script>
+import StrengthsSection from '../components/StrengthsSection.vue';
 
 export default {
-
-
+    components: {
+        StrengthsSection
+    },
 }
-
 </script>
 
 <template>
-
-<h1>Ciao Elisa</h1>
-
+    <StrengthsSection></StrengthsSection>
 </template>
-
-
-
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
-
-h1{
-color: black;
-}
-
 
 </style>
