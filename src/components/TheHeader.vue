@@ -1,8 +1,11 @@
 <script>
 
+import AdvancedFilters from '../components/advanced_research/Filters.vue';
+
 export default {
-
-
+    components: {
+        AdvancedFilters,
+    },
 }
 
 </script>
