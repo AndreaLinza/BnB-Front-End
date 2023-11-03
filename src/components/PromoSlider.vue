@@ -77,9 +77,9 @@ export default {
 
         },
         onNextClick() {
-                 //0      //1       //2      //3     //4      //5      //6       //7     //0 
-                // 0 1 2 -> 1 2 3 -> 2 3 4 -> 3 4 5 -> 4 5 6 -> 5 6 7 -> 6 7 0 -> 7 0 1 -> 0 1 2             
-                this.currentSlide++; 
+             //0      //1       //2      //3     //4      //5      //6       //7     //0 
+            // 0 1 2 -> 1 2 3 -> 2 3 4 -> 3 4 5 -> 4 5 6 -> 5 6 7 -> 6 7 0 -> 7 0 1 -> 0 1 2             
+            this.currentSlide++; 
         },
     },
 }
@@ -91,19 +91,19 @@ export default {
         <!-- Sezione carosello per dispositivi più grandi di 769px -->
         <div class="slider-container">
             <div class="promo-slider-box">
-                    <div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
-                        <div v-for="(card, i) in visibleSlide" :key="i" class="col">
-                            <div class="card">
-                                <img :src="card.img" class="card-img-top" :alt="card.title">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start justify-content-between">
-                                        <h5 class="card-title">{{ card.title }}</h5>
-                                    </div>
-                                    <p class="card-text">{{ card.description }}</p>
+                <div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
+                    <div v-for="(card, i) in visibleSlide" :key="i" class="col">
+                        <div class="card">
+                            <img :src="card.img" class="card-img-top" :alt="card.title">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start justify-content-between">
+                                    <h5 class="card-title">{{ card.title }}</h5>
                                 </div>
+                                <p class="card-text">{{ card.description }}</p>
                             </div>
                         </div>
                     </div>
+                </div>
                 <!-- Pulsanti di navigazione -->
                 <div class="prev text-center" @click="onPrevClick">
                     <button type="button" class="btn btn-primary">
