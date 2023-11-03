@@ -19,7 +19,7 @@ export default {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="h-100"><img src="../../public/navicon.png" style="width:40px" alt=""></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -85,25 +85,15 @@ nav {
         color: white !important;
     }
 
-
-
     .navbar-toggler {
-        padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
-        font-size: var(--bs-navbar-toggler-font-size);
-        line-height: 1;
-        color: var(--bs-navbar-color);
-        background-color: transparent;
+        padding: 0.2rem 0.6rem;
+        background-color: white;
         border: var(--bs-border-width) solid white;
-        border-radius: var(--bs-navbar-toggler-border-radius);
-        transition: var(--bs-navbar-toggler-transition);
 
-        .navbar-toggler-icon {
 
-            span {
-                color: #ffffff !important;
-            }
+        &:focus{
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
         }
-
     }
 
 
