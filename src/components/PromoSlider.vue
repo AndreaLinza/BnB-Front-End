@@ -133,6 +133,10 @@ export default {
 
     img {
         transition: all .5s;
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
     h5 {
