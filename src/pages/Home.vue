@@ -1,11 +1,13 @@
 <script>
 import PromoSlider from '../components/PromoSlider.vue';
 import StrengthsSection from '../components/StrengthsSection.vue';
+import TravelTips from '../components/TravelTips.vue';
 
 export default {
     components: {
         PromoSlider,
-        StrengthsSection
+        StrengthsSection,
+        TravelTips
     },
 }
 </script>
@@ -45,6 +47,8 @@ export default {
             </div>
         </div>
     </div>
+
+    <TravelTips></TravelTips>
 </template>
 
 <style lang="scss" scoped>
