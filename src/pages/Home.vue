@@ -23,7 +23,7 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="offcanvas-body container">
+            <div class="offcanvas-body container d-flex flex-wrap">
                 <Filters></Filters>
             </div>
         </div>
@@ -68,6 +68,13 @@ export default {
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
+
+// ======OFFCANVAS======
+.offcanvas.offcanvas-top {
+    height: 50vh;
+}
+
+// =====================
 
 .offcanvas-top {
     background-color: transparent;

@@ -14,10 +14,10 @@ export default {
 <template>
   <form action="">
     <div class="container">
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap container">
         <!--Numero di stanze-->
         <div class="radio-dist">
-          <div class="d-flex align-items-center ">
+          <div class="d-flex align-items-center flex-wrap">
             <span class="text-white fw-bold ms-2 ">Quantità di stanze</span>
             <div class="deco-line"></div>
           </div>
@@ -134,13 +134,15 @@ export default {
         </div>
       </div>
     </div>
-    <div class="text-center"><button class="general-btn fw-bold">Cerca</button></div>
+    <div class="text-center mt-auto"><button class="general-btn fw-bold">Cerca</button></div>
   </form>
 </template>
 
 
 <style lang="scss" scoped>
 @use '../../style/partials/variables' as *;
+
+$offcanvas-height: 50vh;
 
 .deco-line {
   height: 2px;
@@ -155,6 +157,8 @@ export default {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+
 
 // ======CHECKBOX======
 .checkbox-wrapper-23 *,
