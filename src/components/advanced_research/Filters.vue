@@ -1,48 +1,33 @@
 <script>
-import axios from "axios";
+import { store, fetchApartments, fetchServices } from "../../store";
 
 export default {
-
   data() {
     return {
-      services: [],
-      apartments:[],
-      filter: 
-        {
-          'rooms_number' :'3',
-          'beds_number' :'',
-          'bathrooms_number' :'',
-          services:[]
-        },
-
-    }
+      store,
+      filter: {
+        'rooms_number': '',
+        'beds_number': '',
+        'bathrooms_number': '',
+        services: []
+      },
+    };
   },
   methods: {
-    fetchServices() {
-      axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
-        this.services = response.data.services;
-        //console.log(this.servizi)
-      })
-    },
-    fetchApartments() {
-      axios.get('http://127.0.0.1:8000/api/apartments' , {params:this.filter} ).then((response) => {
-        this.apartments = response.data.apartments;
-        console.log(this.apartments);
-      })
+    submitResearch(){
+      fetchApartments(this.filter)
+      this.$router.push({ name: 'search', route: "search" });
     }
   },
   mounted() {
-    this.fetchServices();
-    this.fetchApartments();
-
-
-  }
+    fetchServices();
+  },
 }
 </script>
 
 
 <template>
-  <form action="POST" @submit.prevent="fetchApartments()" class="container justify-content-center">
+  <form action="POST" @submit.prevent="submitResearch()" class="container justify-content-center">
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <!--Numero di stanze-->
@@ -188,20 +173,16 @@ export default {
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="km" id="km0" autocomplete="off"
-            v-model="filter.km" value="0">
+          <input type="radio" class="btn-check" name="km" id="km0" autocomplete="off" v-model="filter.km" value="0">
           <label class="btn btn-outline-personal" for="km0">Centro</label>
 
-          <input type="radio" class="btn-check" name="km" id="km1" autocomplete="off"
-            v-model="filter.km" value="1">
+          <input type="radio" class="btn-check" name="km" id="km1" autocomplete="off" v-model="filter.km" value="1">
           <label class="btn btn-outline-personal" for="km1">2-5km</label>
 
-          <input type="radio" class="btn-check" name="km" id="km2" autocomplete="off"
-            v-model="filter.km" value="2">
+          <input type="radio" class="btn-check" name="km" id="km2" autocomplete="off" v-model="filter.km" value="2">
           <label class="btn btn-outline-personal" for="km2">5-20km</label>
 
-          <input type="radio" class="btn-check" name="km" id="km3" autocomplete="off"
-            v-model="filter.km" value="3">
+          <input type="radio" class="btn-check" name="km" id="km3" autocomplete="off" v-model="filter.km" value="3">
           <label class="btn btn-outline-personal" for="km3">10-20km</label>
         </div>
 
@@ -231,9 +212,8 @@ export default {
     <!--Servizi-->
     <h5 class="text-white mt-5">Servizi</h5>
     <div class=" d-flex flex-wrap pt-3">
-      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  services ">
-        <input type="checkbox" :id="`${i}`"
-        v-model="filter.services" :value="service">
+      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  store.services ">
+        <input type="checkbox" :id="`${i}`" v-model="filter.services" :value="service.id">
         <label :for="`${i}`" style="--size: 30px">
           <svg viewBox="0,0,50,50">
             <path d="M5 30 L 20 45 L 45 5"></path>
@@ -243,7 +223,12 @@ export default {
       </div>
     </div>
 
-    <div class="text-center mt-4"><button class="general-btn fw-bold">Cerca</button></div>
+    <div class="text-center mt-4">
+      <button class="general-btn fw-bold" type="submit">
+          Salva
+      </button>
+    </div>
+
   </form>
 </template>
 
