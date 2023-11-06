@@ -1,5 +1,5 @@
 <script>
-
+import { store, fetchApartments } from "../store";
 
 export default {
   components: {
@@ -7,12 +7,22 @@ export default {
   },
   data() {
     return {
+      store,
       searchPage: {
         title: "search",
         route: "search",
       },
+      filter: {
+        city: '',
+      },
     }
-  }
+  },
+  methods: {
+    submitResearch() {
+      fetchApartments(this.filter)
+      this.$router.push({ name: 'search', route: "search" });
+    }
+  },
 }
 
 </script>
@@ -22,8 +32,8 @@ export default {
     <nav class="navbar navbar-expand-lg shadow-lg">
       <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="/"><img src="../../public/LogoBnb_white.png" alt="LogoB'n'B"
-            style="width: 80px;"></a>
+        <router-link class="navbar-brand" :to='{ name: "home" }'><img src="../../public/LogoBnb_white.png" alt="LogoB'n'B"
+            style="width: 80px;"></router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="h-100"><img src="../../public/navicon.png" style="width:40px" alt=""></span>
@@ -34,13 +44,12 @@ export default {
 
           <!-- SearchBar -->
 
-          <form class="d-flex input-group w-50 mx-auto search-bar" role="search">
+          <form class="d-flex input-group w-50 mx-auto search-bar" action="POST" @submit.prevent="submitResearch()"
+            role="search">
             <button class="btn btn-outline-personal" type="submit">
-              <router-link :to="{ name: searchPage.route }">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </router-link>
+              <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" v-model="filter.city">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
               aria-controls="offcanvasTop">Toggle top offcanvas</button>
           </form>
@@ -49,7 +58,7 @@ export default {
           <!--  -->
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <router-link class="nav-link active" aria-current="page" :to='{ name: "home" }'>Home</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Chi Siamo</a>

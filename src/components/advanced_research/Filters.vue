@@ -1,15 +1,10 @@
 <script>
-import { RouterLink } from "vue-router";
-import { store, fetchApartments } from "../../store";
+import { store, fetchApartments, fetchServices } from "../../store";
 
 export default {
   data() {
     return {
       store,
-      searchPage: {
-        title: "search",
-        route: "search",
-      },
       filter: {
         'rooms_number': '',
         'beds_number': '',
@@ -19,18 +14,20 @@ export default {
     };
   },
   methods: {
-    fetchApartments,
+    submitResearch(){
+      fetchApartments(this.filter)
+      this.$router.push({ name: 'search', route: "search" });
+    }
   },
   mounted() {
-    fetchApartments(this.filter);
+    fetchServices();
   },
-  components: { RouterLink }
 }
 </script>
 
 
 <template>
-  <form action="POST" @submit.prevent="fetchApartments(filter)" class="container justify-content-center">
+  <form action="POST" @submit.prevent="submitResearch()" class="container justify-content-center">
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <!--Numero di stanze-->
