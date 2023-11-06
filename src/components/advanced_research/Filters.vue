@@ -1,42 +1,64 @@
 <script>
+import axios from "axios";
 
 export default {
 
   data() {
     return {
-
+      services: [],
+      apartments: [],
     }
+  },
+  methods: {
+    fetchServices() {
+      axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
+        this.services = response.data.services;
+      })
+    },
+    fetchApartments() {
+      axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
+        this.apartments = response.data.apartments;
+      })
+    }
+  },
+  mounted() {
+    this.fetchServices();
+    this.fetchApartments();
   }
 }
 </script>
 
 
 <template>
-  <form action="" class="container justify-content-center">
+  <form action="POST" @submit.prevent="fetchApartments()" class="container justify-content-center">
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
-          <!--Numero di stanze-->
-          <div class="col">
-            <div class="d-flex align-items-center flex-wrap">
-              <span class="text-white fw-bold ms-2 pb-2">Quantità di stanze</span>
-              <div class="deco-line"></div>
-            </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
+      <!--Numero di stanze-->
+      <div class="col">
+        <div class="d-flex align-items-center flex-wrap">
+          <span class="text-white fw-bold ms-2 pb-2">Quantità di stanze</span>
+          <div class="deco-line"></div>
+        </div>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnro" id="btnroom0" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnroom0">Nessuna</label>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnroom" id="btnroom0" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnroom0">Nessuna</label>
 
-              <input type="radio" class="btn-check" name="btnro" id="btnroom1" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnroom1">1</label>
+          <input type="radio" class="btn-check" name="btnroom" id="btnroom1" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnroom1">1</label>
 
-              <input type="radio" class="btn-check" name="btnro" id="btnroom2" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnroom2">2</label>
+          <input type="radio" class="btn-check" name="btnroom" id="btnroom2" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnroom2">2</label>
 
-              <input type="radio" class="btn-check" name="btnro" id="btnroom3" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnroom3">3+</label>
-            </div>
+          <input type="radio" class="btn-check" name="btnroom" id="btnroom3" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnroom3">3+</label>
+        </div>
 
-            <!-- <div class="radio-input">
+        <!-- <div class="radio-input">
               <label>
                 <input value="stanze-1" name="stanze" id="stanze-1" type="radio" checked="">
                 <span class="fw-bold">Nessuna</span>
@@ -55,29 +77,33 @@ export default {
               </label>
               <span class="selection"></span>
             </div> -->
-          </div>
-          <!--Numero di letti-->
-          <div class="col">
-            <div class="d-flex align-items-center ">
-              <span class="text-white fw-bold ms-2 pb-2">Quantità di letti</span>
-              <div class="deco-line"></div>
-            </div>
+      </div>
+      <!--Numero di letti-->
+      <div class="col">
+        <div class="d-flex align-items-center ">
+          <span class="text-white fw-bold ms-2 pb-2">Quantità di letti</span>
+          <div class="deco-line"></div>
+        </div>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnbe" id="btnbed0" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbed0">Nessuna</label>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnbed" id="btnbed0" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbed0">Nessuna</label>
 
-              <input type="radio" class="btn-check" name="btnbe" id="btnbed1" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbed1">1</label>
+          <input type="radio" class="btn-check" name="btnbed" id="btnbed1" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbed1">1</label>
 
-              <input type="radio" class="btn-check" name="btnbe" id="btnbed2" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbed2">2</label>
+          <input type="radio" class="btn-check" name="btnbed" id="btnbed2" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbed2">2</label>
 
-              <input type="radio" class="btn-check" name="btnbe" id="btnbed3" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbed3">3+</label>
-            </div>
+          <input type="radio" class="btn-check" name="btnbed" id="btnbed3" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbed3">3+</label>
+        </div>
 
-            <!-- <div class="radio-input">
+        <!-- <div class="radio-input">
               <label>
                 <input value="letti-1" name="letti" id="letti-1" type="radio" checked="">
                 <span class="fw-bold">Nessuna</span>
@@ -96,29 +122,33 @@ export default {
               </label>
               <span class="selection"></span>
             </div> -->
-          </div>
-          <!--Numero di  Bagni-->
-          <div class="col">
-            <div class="d-flex align-items-center ">
-              <span class="text-white fw-bold ms-2 pb-2">Quantità di bagni</span>
-              <div class="deco-line"></div>
-            </div>
+      </div>
+      <!--Numero di  Bagni-->
+      <div class="col">
+        <div class="d-flex align-items-center ">
+          <span class="text-white fw-bold ms-2 pb-2">Quantità di bagni</span>
+          <div class="deco-line"></div>
+        </div>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnbath" id="btnbath0" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbath0">Nessuna</label>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnbath" id="btnbath0" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbath0">Nessuna</label>
 
-              <input type="radio" class="btn-check" name="btnbath" id="btnbath1" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbath1">1</label>
+          <input type="radio" class="btn-check" name="btnbath" id="btnbath1" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbath1">1</label>
 
-              <input type="radio" class="btn-check" name="btnbath" id="btnbath2" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbath2">2</label>
+          <input type="radio" class="btn-check" name="btnbath" id="btnbath2" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbath2">2</label>
 
-              <input type="radio" class="btn-check" name="btnbath" id="btnbath3" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnbath3">3+</label>
-            </div>
+          <input type="radio" class="btn-check" name="btnbath" id="btnbath3" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnbath3">3+</label>
+        </div>
 
-            <!-- <div class="radio-input">
+        <!-- <div class="radio-input">
               <label>
                 <input value="bagni-1" name="bagni" id="bagni-1" type="radio" checked="">
                 <span class="fw-bold">Nessuna</span>
@@ -137,30 +167,34 @@ export default {
               </label>
               <span class="selection"></span>
             </div> -->
-          </div>
-          <!--Distanza dal centro-->
-          <div class="col">
-            <div class="d-flex align-items-center ">
-              <span class="text-white fw-bold ms-2 pb-2">Distanza centro</span>
-              <div class="deco-line"></div>
-            </div>
+      </div>
+      <!--Distanza dal centro-->
+      <div class="col">
+        <div class="d-flex align-items-center ">
+          <span class="text-white fw-bold ms-2 pb-2">Distanza centro</span>
+          <div class="deco-line"></div>
+        </div>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnkm" id="btnkm0" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnkm0">Centro</label>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnkm" id="btnkm0" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnkm0">Centro</label>
 
-              <input type="radio" class="btn-check" name="btnkm" id="btnkm1" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnkm1">2-5km</label>
+          <input type="radio" class="btn-check" name="btnkm" id="btnkm1" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnkm1">2-5km</label>
 
-              <input type="radio" class="btn-check" name="btnkm" id="btnkm2" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnkm2">5-20km</label>
+          <input type="radio" class="btn-check" name="btnkm" id="btnkm2" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnkm2">5-20km</label>
 
-              <input type="radio" class="btn-check" name="btnkm" id="btnkm3" autocomplete="off">
-              <label class="btn btn-outline-personal" for="btnkm3">10-20km</label>
-            </div>
+          <input type="radio" class="btn-check" name="btnkm" id="btnkm3" autocomplete="off"
+            :v-model="this.fetchApartments">
+          <label class="btn btn-outline-personal" for="btnkm3">10-20km</label>
+        </div>
 
 
-            <!-- <div class="radio-input">
+        <!-- <div class="radio-input">
               <label>
                 <input value="dista-1" name="dista" id="dista-1" type="radio" checked="">
                 <span class="fw-bold">Centro</span>
@@ -179,24 +213,24 @@ export default {
               </label>
               <span class="selection"></span>
             </div> -->
-          </div>
-        </div>
-      
-      <!--Servizi-->
-      <div class="mt-4">
-        <h5 class="text-white">Servizi</h5>
-        <div class="checkbox-wrapper-23 d-flex align-items-center">
-          <input type="checkbox" id="check-23">
-          <label for="check-23" style="--size: 30px">
-            <svg viewBox="0,0,50,50">
-              <path d="M5 30 L 20 45 L 45 5"></path>
-            </svg>
-          </label>
-          <span class="text-white ps-2">Servizio 1</span>
-        </div>
       </div>
-    
-    <div class="text-center mt-auto"><button class="general-btn fw-bold">Cerca</button></div>
+    </div>
+
+    <!--Servizi-->
+    <h5 class="text-white mt-5">Servizi</h5>
+    <div class=" d-flex flex-wrap justify-content-center pt-3">
+      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  services ">
+        <input type="checkbox" :id="`${i}`">
+        <label :for="`${i}`" style="--size: 30px">
+          <svg viewBox="0,0,50,50">
+            <path d="M5 30 L 20 45 L 45 5"></path>
+          </svg>
+        </label>
+        <span class="text-white ps-2">{{ service.title }}</span>
+      </div>
+    </div>
+
+    <div class="text-center mt-4"><button class="general-btn fw-bold">Cerca</button></div>
   </form>
 </template>
 
@@ -279,38 +313,39 @@ $offcanvas-height: 50vh;
 //========RADIO ANDREA=========
 
 
-.btn-group{
+.btn-group {
   width: 100%;
 
-  label{
+  label {
     font-weight: bold;
-    &:hover{
+
+    &:hover {
       background-color: $partial-secondary-color;
       color: #fff;
     }
   }
 }
 
-  
-  .btn-outline-personal{
-    border-radius: 20px;
-    background-color: white;
-    border-color: $partial-secondary-color;
-    
-    &:hover{
-      background-color: $partial-secondary-color;
+
+.btn-outline-personal {
+  border-radius: 20px;
+  background-color: white;
+  border-color: $partial-secondary-color;
+
+  &:hover {
+    background-color: $partial-secondary-color;
   }
 }
-  
 
-.btn-check:checked + .btn{
+
+.btn-check:checked+.btn {
   color: #fff;
   border-color: $partial-secondary-color;
   background-color: $partial-secondary-color;
-  
-  &:hover{
+
+  &:hover {
     background-color: $partial-secondary-color;
-    
+
   }
 }
 

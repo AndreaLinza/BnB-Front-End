@@ -71,7 +71,7 @@ export default {
 
 // ======OFFCANVAS======
 .offcanvas.offcanvas-top {
-    height: 50vh;
+    height: 60vh;
 }
 
 // =====================
