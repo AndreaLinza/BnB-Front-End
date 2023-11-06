@@ -9,10 +9,9 @@ export default {
       apartments:[],
       filter: 
         {
-          rooms_number:'',
-          beds_number:'',
-          bathrooms_number:'',
-          //km:'',
+          'rooms_number' :'3',
+          'beds_number' :'',
+          'bathrooms_number' :'',
           services:[]
         },
 
@@ -28,6 +27,7 @@ export default {
     fetchApartments() {
       axios.get('http://127.0.0.1:8000/api/apartments' , {params:this.filter} ).then((response) => {
         this.apartments = response.data.apartments;
+        console.log(this.apartments);
       })
     }
   },
