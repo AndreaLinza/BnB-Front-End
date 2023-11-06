@@ -53,7 +53,7 @@ export default {
                                 Account
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end dd-bg">
-                                <li><a class="dropdown-item" href="#">Login</a></li>
+                                <li><a class="dropdown-item" href="http://127.0.0.1:8000/login">Login</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
