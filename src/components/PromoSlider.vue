@@ -17,23 +17,29 @@ export default {
 			const start = this.currentSlide;
 			const end = start + this.cardsForSlide;
 
-			// Se si è raggiunta la fine dell'array, riporto l'indice "currentSlide" a 0 e ritorno le prime carte dell'array
-			if (start >= this.slidePromoList.length) {
-				this.currentSlide = 0;
-				return this.slidePromoList.slice(0, this.cardsForSlide);
+			// Verifico se l'array contiene almeno 3 elementi
+			if (this.slidePromoList.length < this.cardsForSlide) {
+				return this.slidePromoList;
+			} else {
+
+				// Se si è raggiunta la fine dell'array, riporto l'indice "currentSlide" a 0 e ritorno le prime carte dell'array
+				if (start >= this.slidePromoList.length) {
+					this.currentSlide = 0;
+					return this.slidePromoList.slice(0, this.cardsForSlide);
+				}
+
+				// Se sono nei limiti dell'array, ritorno il range di carte tra l'indice di inizio e quello di fine
+				if (end <= this.slidePromoList.length) {
+					return this.slidePromoList.slice(start, end);
+				}
+
+				// Individuo le due porzioni di array da mostrare
+				const firstPart = this.slidePromoList.slice(start); // dall'indice "start" fino alla fine dell'array			
+				const secondPart = this.slidePromoList.slice(0, end - this.slidePromoList.length); // dall'inizio dell'array fino all'indice "end" sottraendo la sua lunghezza
+
+				// Restituisco le due parti concatenate
+				return firstPart.concat(secondPart);
 			}
-
-			// Se sono nei limiti dell'array, ritorno il range di carte tra l'indice di inizio e quello di fine
-			if (end <= this.slidePromoList.length) {
-				return this.slidePromoList.slice(start, end);
-			}
-
-			// Individuo le due porzioni di array da mostrare
-			const firstPart = this.slidePromoList.slice(start); // dall'indice "start" fino alla fine dell'array			
-			const secondPart = this.slidePromoList.slice(0, end - this.slidePromoList.length); // dall'inizio dell'array fino all'indice "end" sottraendo la sua lunghezza
-
-			// Restituisco le due parti concatenate
-			return firstPart.concat(secondPart);
 		},
 	},
 	methods: {
