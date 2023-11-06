@@ -45,43 +45,58 @@ export default {
 					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
 				}
 			],
-			//Counter slide
-			currentSlide: 0,
-			//Quantità di cards per slide
-			cardsForSlide: 3
+			currentSlide: 0, // counter slide
+			cardsForSlide: 3, // quantità di cards per slide
+			movingCard: false,
 		};
 	},
 	computed: {
 		// Calcola le card visibili in base all'indice corrente e al numero di card da dover mostrare
 		visibleSlide() {
-			if (this.currentSlide >= 0 && this.currentSlide < 6) {
-				return this.slidePromoList.slice(this.currentSlide, this.currentSlide + this.cardsForSlide);
-			} else if (this.currentSlide === 6) { //Una volta che il counter slide è = 6, ritorno i seguenti elementi dell'array con slice ()
-				return this.slidePromoList.slice(6).concat(this.slidePromoList.slice(0, 1));
-			} else if (this.currentSlide === 7) { //Una volta che il counter slide è = 7, ritorno i seguenti elementi dell'array con slice
-				return this.slidePromoList.slice(7).concat(this.slidePromoList.slice(0, 2));
-			} else if (this.currentSlide === 8) {
+			// Creo l'indice di inizio e fine del range di carte da mostrare
+			const start = this.currentSlide;
+			const end = start + this.cardsForSlide;
+
+			// Se si è raggiunta la fine dell'array, riporto l'indice "currentSlide" a 0 e ritorno le prime carte dell'array
+			if (start >= this.slidePromoList.length) {
 				this.currentSlide = 0;
-				return this.slidePromoList.slice(this.currentSlide, this.currentSlide + this.cardsForSlide);
+				return this.slidePromoList.slice(0, this.cardsForSlide);
 			}
+
+			// Se sono nei limiti dell'array, ritorno il range di carte tra l'indice di inizio e quello di fine
+			if (end <= this.slidePromoList.length) {
+				return this.slidePromoList.slice(start, end);
+			}
+
+			// Individuo le due porzioni di array da mostrare
+			const firstPart = this.slidePromoList.slice(start); // dall'indice "start" fino alla fine dell'array			
+			const secondPart = this.slidePromoList.slice(0, end - this.slidePromoList.length); // dall'inizio dell'array fino all'indice "end" sottraendo la sua lunghezza
+
+			// Restituisco le due parti concatenate
+			return firstPart.concat(secondPart);
 		},
 	},
 	methods: {
+		onNextClick() {
+			this.movingCard = true;
+			this.currentSlide++;
+			// Rimuovo la classe di animazione
+			setTimeout(() => {
+				this.movingCard = false;
+			}, 300);
+		},
 		onPrevClick() {
+			this.movingCard = true;
 			this.currentSlide--;
 			if (this.currentSlide < 0) {
 				this.currentSlide = 7
 			}
-
-
-
+			// Rimuovo la classe di animazione
+			setTimeout(() => {
+				this.movingCard = false;
+			}, 300);
 		},
-		onNextClick() {
-			//0      //1       //2      //3     //4      //5      //6       //7     //0 
-			// 0 1 2 -> 1 2 3 -> 2 3 4 -> 3 4 5 -> 4 5 6 -> 5 6 7 -> 6 7 0 -> 7 0 1 -> 0 1 2             
-			this.currentSlide++;
-		},
-	},
+	}
 }
 </script>
 
@@ -93,7 +108,7 @@ export default {
 			<div class="promo-slider-box">
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
-						<div class="card">
+						<div class="card" :class="{ 'slide-active': movingCard }">
 							<img :src="card.img" class="card-img-top" :alt="card.title">
 							<div class="card-body">
 								<div class="d-flex align-items-start justify-content-between">
@@ -141,6 +156,7 @@ export default {
 @use "../style/partials/variables" as *;
 
 .card {
+	opacity: 1;
 	border-color: $primary-color;
 	background-color: $primary-color;
 	cursor: pointer;
@@ -172,6 +188,10 @@ export default {
 	}
 }
 
+.slide-active {
+	opacity: 0.4;
+}
+
 .promo-slider-box {
 	position: relative;
 
@@ -197,9 +217,6 @@ export default {
 .card-container {
 	display: block;
 }
-
-
-
 
 @media (min-width: 769px) {
 	.slider-container {
