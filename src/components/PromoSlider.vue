@@ -1,86 +1,77 @@
 <script>
+import axios from "axios";
 
 export default {
 	data() {
 		return {
-			slidePromoList: [
-				{//0
-					title: "Casa 1",
-					img: "https://picsum.photos/50/50?random=1",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//1
-					title: "Casa 2",
-					img: "https://picsum.photos/50/50?random=2",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//2
-					title: "Casa 3",
-					img: "https://picsum.photos/50/50?random=3",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//3
-					title: "Casa 4",
-					img: "https://picsum.photos/50/50?random=4",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//4
-					title: "Casa 5",
-					img: "https://picsum.photos/50/50?random=5",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//5
-					title: "Casa 6",
-					img: "https://picsum.photos/50/50?random=6",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//6
-					title: "Casa 7",
-					img: "https://picsum.photos/50/50?random=7",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//7
-					title: "Casa 8",
-					img: "https://picsum.photos/50/50?random=8",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				}
-			],
-			//Counter slide
-			currentSlide: 0,
-			//Quantità di cards per slide
-			cardsForSlide: 3
+			slidePromoList: [],
+			currentSlide: 0, // counter slide
+			cardsForSlide: 3, // quantità di cards per slide
+			movingCard: false,
 		};
 	},
 	computed: {
 		// Calcola le card visibili in base all'indice corrente e al numero di card da dover mostrare
 		visibleSlide() {
-			if (this.currentSlide >= 0 && this.currentSlide < 6) {
-				return this.slidePromoList.slice(this.currentSlide, this.currentSlide + this.cardsForSlide);
-			} else if (this.currentSlide === 6) { //Una volta che il counter slide è = 6, ritorno i seguenti elementi dell'array con slice ()
-				return this.slidePromoList.slice(6).concat(this.slidePromoList.slice(0, 1));
-			} else if (this.currentSlide === 7) { //Una volta che il counter slide è = 7, ritorno i seguenti elementi dell'array con slice
-				return this.slidePromoList.slice(7).concat(this.slidePromoList.slice(0, 2));
-			} else if (this.currentSlide === 8) {
-				this.currentSlide = 0;
-				return this.slidePromoList.slice(this.currentSlide, this.currentSlide + this.cardsForSlide);
+			// Creo l'indice di inizio e fine del range di carte da mostrare
+			const start = this.currentSlide;
+			const end = start + this.cardsForSlide;
+
+			// Verifico se l'array contiene almeno 3 elementi
+			if (this.slidePromoList.length < this.cardsForSlide) {
+				return this.slidePromoList;
+			} else {
+
+				// Se si è raggiunta la fine dell'array, riporto l'indice "currentSlide" a 0 e ritorno le prime carte dell'array
+				if (start >= this.slidePromoList.length) {
+					this.currentSlide = 0;
+					return this.slidePromoList.slice(0, this.cardsForSlide);
+				}
+
+				// Se sono nei limiti dell'array, ritorno il range di carte tra l'indice di inizio e quello di fine
+				if (end <= this.slidePromoList.length) {
+					return this.slidePromoList.slice(start, end);
+				}
+
+				// Individuo le due porzioni di array da mostrare
+				const firstPart = this.slidePromoList.slice(start); // dall'indice "start" fino alla fine dell'array			
+				const secondPart = this.slidePromoList.slice(0, end - this.slidePromoList.length); // dall'inizio dell'array fino all'indice "end" sottraendo la sua lunghezza
+
+				// Restituisco le due parti concatenate
+				return firstPart.concat(secondPart);
 			}
 		},
 	},
 	methods: {
-		onPrevClick() {
-			this.currentSlide--;
-			if (this.currentSlide < 0) {
-				this.currentSlide = 7
-			}
-
-
-
+		fetchData(url) {
+			axios.get(url).then((response) => {
+				this.slidePromoList = response.data.apartments;
+			});
+		},
+		getApartmentThumbnail(apartment) {
+			return `http://127.0.0.1:8000/storage/${apartment.thumbnail}`;
 		},
 		onNextClick() {
-			//0      //1       //2      //3     //4      //5      //6       //7     //0 
-			// 0 1 2 -> 1 2 3 -> 2 3 4 -> 3 4 5 -> 4 5 6 -> 5 6 7 -> 6 7 0 -> 7 0 1 -> 0 1 2             
+			this.movingCard = true;
 			this.currentSlide++;
+			// Rimuovo la classe di animazione
+			setTimeout(() => {
+				this.movingCard = false;
+			}, 300);
 		},
+		onPrevClick() {
+			this.movingCard = true;
+			this.currentSlide--;
+			if (this.currentSlide < 0) {
+				this.currentSlide = this.slidePromoList.length - 1; // Per tornare all'ultima slide
+			}
+			setTimeout(() => {
+				this.movingCard = false;
+			}, 300);
+		},
+	},
+	mounted() {
+		this.fetchData('http://127.0.0.1:8000/api/apartments/');
 	},
 }
 </script>
@@ -93,13 +84,21 @@ export default {
 			<div class="promo-slider-box">
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
-						<div class="card">
-							<img :src="card.img" class="card-img-top" :alt="card.title">
+						<div class="card h-100" :class="{ 'slide-active': movingCard }">
+							<img :src="getApartmentThumbnail(card)" class="card-img-top" :alt="card.title">
 							<div class="card-body">
 								<div class="d-flex align-items-start justify-content-between">
 									<h5 class="card-title">{{ card.title }}</h5>
 								</div>
-								<p class="card-text">{{ card.description }}</p>
+								<p class="card-text">{{ card.city }}</p>
+								<p class="card-text">{{ card.address }}</p>
+								<!-- Servizi -->
+								<p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
+								<ul>
+									<li class="card-text" v-for="(service, z) in card.services" :key="z">
+										{{ service.title }}
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -141,6 +140,7 @@ export default {
 @use "../style/partials/variables" as *;
 
 .card {
+	opacity: 1;
 	border-color: $primary-color;
 	background-color: $primary-color;
 	cursor: pointer;
@@ -172,6 +172,10 @@ export default {
 	}
 }
 
+.slide-active {
+	opacity: 0.4;
+}
+
 .promo-slider-box {
 	position: relative;
 
@@ -197,9 +201,6 @@ export default {
 .card-container {
 	display: block;
 }
-
-
-
 
 @media (min-width: 769px) {
 	.slider-container {
