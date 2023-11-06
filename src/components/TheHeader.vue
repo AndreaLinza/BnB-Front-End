@@ -53,7 +53,7 @@ export default {
                                 Account
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end dd-bg">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Login</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li>
                                     <hr class="dropdown-divider">

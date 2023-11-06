@@ -5,18 +5,28 @@ export default {
 
   data() {
     return {
-      services: [],
-      apartments: [],
+      servizi: [],
+      apartments:[],
+      filter: 
+        {
+          rooms_number:'',
+          beds_number:'',
+          bathrooms_number:'',
+          //km:'',
+          services:[]
+        },
+
     }
   },
   methods: {
     fetchServices() {
       axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
-        this.services = response.data.services;
+        this.servizi = response.data.services;
+        //console.log(this.servizi)
       })
     },
     fetchApartments() {
-      axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
+      axios.get('http://127.0.0.1:8000/api/apartments' , {params:this.filter} ).then((response) => {
         this.apartments = response.data.apartments;
       })
     }
@@ -24,6 +34,8 @@ export default {
   mounted() {
     this.fetchServices();
     this.fetchApartments();
+
+
   }
 }
 </script>
@@ -41,21 +53,21 @@ export default {
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnroom" id="btnroom0" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnroom0">Nessuna</label>
+          <input type="radio" class="btn-check" name="rooms_number" id="room0" autocomplete="off"
+            v-model="filter.rooms_number" value="0">
+          <label class="btn btn-outline-personal" for="room0">Nessuna</label>
 
-          <input type="radio" class="btn-check" name="btnroom" id="btnroom1" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnroom1">1</label>
+          <input type="radio" class="btn-check" name="rooms_number" id="room1" autocomplete="off"
+            v-model="filter.rooms_number" value="1">
+          <label class="btn btn-outline-personal" for="room1">1</label>
 
-          <input type="radio" class="btn-check" name="btnroom" id="btnroom2" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnroom2">2</label>
+          <input type="radio" class="btn-check" name="rooms_number" id="room2" autocomplete="off"
+            v-model="filter.rooms_number" value="2">
+          <label class="btn btn-outline-personal" for="room2">2</label>
 
-          <input type="radio" class="btn-check" name="btnroom" id="btnroom3" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnroom3">3+</label>
+          <input type="radio" class="btn-check" name="rooms_number" id="room3" autocomplete="off"
+            v-model="filter.rooms_number" value="3">
+          <label class="btn btn-outline-personal" for="room3">3+</label>
         </div>
 
         <!-- <div class="radio-input">
@@ -86,21 +98,21 @@ export default {
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnbed" id="btnbed0" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbed0">Nessuna</label>
+          <input type="radio" class="btn-check" name="beds_number" id="bed0" autocomplete="off"
+            v-model="filter.beds_number" value="0">
+          <label class="btn btn-outline-personal" for="bed0">Nessuna</label>
 
-          <input type="radio" class="btn-check" name="btnbed" id="btnbed1" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbed1">1</label>
+          <input type="radio" class="btn-check" name="beds_number" id="bed1" autocomplete="off"
+            v-model="filter.beds_number" value="1">
+          <label class="btn btn-outline-personal" for="bed1">1</label>
 
-          <input type="radio" class="btn-check" name="btnbed" id="btnbed2" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbed2">2</label>
+          <input type="radio" class="btn-check" name="beds_number" id="bed2" autocomplete="off"
+            v-model="filter.beds_number" value="2">
+          <label class="btn btn-outline-personal" for="bed2">2</label>
 
-          <input type="radio" class="btn-check" name="btnbed" id="btnbed3" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbed3">3+</label>
+          <input type="radio" class="btn-check" name="beds_number" id="bed3" autocomplete="off"
+            v-model="filter.beds_number" value="3">
+          <label class="btn btn-outline-personal" for="bed3">3+</label>
         </div>
 
         <!-- <div class="radio-input">
@@ -131,21 +143,21 @@ export default {
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnbath" id="btnbath0" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbath0">Nessuna</label>
+          <input type="radio" class="btn-check" name="bathrooms-number" id="bath0" autocomplete="off"
+            v-model="filter.bathrooms_number" value="0">
+          <label class="btn btn-outline-personal" for="bath0">Nessuna</label>
 
-          <input type="radio" class="btn-check" name="btnbath" id="btnbath1" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbath1">1</label>
+          <input type="radio" class="btn-check" name="bathrooms-number" id="bath1" autocomplete="off"
+            v-model="filter.bathrooms_number" value="1">
+          <label class="btn btn-outline-personal" for="bath1">1</label>
 
-          <input type="radio" class="btn-check" name="btnbath" id="btnbath2" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbath2">2</label>
+          <input type="radio" class="btn-check" name="bathrooms-number" id="bath2" autocomplete="off"
+            v-model="filter.bathrooms_number" value="2">
+          <label class="btn btn-outline-personal" for="bath2">2</label>
 
-          <input type="radio" class="btn-check" name="btnbath" id="btnbath3" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnbath3">3+</label>
+          <input type="radio" class="btn-check" name="bathrooms-number" id="bath3" autocomplete="off"
+            v-model="filter.bathrooms_number" value="3">
+          <label class="btn btn-outline-personal" for="bath3">3+</label>
         </div>
 
         <!-- <div class="radio-input">
@@ -176,21 +188,21 @@ export default {
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnkm" id="btnkm0" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnkm0">Centro</label>
+          <input type="radio" class="btn-check" name="km" id="km0" autocomplete="off"
+            v-model="filter.km" value="0">
+          <label class="btn btn-outline-personal" for="km0">Centro</label>
 
-          <input type="radio" class="btn-check" name="btnkm" id="btnkm1" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnkm1">2-5km</label>
+          <input type="radio" class="btn-check" name="km" id="km1" autocomplete="off"
+            v-model="filter.km" value="1">
+          <label class="btn btn-outline-personal" for="km1">2-5km</label>
 
-          <input type="radio" class="btn-check" name="btnkm" id="btnkm2" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnkm2">5-20km</label>
+          <input type="radio" class="btn-check" name="km" id="km2" autocomplete="off"
+            v-model="filter.km" value="2">
+          <label class="btn btn-outline-personal" for="km2">5-20km</label>
 
-          <input type="radio" class="btn-check" name="btnkm" id="btnkm3" autocomplete="off"
-            :v-model="this.fetchApartments">
-          <label class="btn btn-outline-personal" for="btnkm3">10-20km</label>
+          <input type="radio" class="btn-check" name="km" id="km3" autocomplete="off"
+            v-model="filter.km" value="3">
+          <label class="btn btn-outline-personal" for="km3">10-20km</label>
         </div>
 
 
@@ -218,9 +230,10 @@ export default {
 
     <!--Servizi-->
     <h5 class="text-white mt-5">Servizi</h5>
-    <div class=" d-flex flex-wrap justify-content-center pt-3">
-      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  services ">
-        <input type="checkbox" :id="`${i}`">
+    <div class=" d-flex flex-wrap pt-3">
+      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  servizi ">
+        <input type="checkbox" :id="`${i}`"
+        v-model="filter.services" :value="service">
         <label :for="`${i}`" style="--size: 30px">
           <svg viewBox="0,0,50,50">
             <path d="M5 30 L 20 45 L 45 5"></path>
