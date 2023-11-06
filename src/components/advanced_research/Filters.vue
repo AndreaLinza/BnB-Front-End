@@ -5,7 +5,7 @@ export default {
 
   data() {
     return {
-      servizi: [],
+      services: [],
       apartments:[],
       filter: 
         {
@@ -21,7 +21,7 @@ export default {
   methods: {
     fetchServices() {
       axios.get('http://127.0.0.1:8000/api/apartments').then((response) => {
-        this.servizi = response.data.services;
+        this.services = response.data.services;
         //console.log(this.servizi)
       })
     },
@@ -231,7 +231,7 @@ export default {
     <!--Servizi-->
     <h5 class="text-white mt-5">Servizi</h5>
     <div class=" d-flex flex-wrap pt-3">
-      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  servizi ">
+      <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  services ">
         <input type="checkbox" :id="`${i}`"
         v-model="filter.services" :value="service">
         <label :for="`${i}`" style="--size: 30px">
