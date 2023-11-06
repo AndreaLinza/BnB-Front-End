@@ -1,50 +1,10 @@
 <script>
+import axios from "axios";
 
 export default {
 	data() {
 		return {
-			slidePromoList: [
-				{//0
-					title: "Casa 1",
-					img: "https://picsum.photos/50/50?random=1",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//1
-					title: "Casa 2",
-					img: "https://picsum.photos/50/50?random=2",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//2
-					title: "Casa 3",
-					img: "https://picsum.photos/50/50?random=3",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//3
-					title: "Casa 4",
-					img: "https://picsum.photos/50/50?random=4",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//4
-					title: "Casa 5",
-					img: "https://picsum.photos/50/50?random=5",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//5
-					title: "Casa 6",
-					img: "https://picsum.photos/50/50?random=6",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//6
-					title: "Casa 7",
-					img: "https://picsum.photos/50/50?random=7",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				},
-				{//7
-					title: "Casa 8",
-					img: "https://picsum.photos/50/50?random=8",
-					description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a voluptatem dolore consequatur.",
-				}
-			],
+			slidePromoList: [],
 			currentSlide: 0, // counter slide
 			cardsForSlide: 3, // quantità di cards per slide
 			movingCard: false,
@@ -77,6 +37,14 @@ export default {
 		},
 	},
 	methods: {
+		fetchData(url) {
+			axios.get(url).then((response) => {
+				this.slidePromoList = response.data.apartments;
+			});
+		},
+		getApartmentThumbnail(apartment) {
+			return `http://127.0.0.1:8000/storage/${apartment.thumbnail}`;
+		},
 		onNextClick() {
 			this.movingCard = true;
 			this.currentSlide++;
@@ -89,14 +57,16 @@ export default {
 			this.movingCard = true;
 			this.currentSlide--;
 			if (this.currentSlide < 0) {
-				this.currentSlide = 7
+				this.currentSlide = this.slidePromoList.length - 1; // Per tornare all'ultima slide
 			}
-			// Rimuovo la classe di animazione
 			setTimeout(() => {
 				this.movingCard = false;
 			}, 300);
 		},
-	}
+	},
+	mounted() {
+		this.fetchData('http://127.0.0.1:8000/api/apartments/');
+	},
 }
 </script>
 
@@ -108,13 +78,21 @@ export default {
 			<div class="promo-slider-box">
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
-						<div class="card" :class="{ 'slide-active': movingCard }">
-							<img :src="card.img" class="card-img-top" :alt="card.title">
+						<div class="card h-100" :class="{ 'slide-active': movingCard }">
+							<img :src="getApartmentThumbnail(card)" class="card-img-top" :alt="card.title">
 							<div class="card-body">
 								<div class="d-flex align-items-start justify-content-between">
 									<h5 class="card-title">{{ card.title }}</h5>
 								</div>
-								<p class="card-text">{{ card.description }}</p>
+								<p class="card-text">{{ card.city }}</p>
+								<p class="card-text">{{ card.address }}</p>
+								<!-- Servizi -->
+								<p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
+								<ul>
+									<li class="card-text" v-for="(service, z) in card.services" :key="z">
+										{{ service.title }}
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
