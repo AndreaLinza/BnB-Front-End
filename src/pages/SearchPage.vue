@@ -1,12 +1,14 @@
 <script>
 import { store, fetchApartments } from "../store";
 import Filters from '../components/advanced_research/Filters.vue';
+import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 
 export default {
   components: {
     Filters,
-  },
+    TopOffcanvas
+},
   data() {
     return {
       store,
@@ -18,16 +20,7 @@ export default {
 </script>
 
 <template>
-  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-    <div class="offcanvas-header container">
-      <h5 class="offcanvas-title text-white mx-3" id="offcanvasTopLabel">Filtri avanzati</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
-          class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="offcanvas-body container d-flex flex-wrap">
-      <Filters></Filters>
-    </div>
-  </div>
+  <TopOffcanvas></TopOffcanvas>
 
   <div class="container">
     <h2 class="pb-3">Le nostre migliori strutture</h2>
@@ -99,25 +92,4 @@ export default {
   }
 }
 
-
-.offcanvas.offcanvas-top {
-  height: 60vh;
-}
-
-// =====================
-
-.offcanvas-top {
-  background-color: transparent;
-  border-bottom: none !important;
-
-  .offcanvas-header,
-  .offcanvas-body {
-    background-color: $secondary-color;
-  }
-
-  .btn-close {
-    background-image: none;
-    color: white;
-  }
-}
 </style>

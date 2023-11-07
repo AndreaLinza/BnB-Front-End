@@ -32,13 +32,13 @@ export default {
         <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container">
                 <!-- Logo -->
-                <router-link class="navbar-brand" :to='{ name: "home" }'><img src="../../public/LogoBnb_white.png"
+                <router-link class="navbar-brand" :to='{ name: "home" }'><img src="../../LogoBnb_white.png"
                         alt="LogoB'n'B" style="width: 80px;"></router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="h-100"><img src="../../public/navicon-white.png" style="width:40px" alt="navico"></span>
-                    <span class="h-100"><img class="d-none" src="../../public/navicon-orange.png" style="width:40px" alt="navico"></span>
+                    <span class="h-100"><img src="../../navicon-white.png" style="width:40px" alt="navico"></span>
+                    <span class="h-100"><img class="d-none" src="../../navicon-orange.png" style="width:40px" alt="navico"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,7 +57,7 @@ export default {
                             data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                             <div class="trans-icon">
                                 <img 
-                                src="../../public/transition-navicon.png" alt="navicon" style="width: 30px;">
+                                src="../../transition-navicon.png" alt="navicon" style="width: 30px;">
                             </div>
                         </button>
                     </form>
