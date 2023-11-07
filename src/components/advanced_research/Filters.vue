@@ -14,14 +14,52 @@ export default {
     };
   },
   methods: {
-    submitResearch(){
+    submitResearch() {
       fetchApartments(this.filter)
       this.$router.push({ name: 'search', route: "search" });
+      this.saveFilter()
+    },
+
+    // Creo una funzione per salvare i filtri nel localStorage
+    saveFilter() {
+      localStorage.setItem('filters', JSON.stringify(this.filter));
+    },
+
+    // Creo una funzione per cancellare i filtri nel localStorage
+    deleteFilter() {
+      localStorage.removeItem('filters')
+    },
+
+    // Creo una funzione che servirà a mantere i filtri selezionati
+    loadFilter() {
+      //Recupero i filtri dal localStorage
+      const savedFilter = localStorage.getItem('filters');
+
+      return savedFilter ? JSON.parse(savedFilter) : null;
+
     }
+
+
+
   },
   mounted() {
     fetchServices();
+    const savedFilter = this.loadFilter();
+
+    if (savedFilter) {
+      this.filter = savedFilter;
+    }
+    // Aggiungo il listener per l'evento beforeunload 
+    //"beforeunload" E' un evento del browser che si verifica prima che una pagina venga scaricata o rinfrescata. 
+    //Viene generato quando l'utente sta per lasciare la pagina, ad esempio, facendo un refresh della pagina o chiudendo la scheda del browser.
+    window.addEventListener('beforeunload', this.deleteFilter)
   },
+
+  //
+  beforeUnmount() {
+    //Rimuovo il listener dell'evento beforeunload quando smonto il componente
+    window.removeEventListener('beforeunload', this.deleteFilter)
+  }
 }
 </script>
 
@@ -165,8 +203,9 @@ export default {
               <span class="selection"></span>
             </div> -->
       </div>
+
       <!--Distanza dal centro-->
-      <div class="col">
+      <!-- <div class="col">
         <div class="d-flex align-items-center ">
           <span class="text-white fw-bold ms-2 pb-2">Distanza centro</span>
           <div class="deco-line"></div>
@@ -184,10 +223,10 @@ export default {
 
           <input type="radio" class="btn-check" name="km" id="km3" autocomplete="off" v-model="filter.km" value="3">
           <label class="btn btn-outline-personal" for="km3">10-20km</label>
-        </div>
+        </div> -->
 
 
-        <!-- <div class="radio-input">
+      <!-- <div class="radio-input">
               <label>
                 <input value="dista-1" name="dista" id="dista-1" type="radio" checked="">
                 <span class="fw-bold">Centro</span>
@@ -206,7 +245,7 @@ export default {
               </label>
               <span class="selection"></span>
             </div> -->
-      </div>
+
     </div>
 
     <!--Servizi-->
@@ -225,7 +264,7 @@ export default {
 
     <div class="text-center mt-4">
       <button class="general-btn fw-bold" type="submit">
-          Filtra
+        Filtra
       </button>
     </div>
 
