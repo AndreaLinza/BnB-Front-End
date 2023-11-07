@@ -33,8 +33,7 @@ export default {
 </script>
 
 <template>
-    <div class="form-container rounded m-auto">
-        <div class="messages-form-box">
+        <div class="messages-form-box mt-3">
             <h3 class="text-center m-0">Contatta l'host!</h3>
             <!--Error-->
             <div class="alert my-error-alert" v-if="error">
@@ -64,7 +63,6 @@ export default {
                 Grazie per il messaggio, l'host ti contatterà presto!
             </div>
         </div>
-    </div>
 </template>
 
 <style scoped lang="scss">
