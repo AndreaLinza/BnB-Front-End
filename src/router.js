@@ -16,17 +16,15 @@ const routes = [
     component: SearchPage,
   },
   { //SHOW
-    path:'/apartments/:slug',
-    name:'apartments.show',
+    path: '/apartments/:slug',
+    name: 'apartments.show',
     component: ApartmentShowPage,
-  }
-
-
-  //{ //NOT FOUND
-  //  path: "/:pathMatch(.*)*",
-  //  name: "not-found",
-  //  component: NotFoundPage
-  //}
+  },
+  // { //NOT FOUND
+  //   path: "/:pathMatch(.*)*",
+  //   name: "not-found",
+  //   component: NotFoundPage
+  // }
 ];
 
 const router = createRouter({
