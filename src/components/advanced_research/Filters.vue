@@ -9,6 +9,7 @@ export default {
         'rooms_number': '',
         'beds_number': '',
         'bathrooms_number': '',
+        'radius': '0',
         services: []
       },
     };
@@ -92,27 +93,8 @@ export default {
             v-model="filter.rooms_number" value="3">
           <label class="btn btn-outline-personal" for="room3">3+</label>
         </div>
-
-        <!-- <div class="radio-input">
-              <label>
-                <input value="stanze-1" name="stanze" id="stanze-1" type="radio" checked="">
-                <span class="fw-bold">Nessuna</span>
-              </label>
-              <label>
-                <input value="stanze-2" name="stanze" id="stanze-2" type="radio">
-                <span class="fw-bold">1</span>
-              </label>
-              <label>
-                <input value="stanze-3" name="stanze" id="stanze-3" type="radio">
-                <span class="fw-bold">2</span>
-              </label>
-              <label>
-                <input value="stanze-4" name="stanze" id="stanze-4" type="radio">
-                <span class="fw-bold">3 +</span>
-              </label>
-              <span class="selection"></span>
-            </div> -->
       </div>
+
       <!--Numero di letti-->
       <div class="col">
         <div class="d-flex align-items-center ">
@@ -137,27 +119,8 @@ export default {
             v-model="filter.beds_number" value="3">
           <label class="btn btn-outline-personal" for="bed3">3+</label>
         </div>
-
-        <!-- <div class="radio-input">
-              <label>
-                <input value="letti-1" name="letti" id="letti-1" type="radio" checked="">
-                <span class="fw-bold">Nessuna</span>
-              </label>
-              <label>
-                <input value="letti-2" name="letti" id="letti-2" type="radio">
-                <span class="fw-bold">1</span>
-              </label>
-              <label>
-                <input value="letti-3" name="letti" id="letti-3" type="radio">
-                <span class="fw-bold">2</span>
-              </label>
-              <label>
-                <input value="letti-4" name="letti" id="letti-4" type="radio">
-                <span class="fw-bold">3 +</span>
-              </label>
-              <span class="selection"></span>
-            </div> -->
       </div>
+
       <!--Numero di  Bagni-->
       <div class="col">
         <div class="d-flex align-items-center ">
@@ -182,69 +145,17 @@ export default {
             v-model="filter.bathrooms_number" value="3">
           <label class="btn btn-outline-personal" for="bath3">3+</label>
         </div>
-
-        <!-- <div class="radio-input">
-              <label>
-                <input value="bagni-1" name="bagni" id="bagni-1" type="radio" checked="">
-                <span class="fw-bold">Nessuna</span>
-              </label>
-              <label>
-                <input value="bagni-2" name="bagni" id="bagni-2" type="radio">
-                <span class="fw-bold">1</span>
-              </label>
-              <label>
-                <input value="bagni-3" name="bagni" id="bagni-3" type="radio">
-                <span class="fw-bold">2</span>
-              </label>
-              <label>
-                <input value="bagni-4" name="bagni" id="bagni-4" type="radio">
-                <span class="fw-bold">3 +</span>
-              </label>
-              <span class="selection"></span>
-            </div> -->
       </div>
 
       <!--Distanza dal centro-->
-      <!-- <div class="col">
+      <div class="col">
         <div class="d-flex align-items-center ">
           <span class="text-white fw-bold ms-2 pb-2">Distanza centro</span>
           <div class="deco-line"></div>
         </div>
-
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="km" id="km0" autocomplete="off" v-model="filter.km" value="0">
-          <label class="btn btn-outline-personal" for="km0">Centro</label>
-
-          <input type="radio" class="btn-check" name="km" id="km1" autocomplete="off" v-model="filter.km" value="1">
-          <label class="btn btn-outline-personal" for="km1">2-5km</label>
-
-          <input type="radio" class="btn-check" name="km" id="km2" autocomplete="off" v-model="filter.km" value="2">
-          <label class="btn btn-outline-personal" for="km2">5-20km</label>
-
-          <input type="radio" class="btn-check" name="km" id="km3" autocomplete="off" v-model="filter.km" value="3">
-          <label class="btn btn-outline-personal" for="km3">10-20km</label>
-        </div> -->
-
-
-      <!-- <div class="radio-input">
-              <label>
-                <input value="dista-1" name="dista" id="dista-1" type="radio" checked="">
-                <span class="fw-bold">Centro</span>
-              </label>
-              <label>
-                <input value="dista-2" name="dista" id="dista-2" type="radio">
-                <span class="fw-bold">2-5km</span>
-              </label>
-              <label>
-                <input value="dista-3" name="dista" id="dista-3" type="radio">
-                <span class="fw-bold">5-20km</span>
-              </label>
-              <label>
-                <input value="dista-4" name="dista" id="dista-4" type="radio">
-                <span class="fw-bold">10-20km</span>
-              </label>
-              <span class="selection"></span>
-            </div> -->
+        <input type="range" class="form-range" min="0" max="20" step="5" name="radius" id="radius0"
+        v-model="filter.radius">
+      </div>
 
     </div>
 
@@ -275,7 +186,6 @@ export default {
 <style lang="scss" scoped>
 @use '../../style/partials/variables' as *;
 
-$offcanvas-height: 50vh;
 
 .deco-line {
   height: 2px;
@@ -286,11 +196,6 @@ $offcanvas-height: 50vh;
   margin-left: 5px;
 }
 
-.radio-dist {
-  width: calc((100% / 4) - 10px);
-  margin-left: 5px;
-  margin-right: 5px;
-}
 
 
 
@@ -346,8 +251,7 @@ $offcanvas-height: 50vh;
 }
 
 
-//  ============================
-//========RADIO ANDREA=========
+//============= RADIO ===============
 
 
 .btn-group {
@@ -386,75 +290,11 @@ $offcanvas-height: 50vh;
   }
 }
 
-
-// ====================
-// ========RADIO========
-.radio-input input {
-  display: none;
-}
-
-.radio-input {
-  padding: 0 .8rem;
-  --container_width: 300px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-radius: 9999px;
-  background-color: #fff;
-  color: $grey;
-  width: var(--container_width);
-  overflow: hidden;
-  border: 2px solid $partial-secondary-color;
-}
-
-.radio-input label {
-  width: 100%;
-  padding: 10px 5px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  font-weight: 600;
-  letter-spacing: -1px;
-  font-size: 14px;
-}
-
-.selection {
-  display: none;
-  position: absolute;
-  height: 100%;
-  width: calc(var(--container_width) / 4);
-  z-index: 0;
-  left: 0;
-  top: 0;
-  transition: .15s ease;
-}
-
-.radio-input label:has(input:checked) {
-  color: #fff;
-}
-
-.radio-input label:has(input:checked)~.selection {
+.form-range::-moz-range-thumb{
   background-color: $partial-secondary-color;
-  display: inline-block;
+  &:active{
+    background-color: $partial-primary-color;
+  }
 }
 
-.radio-input label:nth-child(1):has(input:checked)~.selection {
-  transform: translateX(calc(var(--container_width) * 0/4));
-}
-
-.radio-input label:nth-child(2):has(input:checked)~.selection {
-  transform: translateX(calc(var(--container_width) * 1/4));
-}
-
-.radio-input label:nth-child(3):has(input:checked)~.selection {
-  transform: translateX(calc(var(--container_width) * 2/4));
-}
-
-.radio-input label:nth-child(4):has(input:checked)~.selection {
-  transform: translateX(calc(var(--container_width) * 3/4));
-}
-
-// =====================
 </style>

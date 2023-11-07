@@ -1,10 +1,12 @@
 <script>
 import axios from "axios";
 import ContactForm from '../components/ContactForm.vue';
+import TopOffcanvas from '../components/partials/TopOffcanvas.vue'
 
 export default {
     components: {
         ContactForm,
+        TopOffcanvas
     },
     data() {
         return {
@@ -31,6 +33,9 @@ export default {
 
 
 <template>
+
+    <TopOffcanvas></TopOffcanvas>
+    
     <div class="container">
         <!--Banner appartamento-->
         <div class="apt-pres map-border">
@@ -39,7 +44,7 @@ export default {
         <!--Info apt + form contatto-->
         <div class="row">
             <!--Info generali-->
-            <div class="col-12 col-lg-9">
+            <div class="col-12 col-lg-7">
                 <div class="infos mt-3">
                     <h2>{{ apartment.title }}</h2>
                     <span class="aubergine">{{ apartment.address }}</span>
@@ -57,7 +62,7 @@ export default {
                 </div>
             </div>
             <!--form-->
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg-5">
                 <ContactForm></ContactForm>
             </div>
         </div>
