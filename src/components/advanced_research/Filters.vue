@@ -225,7 +225,7 @@ export default {
 
     <div class="text-center mt-4">
       <button class="general-btn fw-bold" type="submit">
-          Salva
+          Filtra
       </button>
     </div>
 
@@ -346,23 +346,6 @@ $offcanvas-height: 50vh;
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ====================

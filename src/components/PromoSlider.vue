@@ -78,7 +78,7 @@ export default {
 
 <template>
 	<div class="container pt-2 pb-4">
-		<h2 class="pb-2">Le nostre migliori strutture</h2>
+		<h2 class="pb-3">Le nostre migliori strutture</h2>
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
