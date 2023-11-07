@@ -1,5 +1,5 @@
 <script>
-import ContactForm from '../components/ContactForm.vue'
+import ContactForm from '../components/ContactForm.vue';
 export default {
     components: {
         ContactForm,
@@ -20,6 +20,7 @@ export default {
         <!--Informazioni Appartamento-->
         <h1>Titolo Appartamento</h1><!---->
 
+        <!--Form di contatto-->
         <ContactForm></ContactForm>
     </div>
 </template>
