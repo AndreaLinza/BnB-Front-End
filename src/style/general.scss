@@ -6,6 +6,7 @@ body{
     display: flex;
     flex-direction: column;
     overflow: auto!important;
+    background-color: $primary-color!important;
 }
 #app {
     display: contents;
