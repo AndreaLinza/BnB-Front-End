@@ -28,33 +28,36 @@ export default {
       <Filters></Filters>
     </div>
   </div>
-  
-    <div class="container">
-      <h2 class="pb-3">Le nostre migliori strutture</h2>
+
+  <div class="container">
+    <h2 class="pb-3">Le nostre migliori strutture</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
-        <div class="col" v-for="apartment in store.apartments">
-          <div class="card h-100">
-            <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top"
-            :alt="apartment.title">
-            <div class="card-body">
-              <div class="d-flex align-items-start justify-content-between">
-                <h5 class="card-title">{{ apartment.title }}</h5>
-              </div>
-              <p class="card-text">{{ apartment.city }}</p>
-              <p class="card-text">{{ apartment.address }}</p>
-              
-              <p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
-              <ul>
-                <li class="card-text" v-for="(service, z) in apartment.services" :key="z">
-                  {{ service.title }}
-                </li>
-              </ul>
+      <div class="col" v-for="apartment in store.apartments">
+        <div class="card h-100">
+          <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top" :alt="apartment.title">
+          <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+              <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
+            <p class="card-text">{{ apartment.city }}</p>
+            <p class="card-text">{{ apartment.address }}</p>
+
+            <p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
+            <ul>
+              <li class="card-text" v-for="(service, z) in apartment.services" :key="z">
+                {{ service.title }}
+              </li>
+            </ul>
           </div>
+          <!-- Pulsante per visualizzare un appartamento  -->
+          <router-link class="btn btn-primary" role="button"
+            :to="{ name: 'apartments.show', params: { slug: apartment.slug } }">
+            Scopri di più
+          </router-link>
         </div>
       </div>
     </div>
-  
+  </div>
 </template>
 
 
