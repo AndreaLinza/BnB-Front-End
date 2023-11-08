@@ -42,7 +42,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@use "../style/partials/variables" as *;
+@use "../../style/partials/variables" as *;
 
 .my-card-box {
     background-color: $partial-primary-color;

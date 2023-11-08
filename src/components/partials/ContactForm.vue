@@ -66,7 +66,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@use "../style/partials/variables" as *;
+@use "../../style/partials/variables" as *;
 
 .my-btn-messages {
     --bs-btn-color: #fff;

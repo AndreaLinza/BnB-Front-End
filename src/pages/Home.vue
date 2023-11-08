@@ -1,33 +1,22 @@
 <script>
-import PromoSlider from '../components/PromoSlider.vue';
-import StrengthsSection from '../components/StrengthsSection.vue';
-import TravelTips from '../components/TravelTips.vue';
-import Filters from '../components/advanced_research/Filters.vue';
+import PromoSlider from '../components/HomeComponent/PromoSlider.vue';
+import StrengthsSection from '../components/HomeComponent/StrengthsSection.vue';
+import TravelTips from '../components/HomeComponent/TravelTips.vue';
+import TopOffcanvas from '../components/partials/TopOffcanvas.vue';
 
 export default {
     components: {
-        Filters,
         PromoSlider,
         StrengthsSection,
         TravelTips,
-
+        TopOffcanvas
     },
 }
 </script>
 
 <template>
-    <div>
-        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-            <div class="offcanvas-header container">
-                <h5 class="offcanvas-title text-white mx-3" id="offcanvasTopLabel">Filtri avanzati</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
-                        class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="offcanvas-body container d-flex flex-wrap">
-                <Filters></Filters>
-            </div>
-        </div>
-    </div>
+    
+    <TopOffcanvas></TopOffcanvas>
     <PromoSlider></PromoSlider>
     <StrengthsSection></StrengthsSection>
 

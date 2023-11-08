@@ -67,7 +67,7 @@ export default {
                         <button class="btn btn-outline-personal" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <div class="d-flex flex-column" style="width: 400px;">
+                        <div class="d-flex flex-column flex-grow-1">
                             <input class="form-control" type="search" name="address" @input="fetchTomTomSuggestions"
                                 placeholder="Search" aria-label="Search" v-model="filter.address">
                             <div class="position-relative">
@@ -83,7 +83,7 @@ export default {
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                             <div class="trans-icon">
-                                <img src="../../public/transition-navicon.png" alt="navicon" style="width: 30px;">
+                                <img src="../../transition-navicon.png" alt="navicon" style="width: 30px;">
                             </div>
                         </button>
                     </form>
@@ -168,9 +168,16 @@ nav {
                 color: white;
             }
 
-
         }
+        
+        .list-group-item {
+            cursor: pointer;
 
+            &:hover {
+                color: #fff;
+                background-color: #e55812;
+            }
+        }
         .form-control:focus {
             box-shadow: none;
         }
@@ -248,4 +255,5 @@ nav {
         }
     }
 
-}</style>
+}
+</style>

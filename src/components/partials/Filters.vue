@@ -155,6 +155,13 @@ export default {
         </div>
         <input type="range" class="form-range" min="0" max="20" step="5" name="radius" id="radius0"
         v-model="filter.radius">
+        <div class="range-dist">
+          <span>0Km</span>
+          <span class="ms-2">5Km</span>
+          <span class="ms-3">10km</span>
+          <span class="ms-2">15km</span>
+          <span>20Km</span>
+        </div>
       </div>
 
     </div>
@@ -267,6 +274,15 @@ export default {
   }
 }
 
+.range-dist{
+  display: flex;
+  justify-content: space-between;
+
+  span{
+    color: #fff;
+    font-weight: bold;
+  }
+}
 
 .btn-outline-personal {
   border-radius: 20px;
