@@ -8,7 +8,7 @@ export default {
 			slidePromoList: [],
 			currentSlide: 0,
 			cardsForSlide: 3,
-			movingCard:false
+			movingCard: false
 		};
 	},
 	computed: {
@@ -83,22 +83,19 @@ export default {
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
 
-						<ApartmentCard 
-						:card="card"
-						:thumbfunction="getApartmentThumbnail(card)"
-						:movingCard="movingCard"
-						></ApartmentCard>
-						
+						<ApartmentCard :card="card" :thumbfunction="getApartmentThumbnail(card)" :movingCard="movingCard">
+						</ApartmentCard>
+
 					</div>
 				</div>
 				<!-- Pulsanti di navigazione -->
 				<div class="prev text-center" @click="onPrevClick">
-					<button type="button" class="btn btn-primary">
+					<button type="button" class="btn slider-btn">
 						<i class="fa-solid fa-chevron-left"></i>
 					</button>
 				</div>
 				<div class="next text-center" @click="onNextClick">
-					<button type="button" class="btn btn-primary">
+					<button type="button" class="btn slider-btn">
 						<i class="fa-solid fa-chevron-right"></i>
 					</button>
 				</div>
@@ -109,12 +106,9 @@ export default {
 		<div class="card-container">
 			<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 				<div v-for="(card, i) in slidePromoList" :key="i" class="col">
-					<ApartmentCard 
-						:card="card"
-						:thumbfunction="getApartmentThumbnail(card)"
-						:movingCard="movingCard"
-						></ApartmentCard>
-					
+					<ApartmentCard :card="card" :thumbfunction="getApartmentThumbnail(card)" :movingCard="movingCard">
+					</ApartmentCard>
+
 				</div>
 			</div>
 		</div>
@@ -146,8 +140,20 @@ export default {
 	display: none;
 }
 
+
 .card-container {
 	display: block;
+}
+
+.slider-btn {
+	color: $partial-secondary-color;
+	border: 2px solid $partial-secondary-color;
+
+	&:hover {
+		color: white;
+		background-color: $secondary-color;
+		border-color: $secondary-color;
+	}
 }
 
 @media (min-width: 769px) {
