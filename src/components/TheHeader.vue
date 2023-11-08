@@ -61,12 +61,22 @@ export default {
 
 
                     <!-- SearchBar -->
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
-                        aria-controls="offcanvasTop">
-                        <div class="trans-icon">
-                            <img src="../../transition-navicon.png" alt="navicon" style="width: 30px;">
+                    <div class="fake-searchbar">
+                        <div class="underbar">
+                            <button class="btn d-flex" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                                <div class="all-left">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                                </div>
+                                <div class="middle-one">
+                                    <div class="text-white">Cerca qui!</div>
+                                </div>
+                                <div class="all-right">
+                                    <img src="../../public/navicon-white.png" alt="navicon" style="width: 30px;">
+                                </div>
+                            </button>
                         </div>
-                    </button>
+                    </div>
 
                     <!-- <form class="d-flex input-group w-50 mx-lg-auto search-bar" action="POST"
                         @submit.prevent="submitResearch()" role="search">
@@ -134,6 +144,34 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
+.fake-searchbar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+
+    button {
+        width: 100%;
+        margin-bottom: -5px;
+    }
+
+    .underbar {
+        width: 40%;
+        border-bottom: 2px solid white;
+    }
+
+    .underbar:hover {
+        border-color: #e55812;
+    }
+
+    .middle-one {
+        width: 360px;
+    }
+
+
+
+
+
+}
 
 nav {
     .search-bar {
