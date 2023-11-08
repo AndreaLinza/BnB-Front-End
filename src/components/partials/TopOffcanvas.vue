@@ -38,9 +38,15 @@ export default {
     background-color: transparent;
     border-bottom: none !important;
 
-    .offcanvas-header,
+
+    .offcanvas-header{
+        background-color: $secondary-color;
+
+    }
     .offcanvas-body {
         background-color: $secondary-color;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
     }
 
     .btn-close {

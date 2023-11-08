@@ -168,9 +168,16 @@ nav {
                 color: white;
             }
 
-
         }
+        
+        .list-group-item {
+            cursor: pointer;
 
+            &:hover {
+                color: #fff;
+                background-color: #e55812;
+            }
+        }
         .form-control:focus {
             box-shadow: none;
         }
@@ -248,4 +255,5 @@ nav {
         }
     }
 
-}</style>
+}
+</style>
