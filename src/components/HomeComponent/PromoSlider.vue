@@ -137,12 +137,12 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@use "../style/partials/variables" as *;
+@use "../../style/partials/variables" as *;
 
 .card {
 	opacity: 1;
 	border-color: $primary-color;
-	background-color: $primary-color;
+	background-color: $partial-secondary-color;
 	cursor: pointer;
 	transition: all .5s;
 

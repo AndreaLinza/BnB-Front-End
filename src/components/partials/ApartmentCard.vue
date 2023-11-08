@@ -2,8 +2,8 @@
 
 export default {
 
-    data(){
-        return{
+    data() {
+        return {
 
         }
     }
@@ -13,13 +13,11 @@ export default {
 </script>
 
 <template>
-
-
+    
 </template>
 
 
 <style lang="scss" scoped>
-@use '../style/partials/variables' as *;
-
+@use '../../style/partials/variables' as *;
 
 </style>

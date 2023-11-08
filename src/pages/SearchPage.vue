@@ -1,6 +1,6 @@
 <script>
 import { store, fetchApartments } from "../store";
-import Filters from '../components/advanced_research/Filters.vue';
+import Filters from '../components/partials/Filters.vue';
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 

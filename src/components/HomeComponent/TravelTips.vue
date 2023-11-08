@@ -44,7 +44,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@use "../style/partials/variables" as *;
+@use "../../style/partials/variables" as *;
 
 .travel-tips {
     background-image: url("https://www.shambix.com/wp-content/uploads/2019/09/google-maps-world-smartsync-at-for-google-world-map.jpg");

@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import ContactForm from '../components/ContactForm.vue';
+import ContactForm from '../components/partials/ContactForm.vue';
 import TopOffcanvas from '../components/partials/TopOffcanvas.vue'
 
 export default {
