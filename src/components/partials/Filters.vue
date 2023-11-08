@@ -9,9 +9,15 @@ export default {
         'rooms_number': '',
         'beds_number': '',
         'bathrooms_number': '',
-        'radius': '',
+        'radius': '20',
+        'address': '',
         services: []
       },
+      searchPage: {
+        title: "search",
+        route: "search",
+      },
+      suggestions: [],
     };
   },
   methods: {
@@ -35,13 +41,21 @@ export default {
     loadFilter() {
       //Recupero i filtri dal localStorage
       const savedFilter = localStorage.getItem('filters');
-
       return savedFilter ? JSON.parse(savedFilter) : null;
+    },
+    fetchTomTomSuggestions() {
+      const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp'; // In alternativa, puoi ottenere la chiave API da un'opzione di configurazione Laravel
 
-    }
-
-
-
+      fetch(`https://api.tomtom.com/search/2/search/${this.filter.address}.json?key=${apiKey}`)
+        .then((response) => response.json())
+        .then((data) => {
+          this.suggestions = data.results;
+        });
+    },
+    selectSuggestion(suggestion) {
+      this.filter.address = suggestion.address.freeformAddress;
+      this.suggestions = [];
+    },
   },
   mounted() {
     fetchServices();
@@ -67,7 +81,23 @@ export default {
 
 <template>
   <form action="POST" @submit.prevent="submitResearch()" class="container justify-content-center">
+    <!-- Searchbar -->
+    <div class="d-flex flex-column flex-grow-1 mb-5">
+      <input class="form-control underline" type="search" name="address" @input="fetchTomTomSuggestions"
+        placeholder="Search" v-model="filter.address">
+      <div class="position-relative">
+        <ul id="address-suggestions" class="list-group position-absolute w-100 overflow-auto"
+          style="max-height: 250px; z-index: 99999;">
+          <li class="list-group-item" v-for="suggestion in suggestions" :key="suggestion.id"
+            @click="selectSuggestion(suggestion)">
+            {{ suggestion.address.freeformAddress }}
+          </li>
+        </ul>
+      </div>
+    </div>
 
+
+    <!-- Filtri avanzati -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <!--Numero di stanze-->
       <div class="col">
@@ -153,13 +183,13 @@ export default {
           <span class="text-white fw-bold ms-2 pb-2">Distanza centro</span>
           <div class="deco-line"></div>
         </div>
-        <input type="range" class="form-range" min="0" max="20" step="5" name="radius" id="radius0"
-        v-model="filter.radius">
+        <input type="range" class="form-range" min="1" max="21" step="5" name="radius" id="radius0"
+          v-model="filter.radius">
         <div class="range-dist">
-          <span data-value="0">0Km</span>
-          <span class="ms-2" data-value="5">5Km</span>
-          <span class="ms-3" data-value="10">10km</span>
-          <span class="ms-2" data-value="15">15km</span>
+          <span>0Km</span>
+          <span class="ms-2">5Km</span>
+          <span class="ms-3">10km</span>
+          <span class="ms-2">15km</span>
           <span data-value="20">20Km</span>
         </div>
       </div>
@@ -192,6 +222,33 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../style/partials/variables' as *;
+
+.form-control {
+  background-color: transparent !important;
+  border-color: transparent;
+  border-bottom: white;
+  color: white;
+
+  &::placeholder {
+    color: white;
+  }
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.underline {
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 2px solid white;
+  border-radius: 0;
+  width: 40%;
+  margin: auto;
+}
+
+
+
 
 
 .deco-line {
@@ -274,11 +331,11 @@ export default {
   }
 }
 
-.range-dist{
+.range-dist {
   display: flex;
   justify-content: space-between;
 
-  span{
+  span {
     color: #fff;
     font-weight: bold;
   }
@@ -306,11 +363,11 @@ export default {
   }
 }
 
-.form-range::-moz-range-thumb{
+.form-range::-moz-range-thumb {
   background-color: $partial-secondary-color;
-  &:active{
+
+  &:active {
     background-color: $partial-primary-color;
   }
 }
-
 </style>

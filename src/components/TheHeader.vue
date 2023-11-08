@@ -8,36 +8,36 @@ export default {
     data() {
         return {
             store,
-            searchPage: {
-                title: "search",
-                route: "search",
-            },
-            filter: {
-                address: '',
-                radius: '20'
-            },
-            suggestions: [],
+            // searchPage: {
+            //     title: "search",
+            //     route: "search",
+            // },
+            // filter: {
+            //     address: '',
+            //     radius: '20'
+            // },
+            // suggestions: [],
         }
     },
-    methods: {
-        submitResearch() {
-            fetchApartments(this.filter)
-            this.$router.push({ name: 'search', route: "search" });
-        },
-        fetchTomTomSuggestions() {
-            const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp'; // In alternativa, puoi ottenere la chiave API da un'opzione di configurazione Laravel
+    // methods: {
+    //     submitResearch() {
+    //         fetchApartments(this.filter)
+    //         this.$router.push({ name: 'search', route: "search" });
+    //     },
+    //     fetchTomTomSuggestions() {
+    //         const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp'; // In alternativa, puoi ottenere la chiave API da un'opzione di configurazione Laravel
 
-            fetch(`https://api.tomtom.com/search/2/search/${this.filter.address}.json?key=${apiKey}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    this.suggestions = data.results;
-                });
-        },
-        selectSuggestion(suggestion) {
-            this.filter.address = suggestion.address.freeformAddress;
-            this.suggestions = [];
-        },
-    },
+    //         fetch(`https://api.tomtom.com/search/2/search/${this.filter.address}.json?key=${apiKey}`)
+    //             .then((response) => response.json())
+    //             .then((data) => {
+    //                 this.suggestions = data.results;
+    //             });
+    //     },
+    //     selectSuggestion(suggestion) {
+    //         this.filter.address = suggestion.address.freeformAddress;
+    //         this.suggestions = [];
+    //     },
+    // },
 }
 
 </script>
@@ -61,8 +61,24 @@ export default {
 
 
                     <!-- SearchBar -->
+                    <div class="fake-searchbar">
+                        <div class="underbar">
+                            <button class="btn d-flex" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                                <div class="all-left">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                                </div>
+                                <div class="middle-one">
+                                    <div class="text-white">Cerca qui!</div>
+                                </div>
+                                <div class="all-right">
+                                    <img src="../../public/navicon-white.png" alt="navicon" style="width: 30px;">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
 
-                    <form class="d-flex input-group w-50 mx-lg-auto search-bar" action="POST"
+                    <!-- <form class="d-flex input-group w-50 mx-lg-auto search-bar" action="POST"
                         @submit.prevent="submitResearch()" role="search">
                         <button class="btn btn-outline-personal" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -86,7 +102,7 @@ export default {
                                 <img src="../../transition-navicon.png" alt="navicon" style="width: 30px;">
                             </div>
                         </button>
-                    </form>
+                    </form> -->
 
 
                     <!--  -->
@@ -128,6 +144,34 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
+.fake-searchbar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+
+    button {
+        width: 100%;
+        margin-bottom: -5px;
+    }
+
+    .underbar {
+        width: 40%;
+        border-bottom: 2px solid white;
+    }
+
+    .underbar:hover {
+        border-color: #e55812;
+    }
+
+    .middle-one {
+        width: 360px;
+    }
+
+
+
+
+
+}
 
 nav {
     .search-bar {
@@ -169,7 +213,7 @@ nav {
             }
 
         }
-        
+
         .list-group-item {
             cursor: pointer;
 
@@ -178,6 +222,7 @@ nav {
                 background-color: #e55812;
             }
         }
+
         .form-control:focus {
             box-shadow: none;
         }
