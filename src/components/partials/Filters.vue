@@ -9,7 +9,7 @@ export default {
         'rooms_number': '',
         'beds_number': '',
         'bathrooms_number': '',
-        'radius': '0',
+        'radius': '',
         services: []
       },
     };
@@ -156,11 +156,11 @@ export default {
         <input type="range" class="form-range" min="0" max="20" step="5" name="radius" id="radius0"
         v-model="filter.radius">
         <div class="range-dist">
-          <span>0Km</span>
-          <span class="ms-2">5Km</span>
-          <span class="ms-3">10km</span>
-          <span class="ms-2">15km</span>
-          <span>20Km</span>
+          <span data-value="0">0Km</span>
+          <span class="ms-2" data-value="5">5Km</span>
+          <span class="ms-3" data-value="10">10km</span>
+          <span class="ms-2" data-value="15">15km</span>
+          <span data-value="20">20Km</span>
         </div>
       </div>
 
