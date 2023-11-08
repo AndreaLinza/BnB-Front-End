@@ -1,13 +1,14 @@
 <script>
 import axios from "axios";
+import ApartmentCard from "../partials/ApartmentCard.vue";
 
 export default {
 	data() {
 		return {
 			slidePromoList: [],
-			currentSlide: 0, // counter slide
-			cardsForSlide: 3, // quantità di cards per slide
-			movingCard: false,
+			currentSlide: 0,
+			cardsForSlide: 3,
+			movingCard:false
 		};
 	},
 	computed: {
@@ -16,27 +17,23 @@ export default {
 			// Creo l'indice di inizio e fine del range di carte da mostrare
 			const start = this.currentSlide;
 			const end = start + this.cardsForSlide;
-
 			// Verifico se l'array contiene almeno 3 elementi
 			if (this.slidePromoList.length < this.cardsForSlide) {
 				return this.slidePromoList;
-			} else {
-
+			}
+			else {
 				// Se si è raggiunta la fine dell'array, riporto l'indice "currentSlide" a 0 e ritorno le prime carte dell'array
 				if (start >= this.slidePromoList.length) {
 					this.currentSlide = 0;
 					return this.slidePromoList.slice(0, this.cardsForSlide);
 				}
-
 				// Se sono nei limiti dell'array, ritorno il range di carte tra l'indice di inizio e quello di fine
 				if (end <= this.slidePromoList.length) {
 					return this.slidePromoList.slice(start, end);
 				}
-
 				// Individuo le due porzioni di array da mostrare
 				const firstPart = this.slidePromoList.slice(start); // dall'indice "start" fino alla fine dell'array			
 				const secondPart = this.slidePromoList.slice(0, end - this.slidePromoList.length); // dall'inizio dell'array fino all'indice "end" sottraendo la sua lunghezza
-
 				// Restituisco le due parti concatenate
 				return firstPart.concat(secondPart);
 			}
@@ -73,6 +70,7 @@ export default {
 	mounted() {
 		this.fetchData('http://127.0.0.1:8000/api/apartments/');
 	},
+	components: { ApartmentCard }
 }
 </script>
 
@@ -84,28 +82,13 @@ export default {
 			<div class="promo-slider-box">
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
-						<div class="card h-100" :class="{ 'slide-active': movingCard }">
-							<img :src="getApartmentThumbnail(card)" class="card-img-top" :alt="card.title">
-							<div class="card-body">
-								<div class="d-flex align-items-start justify-content-between">
-									<h5 class="card-title">{{ card.title }}</h5>
-								</div>
-								<p class="card-text">{{ card.city }}</p>
-								<p class="card-text">{{ card.address }}</p>
-								<!-- Servizi -->
-								<p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
-								<ul>
-									<li class="card-text" v-for="(service, z) in card.services" :key="z">
-										{{ service.title }}
-									</li>
-								</ul>
-								<!-- Pulsante per visualizzare un appartamento  -->
-								<router-link class="btn btn-primary" role="button"
-									:to="{ name: 'apartments.show', params: { slug: card.slug } }">
-									Scopri di più
-								</router-link>
-							</div>
-						</div>
+
+						<ApartmentCard 
+						:card="card"
+						:thumbfunction="getApartmentThumbnail(card)"
+						:movingCard="movingCard"
+						></ApartmentCard>
+						
 					</div>
 				</div>
 				<!-- Pulsanti di navigazione -->
@@ -126,28 +109,12 @@ export default {
 		<div class="card-container">
 			<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 				<div v-for="(card, i) in slidePromoList" :key="i" class="col">
-					<div class="card">
-						<img :src="getApartmentThumbnail(card)" class="card-img-top" :alt="card.title">
-						<div class="card-body">
-							<div class="d-flex align-items-start justify-content-between">
-								<h5 class="card-title">{{ card.title }}</h5>
-							</div>
-							<p class="card-text">{{ card.city }}</p>
-							<p class="card-text">{{ card.address }}</p>
-							<!-- Servizi -->
-							<p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
-							<ul>
-								<li class="card-text" v-for="(service, z) in card.services" :key="z">
-									{{ service.title }}
-								</li>
-							</ul>
-							<!-- Pulsante per visualizzare un appartamento  -->
-							<router-link class="btn btn-primary" role="button"
-								:to="{ name: 'apartments.show', params: { slug: card.slug } }">
-								Scopri di più
-							</router-link>
-						</div>
-					</div>
+					<ApartmentCard 
+						:card="card"
+						:thumbfunction="getApartmentThumbnail(card)"
+						:movingCard="movingCard"
+						></ApartmentCard>
+					
 				</div>
 			</div>
 		</div>
@@ -156,43 +123,6 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../style/partials/variables" as *;
-
-.card {
-	opacity: 1;
-	border-color: $primary-color;
-	background-color: $partial-secondary-color;
-	cursor: pointer;
-	transition: all .5s;
-
-	img {
-		transition: all .5s;
-		height: 200px;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
-	}
-
-	h5 {
-		color: $secondary-color;
-	}
-
-	p {
-		color: $partial-primary-color;
-	}
-
-	&:hover {
-		transform: translateY(-2%);
-		box-shadow: 2px 2px 10px 0px rgb(0, 0, 0, .1);
-
-		img {
-			filter: brightness(.8);
-		}
-	}
-}
-
-.slide-active {
-	opacity: 0.4;
-}
 
 .promo-slider-box {
 	position: relative;
