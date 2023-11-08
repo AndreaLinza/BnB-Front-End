@@ -59,6 +59,10 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
+.container {
+    margin-bottom: 5rem;
+}
+
 .card {
   opacity: 1;
   border-color: $primary-color;

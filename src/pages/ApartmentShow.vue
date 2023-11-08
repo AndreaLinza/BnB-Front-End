@@ -36,7 +36,7 @@ export default {
 
     <TopOffcanvas></TopOffcanvas>
     
-    <div class="container">
+    <div class="container apartment-show-box">
         <!--Banner appartamento-->
         <div class="apt-pres map-border">
             <img :src="fetchImage(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
@@ -79,6 +79,10 @@ export default {
 
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
+
+.apartment-show-box {
+    margin-bottom: 5rem;
+}
 
 h2,
 h3,
