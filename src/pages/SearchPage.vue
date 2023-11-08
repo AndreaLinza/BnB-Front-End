@@ -22,8 +22,14 @@ export default {
 <template>
   <TopOffcanvas></TopOffcanvas>
 
-  <div class="container">
-    <h2 class="pb-3">Le nostre migliori strutture</h2>
+
+
+  <!-- Sezione appartamenti in promozione -->
+
+
+  <!-- Sezione appartamenti normali -->
+  <div class="container" v-if="store.apartments.length > 0">
+    <!-- <h2 class="pb-3">Le nostre migliori strutture</h2> -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <div class="col" v-for="apartment in store.apartments">
         <div class="card h-100 bg-light pb-2 rounded">
@@ -45,10 +51,12 @@ export default {
       </div>
     </div>
   </div>
+
+    <!-- Se la ricerca non produce risultati -->
+    <div class="container" v-else>
+    <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
+  </div>
 </template>
-
-
-
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
