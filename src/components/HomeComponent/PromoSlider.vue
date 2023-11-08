@@ -99,6 +99,11 @@ export default {
 										{{ service.title }}
 									</li>
 								</ul>
+								<!-- Pulsante per visualizzare un appartamento  -->
+								<router-link class="btn btn-primary" role="button"
+									:to="{ name: 'apartments.show', params: { slug: card.slug } }">
+									Scopri di più
+								</router-link>
 							</div>
 						</div>
 					</div>
@@ -122,12 +127,25 @@ export default {
 			<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 				<div v-for="(card, i) in slidePromoList" :key="i" class="col">
 					<div class="card">
-						<img :src="card.img" class="card-img-top" :alt="card.title">
+						<img :src="getApartmentThumbnail(card)" class="card-img-top" :alt="card.title">
 						<div class="card-body">
 							<div class="d-flex align-items-start justify-content-between">
 								<h5 class="card-title">{{ card.title }}</h5>
 							</div>
-							<p class="card-text">{{ card.description }}</p>
+							<p class="card-text">{{ card.city }}</p>
+							<p class="card-text">{{ card.address }}</p>
+							<!-- Servizi -->
+							<p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
+							<ul>
+								<li class="card-text" v-for="(service, z) in card.services" :key="z">
+									{{ service.title }}
+								</li>
+							</ul>
+							<!-- Pulsante per visualizzare un appartamento  -->
+							<router-link class="btn btn-primary" role="button"
+								:to="{ name: 'apartments.show', params: { slug: card.slug } }">
+								Scopri di più
+							</router-link>
 						</div>
 					</div>
 				</div>
