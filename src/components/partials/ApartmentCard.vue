@@ -37,16 +37,8 @@ export default {
                 <h5 class="card-title">{{ card.title }}</h5>
             </div>
             <p class="card-text">{{ card.city }}</p>
-            <p class="card-text">{{ card.address }}</p>
-            <!-- Servizi -->
-            <p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
-            <ul>
-                <li class="card-text" v-for="(service, z) in card.services" :key="z">
-                    {{ service.title }}
-                </li>
-            </ul>
             <!-- Pulsante per visualizzare un appartamento  -->
-            <router-link class="btn btn-primary" role="button"
+            <router-link class="btn general-btn" role="button"
                 :to="{ name: 'apartments.show', params: { slug: card.slug } }">
                 Scopri di più
             </router-link>
@@ -61,7 +53,7 @@ export default {
 .card {
     opacity: 1;
     border-color: $primary-color;
-    background-color: $partial-secondary-color;
+    background-color: white;
     cursor: pointer;
     transition: all .5s;
 
@@ -93,5 +85,26 @@ export default {
 
 .slide-active {
     opacity: 0.4;
+}
+
+.general-btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 30px;
+    border: 2px solid $partial-secondary-color;
+    color: $grey;
+    padding: 5px 15px;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: #1b8397;
+        color: white;
+    }
+
+    &:focus {
+        background-color: #0f4651;
+        border-color: #a33f0d;
+        color: #a33f0d;
+    }
 }
 </style>

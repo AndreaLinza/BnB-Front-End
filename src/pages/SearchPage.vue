@@ -8,7 +8,7 @@ export default {
   components: {
     Filters,
     TopOffcanvas
-},
+  },
   data() {
     return {
       store,
@@ -33,14 +33,6 @@ export default {
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
             <p class="card-text">{{ apartment.city }}</p>
-            <p class="card-text">{{ apartment.address }}</p>
-
-            <p class="card-text mb-0 pb-0 fw-bold">Servizi inclusi:</p>
-            <ul>
-              <li class="card-text" v-for="(service, z) in apartment.services" :key="z">
-                {{ service.title }}
-              </li>
-            </ul>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <router-link class="btn btn-primary" role="button"
@@ -60,7 +52,7 @@ export default {
 @use "../style/partials/variables" as *;
 
 .container {
-    margin-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .card {
@@ -95,5 +87,4 @@ export default {
     }
   }
 }
-
 </style>
