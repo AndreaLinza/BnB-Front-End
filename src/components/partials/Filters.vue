@@ -81,13 +81,13 @@ export default {
 
 <template>
   <form action="POST" @submit.prevent="submitResearch()" class="container justify-content-center">
-
     <!-- Searchbar -->
-    <div class="d-flex flex-column flex-grow-1 mb-3">
-      <input class="form-control" type="search" name="address" @input="fetchTomTomSuggestions" placeholder="Search"
-        aria-label="Search" v-model="filter.address">
+    <div class="d-flex flex-column flex-grow-1 mb-5">
+      <input class="form-control underline" type="search" name="address" @input="fetchTomTomSuggestions"
+        placeholder="Search" v-model="filter.address">
       <div class="position-relative">
-        <ul id="address-suggestions" class="list-group position-absolute w-100 overflow-auto" style="max-height: 250px">
+        <ul id="address-suggestions" class="list-group position-absolute w-100 overflow-auto"
+          style="max-height: 250px; z-index: 99999;">
           <li class="list-group-item" v-for="suggestion in suggestions" :key="suggestion.id"
             @click="selectSuggestion(suggestion)">
             {{ suggestion.address.freeformAddress }}
@@ -222,6 +222,33 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../style/partials/variables' as *;
+
+.form-control {
+  background-color: transparent !important;
+  border-color: transparent;
+  border-bottom: white;
+  color: white;
+
+  &::placeholder {
+    color: white;
+  }
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.underline {
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 2px solid white;
+  border-radius: 0;
+  width: 40%;
+  margin: auto;
+}
+
+
+
 
 
 .deco-line {
