@@ -19,13 +19,13 @@ export default {
     },
     methods: {
         onFormSubmit() {
+            this.formData.apartment_id = this.apartment_id;
+            console.log(this.formData);
             if (this.formData.email && this.formData.message_text) {
                 axios.post("http://localhost:8000/api/messages", this.formData)
                     .then(resp => {
                         this.success = true;
                         this.error = null;
-                        this.formData.apartment_id = this.apartment_id;
-                        console.log(this.formData);
 
                     })
                     .catch(e => {
