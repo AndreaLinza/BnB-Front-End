@@ -8,7 +8,10 @@ export default {
 			slidePromoList: [],
 			currentSlide: 0,
 			cardsForSlide: 3,
-			movingCard: false
+			movingCard: false,
+			filter: {
+				sponsorships: 1,
+			}
 		};
 	},
 	computed: {
@@ -41,7 +44,7 @@ export default {
 	},
 	methods: {
 		fetchData(url) {
-			axios.get(url).then((response) => {
+			axios.get(url, {params: this.filter}).then((response) => {
 				this.slidePromoList = response.data.apartments;
 			});
 		},
