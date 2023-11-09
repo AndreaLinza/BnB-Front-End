@@ -211,7 +211,7 @@ export default {
     </div>
 
     <div class="text-center mt-4">
-      <button class="general-btn fw-bold" type="submit">
+      <button class="general-btn fw-bold" type="submit" data-bs-dismiss="offcanvas">
         Filtra
       </button>
     </div>
@@ -234,8 +234,20 @@ export default {
   }
 }
 
+.list-group-item {
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    background-color: #e55812;
+  }
+}
+
 .form-control:focus {
   box-shadow: none;
+  color: #fff;
+  border-color: $partial-secondary-color;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.705);
 }
 
 .underline {
@@ -368,6 +380,7 @@ export default {
 
   &:active {
     background-color: $partial-primary-color;
+    
   }
 }
 </style>

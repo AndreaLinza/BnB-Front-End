@@ -1,5 +1,5 @@
 <script>
-import { store, fetchApartments } from "../store";
+import { store } from "../store";
 
 export default {
     components: {
@@ -8,36 +8,8 @@ export default {
     data() {
         return {
             store,
-            // searchPage: {
-            //     title: "search",
-            //     route: "search",
-            // },
-            // filter: {
-            //     address: '',
-            //     radius: '20'
-            // },
-            // suggestions: [],
         }
     },
-    // methods: {
-    //     submitResearch() {
-    //         fetchApartments(this.filter)
-    //         this.$router.push({ name: 'search', route: "search" });
-    //     },
-    //     fetchTomTomSuggestions() {
-    //         const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp'; // In alternativa, puoi ottenere la chiave API da un'opzione di configurazione Laravel
-
-    //         fetch(`https://api.tomtom.com/search/2/search/${this.filter.address}.json?key=${apiKey}`)
-    //             .then((response) => response.json())
-    //             .then((data) => {
-    //                 this.suggestions = data.results;
-    //             });
-    //     },
-    //     selectSuggestion(suggestion) {
-    //         this.filter.address = suggestion.address.freeformAddress;
-    //         this.suggestions = [];
-    //     },
-    // },
 }
 
 </script>
@@ -52,9 +24,9 @@ export default {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="h-100"><img src="../../navicon-white.png" style="width:40px" alt="navico"></span>
-                    <span class="h-100"><img class="d-none" src="../../navicon-orange.png" style="width:40px"
-                            alt="navico"></span>
+                    <span class="h-100"><img class="img-nav" src="../../navicon-white.png" style="width:40px" alt="navicon">
+                        <img class="d-none img-nav-hover" src="../../navicon-orange.png" style="width:40px"
+                            alt="navicon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -66,47 +38,21 @@ export default {
                             <button class="btn d-flex" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                                 <div class="all-left">
-                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="middle-one">
-                                    <div class="text-white">Cerca qui!</div>
+                                    <div class="text-white"><span>Cerca qui!</span></div>
                                 </div>
                                 <div class="all-right">
-                                    <img src="../../public/navicon-white.png" alt="navicon" style="width: 30px;">
+                                    <img class="d-none d-lg-block" src="../../transition-navicon.png" alt="navicon"
+                                        style="width: 30px;">
                                 </div>
                             </button>
                         </div>
                     </div>
 
-                    <!-- <form class="d-flex input-group w-50 mx-lg-auto search-bar" action="POST"
-                        @submit.prevent="submitResearch()" role="search">
-                        <button class="btn btn-outline-personal" type="submit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <div class="d-flex flex-column flex-grow-1">
-                            <input class="form-control" type="search" name="address" @input="fetchTomTomSuggestions"
-                                placeholder="Search" aria-label="Search" v-model="filter.address">
-                            <div class="position-relative">
-                                <ul id="address-suggestions" class="list-group position-absolute w-100 overflow-auto"
-                                    style="max-height: 250px">
-                                    <li class="list-group-item" v-for="suggestion in suggestions" :key="suggestion.id"
-                                        @click="selectSuggestion(suggestion)">
-                                        {{ suggestion.address.freeformAddress }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                            <div class="trans-icon">
-                                <img src="../../transition-navicon.png" alt="navicon" style="width: 30px;">
-                            </div>
-                        </button>
-                    </form> -->
-
-
-                    <!--  -->
-                    <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0">
+                    <!-- Link -->
+                    <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0 text-center text-start-lg">
                         <li class="nav-item">
                             <router-link class="nav-link active " aria-current="page"
                                 :to='{ name: "home" }'>Home</router-link>
@@ -115,22 +61,11 @@ export default {
                             <a class="nav-link" href="#">Chi Siamo</a>
                         </li>
 
-
-                        <!-- DropDown Menu -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Account
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end dd-bg">
-                                <li><a class="dropdown-item" href="http://127.0.0.1:8000/login">Login</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/login">Login</a>
                         </li>
+
+
                     </ul>
                 </div>
             </div>
@@ -144,94 +79,78 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
-.fake-searchbar {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-
-    button {
-        width: 100%;
-        margin-bottom: -5px;
-    }
-
-    .underbar {
-        width: 40%;
-        border-bottom: 2px solid white;
-    }
-
-    .underbar:hover {
-        border-color: #e55812;
-    }
-
-    .middle-one {
-        width: 360px;
-    }
-
-
-
-
-
-}
-
 nav {
-    .search-bar {
-        border-bottom: 2px solid white;
-
-        button {
-            background-color: transparent !important;
-            border-color: transparent;
-            border: none;
-
-            &:hover {
-                color: $partial-secondary-color;
-            }
-
-            .trans-icon {
-                width: 30px;
-                height: 30px;
-                overflow: hidden;
-
-                img {
-                    transform: translateY(-50%);
-                    transition: ease-in-out .5s;
-
-                    &:hover {
-                        transform: translateY(0);
-                        transition: ease-in-out .5s;
-                    }
-                }
-            }
-        }
-
-        .form-control {
-            background-color: transparent !important;
-            border-color: transparent;
-            color: white;
-
-            &::placeholder {
-                color: white;
-            }
-
-        }
-
-        .list-group-item {
-            cursor: pointer;
-
-            &:hover {
-                color: #fff;
-                background-color: #e55812;
-            }
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-        }
-    }
 
     position: fixed;
     width: 100%;
     z-index: 100;
     background-color: $secondary-color !important;
+
+    .fake-searchbar {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+
+        .underbar {
+            border-bottom: 2px solid white;
+
+            &:hover {
+                border-color: #e55812;
+
+
+            }
+
+            button {
+                width: 100%;
+                margin-bottom: -5px;
+                background-color: transparent !important;
+                border-color: transparent;
+                border: none;
+
+                img {
+                    transform: translateY(-60%);
+                    transition: ease-in-out .5s;
+                }
+
+                .all-left {
+                    i {
+                        color: #fff;
+                    }
+                }
+
+                &:hover {
+                    i {
+                        transition: .5s ease-out;
+                        color: #e55812;
+                    }
+
+                    img {
+
+                        transform: translateY(0);
+                        transition: ease-in-out .5s;
+                    }
+                }
+
+                .middle-one {
+                    width: 360px;
+
+                    span {
+                        opacity: .5;
+
+                    }
+                }
+
+                .all-right {
+                    width: 35px;
+                    height: 30px;
+                    overflow: hidden;
+
+                }
+            }
+        }
+
+    }
+
 
     a {
         color: white !important;
@@ -240,20 +159,6 @@ nav {
         &:hover,
         &:active {
             color: $partial-secondary-color !important;
-        }
-    }
-
-    .dd-bg {
-        background-color: $secondary-color;
-        border-color: white;
-
-        & a {
-            font-weight: lighter;
-        }
-
-        & a:hover {
-            background-color: $partial-secondary-color !important;
-            color: white !important;
         }
     }
 
@@ -266,39 +171,24 @@ nav {
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
         }
 
-        span {
-            &:hover {
-                img {
-                    display: block !important;
-                }
+        &:hover {
+
+            transition: .5s;
+            border-color: $partial-secondary-color;
+
+            .img-nav {
+                transition: .5s;
+                display: none;
+            }
+
+            .img-nav-hover {
+                transition: .5s;
+                display: block !important;
             }
         }
+
     }
 
-
-    .btn-outline-personal {
-
-        --bs-btn-color: #ffffff;
-        --bs-btn-border-color: white;
-        --bs-btn-hover-color: #000000;
-        --bs-btn-hover-bg: #ffffff;
-        --bs-btn-hover-border-color: #ffffff;
-        --bs-btn-focus-shadow-rgb: 25, 135, 84;
-        --bs-btn-active-color: #fff;
-        --bs-btn-active-bg: #16697a;
-        --bs-btn-active-border-color: white;
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-        --bs-gradient: none;
-
-        &:hover {
-            border-right-color: #000;
-        }
-
-        &:active {
-            border-right-color: #fff;
-
-        }
-    }
 
 }
 </style>
