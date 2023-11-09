@@ -2,12 +2,16 @@
 import axios from 'axios';
 
 export default {
+    props: {
+        apartment_id: Number,
+    },
     data() {
         return {
             formData: {
                 name: "",
                 email: "",
                 message_text: "",
+                apartment_id: "",
             },
             error: null,
             success: null,
@@ -15,11 +19,14 @@ export default {
     },
     methods: {
         onFormSubmit() {
+            this.formData.apartment_id = this.apartment_id;
+            console.log(this.formData);
             if (this.formData.email && this.formData.message_text) {
                 axios.post("http://localhost:8000/api/messages", this.formData)
                     .then(resp => {
                         this.success = true;
                         this.error = null;
+
                     })
                     .catch(e => {
                         this.error = `-> ${e.response?.data?.message ?? e.message}`;
@@ -29,40 +36,43 @@ export default {
             }
         },
     },
+    mounted() {
+        console.log(this.apartment_id)
+    }
 };
 </script>
 
 <template>
-        <div class="messages-form-box mt-3">
-            <h3 class="text-center m-0">Contatta l'host!</h3>
-            <!--Error-->
-            <div class="alert my-error-alert" v-if="error">
-                Qualcosa è andato storto! {{ error }}
-            </div>
-            <form @submit.prevent="onFormSubmit" v-if="!success">
-                <div class="mb-3">
-                    <label class="fw-bold">Nome</label>
-                    <input type="text" class="form-control" v-model="formData.name">
-                </div>
-                <div class="mb-3">
-                    <label class="fw-bold">E-mail</label>
-                    <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
-                </div>
-                <div class="mb-3">
-                    <label class="fw-bold">Messaggio</label>
-                    <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
-                </div>
-                <!--Pulsante di invio-->
-                <div class="d-flex justify-content-center pt-1">
-                    <button type="submit" class="btn my-btn-messages">Invia</button>
-                </div>
-            </form>
-
-            <!--Success-->
-            <div class="alert my-success-alert" v-else>
-                Grazie per il messaggio, l'host ti contatterà presto!
-            </div>
+    <div class="messages-form-box mt-3">
+        <h3 class="text-center m-0">Contatta l'host!</h3>
+        <!--Error-->
+        <div class="alert my-error-alert" v-if="error">
+            Qualcosa è andato storto! {{ error }}
         </div>
+        <form @submit.prevent="onFormSubmit" v-if="!success">
+            <div class="mb-3">
+                <label class="fw-bold">Nome</label>
+                <input type="text" class="form-control" v-model="formData.name">
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">E-mail</label>
+                <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Messaggio</label>
+                <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
+            </div>
+            <!--Pulsante di invio-->
+            <div class="d-flex justify-content-center pt-1">
+                <button type="submit" class="btn my-btn-messages">Invia</button>
+            </div>
+        </form>
+
+        <!--Success-->
+        <div class="alert my-success-alert" v-else>
+            Grazie per il messaggio, l'host ti contatterà presto!
+        </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
