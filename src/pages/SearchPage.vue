@@ -1,8 +1,8 @@
 <script>
-import { store, fetchApartments } from "../store";
+import axios from "axios";
+import { store } from "../store";
 import Filters from '../components/partials/Filters.vue';
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
-
 
 export default {
   components: {
@@ -12,9 +12,36 @@ export default {
   data() {
     return {
       store,
+      filter: {
+        sponsorships: 1,
+      },
+      promoApartment: [],
     }
-  }
+  },
+  methods: {
+    fetchData(url) {
+      axios.get(url, { params: this.filter }).then((response) => {
+        this.promoApartment = response.data.apartments;
 
+        // Aggiungi la seguente riga per applicare il background rosso
+        this.applyClassToPromoApartment();
+      });
+    },
+    applyClassToPromoApartment() {
+      // Itera attraverso tutti gli appartamenti
+      store.apartments.forEach((apartment) => {
+        // Se l'appartamento è presente in promoApartment aggiungo una classe
+        for (const promo of this.promoApartment) {
+          if (promo.id === apartment.id) {
+            apartment.isPromoApartment = true;
+          }
+        }
+      });
+    },
+  },
+  mounted() {
+    this.fetchData('http://127.0.0.1:8000/api/apartments/');
+  }
 }
 
 </script>
@@ -22,17 +49,12 @@ export default {
 <template>
   <TopOffcanvas></TopOffcanvas>
 
-
-
-  <!-- Sezione appartamenti in promozione -->
-
-
-  <!-- Sezione appartamenti normali -->
+  <!-- Sezione appartamenti -->
   <div class="container" v-if="store.apartments.length > 0">
     <!-- <h2 class="pb-3">Le nostre migliori strutture</h2> -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
-      <div class="col" v-for="apartment in store.apartments">
-        <div class="card h-100 bg-light pb-2 rounded">
+      <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.isPromoApartment }">
+        <div class="card h-100 pb-2 rounded">
           <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top" :alt="apartment.title">
           <div class="card-body">
             <div class="d-flex align-items-start justify-content-between">
@@ -52,8 +74,8 @@ export default {
     </div>
   </div>
 
-    <!-- Se la ricerca non produce risultati -->
-    <div class="container" v-else>
+  <!-- Se la ricerca non produce risultati -->
+  <div class="container" v-else>
     <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
   </div>
 </template>
@@ -61,14 +83,19 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
+.card-promo-style {
+  .card {
+    background-color: rgba(226, 87, 18, 0.2);
+  }
+}
+
 .container {
   margin-bottom: 5rem;
 }
 
 .card {
   opacity: 1;
-  border-color: $primary-color;
-  background-color: $primary-color;
+  border-color: #e0dede;
   cursor: pointer;
   transition: all .5s;
 
