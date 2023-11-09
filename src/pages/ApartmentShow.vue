@@ -3,11 +3,13 @@ import axios from "axios";
 import ContactForm from '../components/partials/ContactForm.vue';
 import TopOffcanvas from '../components/partials/TopOffcanvas.vue'
 
+
 export default {
     components: {
         ContactForm,
         TopOffcanvas
     },
+
     data() {
         return {
             apartment: {},
@@ -16,8 +18,11 @@ export default {
     methods: {
         fetchApartment() {
             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.slug)
-                .then((response) => { this.apartment = response.data });
-            console.log(this.apartment);
+                .then((response) => {
+                    this.apartment = response.data
+                    console.log(this.apartment.id)
+                });
+
         },
         fetchImage(apartment) {
             return `http://127.0.0.1:8000/storage/${apartment.thumbnail}`;
@@ -25,7 +30,7 @@ export default {
     },
     mounted() {
         this.fetchApartment();
-        console.log(this.apartment);
+        console.log(this.apartment)
     }
 
 }
@@ -33,9 +38,8 @@ export default {
 
 
 <template>
-
     <TopOffcanvas></TopOffcanvas>
-    
+
     <div class="container apartment-show-box">
         <!--Banner appartamento-->
         <div class="apt-pres map-border">
@@ -63,7 +67,8 @@ export default {
             </div>
             <!--form-->
             <div class="col-12 col-lg-5">
-                <ContactForm></ContactForm>
+                <ContactForm :apartment_id="apartment.id"></ContactForm>
+                <!-- <p>{{ apartment.id }}</p> -->
             </div>
         </div>
         <!--mappa-->
