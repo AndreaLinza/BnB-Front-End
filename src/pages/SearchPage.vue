@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { store } from "../store";
+import { store , fetchApartments } from "../store";
 import Filters from '../components/partials/Filters.vue';
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       store,
+      filterFromURL: this.$route.query,
       filter: {
         sponsorships: 1,
       },
@@ -38,9 +39,16 @@ export default {
         }
       });
     },
+    fetchApartments,
   },
   mounted() {
+    if (store.apartments.length === 0) {
+      fetchApartments(this.filterFromURL)
+    }
     this.fetchData('http://127.0.0.1:8000/api/apartments/');
+    if (store.apartments.length <= 0) {
+      
+    }
   },
   updated() {
     this.applyClassToPromoApartment();
