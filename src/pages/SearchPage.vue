@@ -41,6 +41,9 @@ export default {
   },
   mounted() {
     this.fetchData('http://127.0.0.1:8000/api/apartments/');
+  },
+  updated() {
+    this.applyClassToPromoApartment();
   }
 }
 
