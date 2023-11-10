@@ -18,6 +18,38 @@ export default {
         route: "search",
       },
       suggestions: [],
+      advancedFilters: [
+        {
+          name: 'rooms_number',
+          label: 'Quantità di stanze',
+          options: [
+            { label: 'Qualsiasi', value: '0' },
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3+', value: '3' },
+          ],
+        },
+        {
+          name: 'beds_number',
+          label: 'Quantità di letti',
+          options: [
+            { label: 'Qualsiasi', value: '0' },
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3+', value: '3' },
+          ],
+        },
+        {
+          name: 'bathrooms_number',
+          label: 'Quantità di bagni',
+          options: [
+            { label: 'Qualsiasi', value: '0' },
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3+', value: '3' },
+          ],
+        },
+      ]
     };
   },
   methods: {
@@ -78,7 +110,6 @@ export default {
 }
 </script>
 
-
 <template>
   <form action="POST" @submit.prevent="submitResearch()" class="container justify-content-center">
     <!-- Searchbar -->
@@ -96,84 +127,22 @@ export default {
       </div>
     </div>
 
-
     <!-- Filtri avanzati -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
-      <!--Numero di stanze-->
-      <div class="col">
+      <div v-for="advancedFilter in advancedFilters" :key="advancedFilter.name" class="col">
         <div class="d-flex align-items-center flex-wrap">
-          <span class="text-white fw-bold ms-2 pb-2">Quantità di stanze</span>
+          <span class="text-white fw-bold ms-2 pb-2">{{ advancedFilter.label }}</span>
           <div class="deco-line"></div>
         </div>
-
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="rooms_number" id="room0" autocomplete="off"
-            v-model="filter.rooms_number" value="0">
-          <label class="btn btn-outline-personal" for="room0">Nessuna</label>
-
-          <input type="radio" class="btn-check" name="rooms_number" id="room1" autocomplete="off"
-            v-model="filter.rooms_number" value="1">
-          <label class="btn btn-outline-personal" for="room1">1</label>
-
-          <input type="radio" class="btn-check" name="rooms_number" id="room2" autocomplete="off"
-            v-model="filter.rooms_number" value="2">
-          <label class="btn btn-outline-personal" for="room2">2</label>
-
-          <input type="radio" class="btn-check" name="rooms_number" id="room3" autocomplete="off"
-            v-model="filter.rooms_number" value="3">
-          <label class="btn btn-outline-personal" for="room3">3+</label>
-        </div>
-      </div>
-
-      <!--Numero di letti-->
-      <div class="col">
-        <div class="d-flex align-items-center ">
-          <span class="text-white fw-bold ms-2 pb-2">Quantità di letti</span>
-          <div class="deco-line"></div>
-        </div>
-
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="beds_number" id="bed0" autocomplete="off"
-            v-model="filter.beds_number" value="0">
-          <label class="btn btn-outline-personal" for="bed0">Nessuna</label>
-
-          <input type="radio" class="btn-check" name="beds_number" id="bed1" autocomplete="off"
-            v-model="filter.beds_number" value="1">
-          <label class="btn btn-outline-personal" for="bed1">1</label>
-
-          <input type="radio" class="btn-check" name="beds_number" id="bed2" autocomplete="off"
-            v-model="filter.beds_number" value="2">
-          <label class="btn btn-outline-personal" for="bed2">2</label>
-
-          <input type="radio" class="btn-check" name="beds_number" id="bed3" autocomplete="off"
-            v-model="filter.beds_number" value="3">
-          <label class="btn btn-outline-personal" for="bed3">3+</label>
-        </div>
-      </div>
-
-      <!--Numero di  Bagni-->
-      <div class="col">
-        <div class="d-flex align-items-center ">
-          <span class="text-white fw-bold ms-2 pb-2">Quantità di bagni</span>
-          <div class="deco-line"></div>
-        </div>
-
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="bathrooms-number" id="bath0" autocomplete="off"
-            v-model="filter.bathrooms_number" value="0">
-          <label class="btn btn-outline-personal" for="bath0">Nessuna</label>
-
-          <input type="radio" class="btn-check" name="bathrooms-number" id="bath1" autocomplete="off"
-            v-model="filter.bathrooms_number" value="1">
-          <label class="btn btn-outline-personal" for="bath1">1</label>
-
-          <input type="radio" class="btn-check" name="bathrooms-number" id="bath2" autocomplete="off"
-            v-model="filter.bathrooms_number" value="2">
-          <label class="btn btn-outline-personal" for="bath2">2</label>
-
-          <input type="radio" class="btn-check" name="bathrooms-number" id="bath3" autocomplete="off"
-            v-model="filter.bathrooms_number" value="3">
-          <label class="btn btn-outline-personal" for="bath3">3+</label>
+          <div class="my-btn-box" v-for="(option, index) in advancedFilter.options">
+            <input :key="index" type="radio" class="btn-check" :name="advancedFilter.name"
+              :id="`${advancedFilter.name}${index}`" autocomplete="off" v-model="filter[advancedFilter.name]"
+              :value="option.value" />
+            <label :for="`${advancedFilter.name}${index}`" class="btn btn-outline-personal">
+              {{ option.label }}
+            </label>
+          </div>
         </div>
       </div>
 
@@ -193,7 +162,6 @@ export default {
           <span data-value="20">20Km</span>
         </div>
       </div>
-
     </div>
 
     <!--Servizi-->
@@ -259,10 +227,6 @@ export default {
   margin: auto;
 }
 
-
-
-
-
 .deco-line {
   height: 2px;
   background-color: $partial-secondary-color;
@@ -271,9 +235,6 @@ export default {
   margin-top: 4px;
   margin-left: 5px;
 }
-
-
-
 
 // ======CHECKBOX======
 .checkbox-wrapper-23 *,
@@ -326,12 +287,31 @@ export default {
   transition: all 250ms cubic-bezier(1, 0, .37, .91);
 }
 
-
 //============= RADIO ===============
-
-
 .btn-group {
   width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+
+  .my-btn-box {
+  width: 100%;
+
+    &:first-of-type {
+      label {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+    }
+
+    &:last-of-type {
+      label {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+    }
+  }
 
   label {
     font-weight: bold;
@@ -343,6 +323,19 @@ export default {
   }
 }
 
+.btn-outline-personal {
+  width: 100%;
+  border-radius: 0px;
+  background-color: white;
+  border-color: $partial-secondary-color;
+  text-align: center;
+
+  &:hover {
+    background-color: $partial-secondary-color;
+  }
+}
+
+
 .range-dist {
   display: flex;
   justify-content: space-between;
@@ -353,17 +346,6 @@ export default {
   }
 }
 
-.btn-outline-personal {
-  border-radius: 20px;
-  background-color: white;
-  border-color: $partial-secondary-color;
-
-  &:hover {
-    background-color: $partial-secondary-color;
-  }
-}
-
-
 .btn-check:checked+.btn {
   color: #fff;
   border-color: $partial-secondary-color;
@@ -371,7 +353,6 @@ export default {
 
   &:hover {
     background-color: $partial-secondary-color;
-
   }
 }
 
@@ -380,7 +361,6 @@ export default {
 
   &:active {
     background-color: $partial-primary-color;
-    
   }
 }
 </style>
