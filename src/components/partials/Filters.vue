@@ -55,7 +55,7 @@ export default {
   methods: {
     submitResearch() {
       fetchApartments(this.filter)
-      this.$router.push({ name: 'search', route: "search" });
+      this.$router.push({ name: 'search', route: "search", query: this.filter });
       this.saveFilter()
     },
 
