@@ -1,5 +1,9 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-@import './partials/variables';
+//@import '@fortawesome/fontawesome-free/css/all.min.css';
+//@import './partials/variables';
+
+@use "./partials/variables" as *;
+@import "bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
 body{
     min-height: 100vh;
@@ -19,6 +23,7 @@ body{
 }
 
 .general-btn{
+    text-decoration: none;
     background-color: transparent;
     border:none;
     border-radius: 30px;

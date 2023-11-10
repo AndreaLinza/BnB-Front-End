@@ -6,9 +6,9 @@ export default {
     return {
       store,
       filter: {
-        'rooms_number': '',
-        'beds_number': '',
-        'bathrooms_number': '',
+        'rooms_number': '0',
+        'beds_number': '0',
+        'bathrooms_number': '0',
         'radius': '20',
         'address': '',
         services: []
@@ -357,6 +357,14 @@ export default {
 }
 
 .form-range::-moz-range-thumb {
+  background-color: $partial-secondary-color;
+
+  &:active {
+    background-color: $partial-primary-color;
+  }
+}
+
+.form-range::-webkit-slider-thumb {
   background-color: $partial-secondary-color;
 
   &:active {

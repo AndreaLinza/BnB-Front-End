@@ -1,7 +1,6 @@
 <script>
 
 export default {
-
     props: {
         movingCard: {
             type: Boolean
@@ -19,13 +18,8 @@ export default {
             type: String,
             required: true
         }
-
-
     },
-
-
 }
-
 
 </script>
 
@@ -38,14 +32,13 @@ export default {
             </div>
             <p class="card-text">{{ card.city }}</p>
             <!-- Pulsante per visualizzare un appartamento  -->
-            <router-link class="btn general-btn" role="button"
+            <router-link class="general-btn general-btn-card" role="button"
                 :to="{ name: 'apartments.show', params: { slug: card.slug } }">
                 Scopri di più
             </router-link>
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped>
 @use '../../style/partials/variables' as *;
@@ -87,24 +80,13 @@ export default {
     opacity: 0.4;
 }
 
-.general-btn {
-    background-color: transparent;
-    border: none;
-    border-radius: 30px;
-    border: 2px solid $partial-secondary-color;
+.general-btn-card {
     color: $grey;
     padding: 5px 15px;
     margin-top: 10px;
 
     &:hover {
-        background-color: #1b8397;
         color: white;
-    }
-
-    &:focus {
-        background-color: #0f4651;
-        border-color: #a33f0d;
-        color: #a33f0d;
     }
 }
 </style>

@@ -18,7 +18,15 @@ export default {
         fetchApartment() {
             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.slug)
                 .then((response) => {
-                    this.apartment = response.data;
+                    // Verifico se la risposta contiene o meno dati validi e in caso di dati non validi reindirizzo l'utente alla pagina NotFound
+                    if (response.data && response.data.slug) {
+                        this.apartment = response.data;
+                    } else {
+                        this.$router.push({ name: "not-found" });
+                    }
+                })
+                .catch((error) => {
+                    this.$router.push({ name: "not-found" });
                 });
         },
         fetchImageApartment,
@@ -26,7 +34,6 @@ export default {
     mounted() {
         this.fetchApartment();
     }
-
 }
 </script>
 
@@ -90,8 +97,6 @@ span {
     padding: 10px;
 }
 
-
-
 .apt-pres {
     height: 500px;
     padding: 15px;
@@ -122,4 +127,3 @@ span {
     border: 2px solid $partial-secondary-color;
 }
 </style>
-

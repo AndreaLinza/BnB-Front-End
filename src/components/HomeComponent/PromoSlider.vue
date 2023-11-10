@@ -89,15 +89,17 @@ export default {
 					</div>
 				</div>
 				<!-- Pulsanti di navigazione -->
-				<div class="prev text-center" @click="onPrevClick">
-					<button type="button" class="btn slider-btn">
-						<i class="fa-solid fa-chevron-left"></i>
-					</button>
-				</div>
-				<div class="next text-center" @click="onNextClick">
-					<button type="button" class="btn slider-btn">
-						<i class="fa-solid fa-chevron-right"></i>
-					</button>
+				<div v-if="slidePromoList.length > 3">
+					<div class="prev text-center" @click="onPrevClick">
+						<button type="button" class="btn slider-btn">
+							<i class="fa-solid fa-chevron-left"></i>
+						</button>
+					</div>
+					<div class="next text-center" @click="onNextClick">
+						<button type="button" class="btn slider-btn">
+							<i class="fa-solid fa-chevron-right"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -138,7 +140,6 @@ export default {
 .slider-container {
 	display: none;
 }
-
 
 .card-container {
 	display: block;
