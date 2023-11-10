@@ -1,15 +1,14 @@
 <script>
 import axios from "axios";
+import { fetchImageApartment } from "../store";
 import ContactForm from '../components/partials/ContactForm.vue';
-import TopOffcanvas from '../components/partials/TopOffcanvas.vue'
-
+import TopOffcanvas from '../components/partials/TopOffcanvas.vue';
 
 export default {
     components: {
         ContactForm,
         TopOffcanvas
     },
-
     data() {
         return {
             apartment: {},
@@ -19,18 +18,13 @@ export default {
         fetchApartment() {
             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.slug)
                 .then((response) => {
-                    this.apartment = response.data
-                    console.log(this.apartment.id)
+                    this.apartment = response.data;
                 });
-
         },
-        fetchImage(apartment) {
-            return `http://127.0.0.1:8000/storage/${apartment.thumbnail}`;
-        },
+        fetchImageApartment,
     },
     mounted() {
         this.fetchApartment();
-        console.log(this.apartment)
     }
 
 }
@@ -43,7 +37,7 @@ export default {
     <div class="container apartment-show-box">
         <!--Banner appartamento-->
         <div class="apt-pres map-border">
-            <img :src="fetchImage(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
+            <img :src="fetchImageApartment(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
         </div>
         <!--Info apt + form contatto-->
         <div class="row">
@@ -65,10 +59,9 @@ export default {
                     }}</span>
                 </div>
             </div>
-            <!--form-->
+            <!--Form di contatto-->
             <div class="col-12 col-lg-5">
                 <ContactForm :apartment_id="apartment.id"></ContactForm>
-                <!-- <p>{{ apartment.id }}</p> -->
             </div>
         </div>
         <!--mappa-->
@@ -77,8 +70,6 @@ export default {
             <div class="mappa container-fluid">
             </div>
         </div>
-        <!--Form di contatto-->
-
     </div>
 </template>
 

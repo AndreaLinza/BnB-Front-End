@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import ApartmentCard from "../partials/ApartmentCard.vue";
+import { fetchImageApartment } from "../../store";
 
 export default {
 	data() {
@@ -44,12 +45,9 @@ export default {
 	},
 	methods: {
 		fetchData(url) {
-			axios.get(url, {params: this.filter}).then((response) => {
+			axios.get(url, { params: this.filter }).then((response) => {
 				this.slidePromoList = response.data.apartments;
 			});
-		},
-		getApartmentThumbnail(apartment) {
-			return `http://127.0.0.1:8000/storage/${apartment.thumbnail}`;
 		},
 		onNextClick() {
 			this.movingCard = true;
@@ -69,6 +67,7 @@ export default {
 				this.movingCard = false;
 			}, 300);
 		},
+		fetchImageApartment,
 	},
 	mounted() {
 		this.fetchData('http://127.0.0.1:8000/api/apartments/');
@@ -85,10 +84,8 @@ export default {
 			<div class="promo-slider-box">
 				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
-
-						<ApartmentCard :card="card" :thumbfunction="getApartmentThumbnail(card)" :movingCard="movingCard">
+						<ApartmentCard :card="card" :thumbfunction="fetchImageApartment(card)" :movingCard="movingCard">
 						</ApartmentCard>
-
 					</div>
 				</div>
 				<!-- Pulsanti di navigazione -->
@@ -109,9 +106,8 @@ export default {
 		<div class="card-container">
 			<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
 				<div v-for="(card, i) in slidePromoList" :key="i" class="col">
-					<ApartmentCard :card="card" :thumbfunction="getApartmentThumbnail(card)" :movingCard="movingCard">
+					<ApartmentCard :card="card" :thumbfunction="fetchImageApartment(card)" :movingCard="movingCard">
 					</ApartmentCard>
-
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/Home.vue";
 import SearchPage from "./pages/SearchPage.vue";
 import ApartmentShowPage from "./pages/ApartmentShow.vue";
+import NotFound from "./pages/NotFound.vue";
 
 const routes = [
   {  //HOME
@@ -20,11 +21,11 @@ const routes = [
     name: 'apartments.show',
     component: ApartmentShowPage,
   },
-  // { //NOT FOUND
-  //   path: "/:pathMatch(.*)*",
-  //   name: "not-found",
-  //   component: NotFoundPage
-  // }
+  { //NOT FOUND
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFound
+  }
 ];
 
 const router = createRouter({

@@ -1,5 +1,5 @@
 <script>
-import Filters from '../partials/Filters.vue';
+import Filters from './filters.vue';
 
 
 export default {
