@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 main {
-    padding-top: 10rem;
+    //padding-top: 10rem;
     //margin-bottom: 5rem;
     flex-grow: 1;
 }
