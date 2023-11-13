@@ -94,7 +94,7 @@ export default {
     width: 100%;
     z-index: 100;
     // background-color: rgba(22, 105, 122, 0.795) !important;
-    background-color: transparent!important;
+    background-color: transparent !important;
     transition: ease-out .5s;
 
     &.navbar-scrolled {
@@ -115,7 +115,7 @@ export default {
             border-bottom: 2px solid white;
 
             &:hover {
-                border-color: #e55812;
+                border-color: $partial-secondary-color;
 
 
             }
@@ -141,7 +141,7 @@ export default {
                 &:hover {
                     i {
                         transition: .5s ease-out;
-                        color: #e55812;
+                        color: $partial-secondary-color;
                     }
 
                     img {

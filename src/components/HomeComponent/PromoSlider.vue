@@ -124,6 +124,7 @@ export default {
 	padding: 0px 30px;
 	border-radius: 20px;
 	border: 2px dashed white;
+	margin-top: 50px;
 }
 
 .promo-slider-box {
@@ -154,12 +155,12 @@ export default {
 
 .slider-btn {
 	color: $partial-primary-color;
-	background-color: $secondary-color;
+	background-color: $partial-secondary-color;
 	border: 2px solid $partial-primary-color;
 
 	&:hover {
 		color: white;
-		background-color: $partial-secondary-color;
+		background-color: $secondary-color;
 		border-color: $partial-primary-color;
 	}
 }
