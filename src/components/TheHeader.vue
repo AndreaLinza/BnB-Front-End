@@ -10,12 +10,30 @@ export default {
     mounted() {
         document.addEventListener('DOMContentLoaded', () => {
             let navbar = document.getElementById("navbar");
+            let underbar = document.querySelector(".underbar");
+            let navlinks = document.querySelectorAll(".nav-link")
+
 
             window.onscroll = function () {
                 if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
                     navbar.classList.add("navbar-scrolled");
+                    underbar.classList.add('underbar-scrolled')
+                    navlinks.forEach(navlink => {
+                        navlink.classList.add('nav-link-scrolled')
+
+                    })
+
+
                 } else {
                     navbar.classList.remove("navbar-scrolled");
+                    underbar.classList.remove('underbar-scrolled')
+
+                    navlinks.forEach(navlink =>{
+                        navlink.classList.remove('nav-link-scrolled')
+
+                    })
+
+
                 }
             };
         });
@@ -34,8 +52,8 @@ export default {
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="h-100"><img class="img-nav" src="../../navicon-white.png" style="width:40px" alt="navicon">
-                        <img class="d-none img-nav-hover" src="../../navicon-orange.png" style="width:40px"
-                            alt="navicon"></span>
+                        <img class="d-none img-nav-hover" src="../../navicon-blue.png" style="width:40px" alt="navicon">
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -47,13 +65,13 @@ export default {
                             <button class="btn d-flex" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                                 <div class="all-left">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <i class="icon fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <div class="middle-one">
                                     <div class="text-white"><span>Cerca qui!</span></div>
                                 </div>
                                 <div class="all-right">
-                                    <img class="d-none d-lg-block" src="../../transition-navicon.png" alt="navicon"
+                                    <img class="d-none d-lg-block" src="../../transition-navicon-blue.png" alt="navicon"
                                         style="width: 30px;">
                                 </div>
                             </button>
@@ -63,7 +81,7 @@ export default {
                     <!-- Link -->
                     <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0 text-center text-start-lg">
                         <li class="nav-item">
-                            <router-link class="nav-link active " aria-current="page"
+                            <router-link class="nav-link active" aria-current="page"
                                 :to='{ name: "home" }'>Home</router-link>
                         </li>
                         <li class="nav-item">
@@ -101,10 +119,6 @@ export default {
         background-color: $secondary-color !important;
 
     }
-    // .container {
-    //     background-color: $secondary-color;;
-    // }
-
 
     .fake-searchbar {
         display: flex;
@@ -112,11 +126,11 @@ export default {
         justify-content: center;
 
         .underbar {
+            transition: .5s;
             border-bottom: 2px solid white;
 
             &:hover {
-                border-color: $partial-secondary-color;
-
+                border-color: $secondary-color;
 
             }
 
@@ -133,15 +147,17 @@ export default {
                 }
 
                 .all-left {
-                    i {
+                    .icon {
                         color: #fff;
+                        transition: .5s;
+
                     }
                 }
 
                 &:hover {
-                    i {
-                        transition: .5s ease-out;
-                        color: $partial-secondary-color;
+                    .icon {
+                        transition: .5s;
+                        color: $secondary-color;
                     }
 
                     img {
@@ -167,21 +183,40 @@ export default {
 
                 }
             }
+
+            //Classi che si attivano quando c'è lo scroll della pagina
+            &.underbar-scrolled:hover {
+                transition: .5s;
+                border-bottom: 2px solid $partial-secondary-color;
+
+                .icon {
+                    transition: .5s ease-out;
+                    color: $partial-secondary-color !important;
+                }
+
+
+            }
+
         }
 
     }
 
-
-    a {
+    //===============Right-Section-Navbar====================//
+    .nav-link {
         color: white !important;
         font-weight: bold;
 
         &:hover,
         &:active {
+            color: $secondary-color !important;
+        }
+        &.nav-link-scrolled:hover {
+            transition: .5s;
             color: $partial-secondary-color !important;
         }
-    }
+        
 
+    }
     .navbar-toggler {
         padding: 0.2rem 0.6rem;
         background-color: transparent;
@@ -194,7 +229,7 @@ export default {
         &:hover {
 
             transition: .5s;
-            border-color: $partial-secondary-color;
+            border-color: $secondary-color;
 
             .img-nav {
                 transition: .5s;
