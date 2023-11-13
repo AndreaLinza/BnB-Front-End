@@ -5,14 +5,31 @@ export const store = reactive({
   apartments: [],
   services: [],
   promoList: [],
+  pagination: {},
+  filter: {
+    rooms_number: "0",
+    beds_number: "0",
+    bathrooms_number: "0",
+    radius: "20",
+    address: "",
+    services: [],
+  },
 });
 
-export function fetchApartments(filter) {
+export function fetchApartments(url) {
   axios
-    .get("http://127.0.0.1:8000/api/apartments", { params: filter })
+    .get(url ?? "http://127.0.0.1:8000/api/apartments", {
+      params: store.filter,
+    })
     .then((response) => {
-      store.apartments = response.data.apartments;
-      console.log(store.apartments);
+      store.apartments = response.data.apartments.data;
+
+      // Salvo i dati della paginazione
+      delete response.data.apartments.data;
+      store.pagination = response.data.apartments;
+    })
+    .catch((error) => {
+      console.error("Errore nella richiesta:", error.response);
     });
 }
 

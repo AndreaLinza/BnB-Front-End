@@ -46,7 +46,7 @@ export default {
 	methods: {
 		fetchData(url) {
 			axios.get(url, { params: this.filter }).then((response) => {
-				this.slidePromoList = response.data.apartments;
+				this.slidePromoList = response.data.apartments.data;
 			});
 		},
 		onNextClick() {

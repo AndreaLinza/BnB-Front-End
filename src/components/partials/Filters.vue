@@ -5,14 +5,6 @@ export default {
   data() {
     return {
       store,
-      filter: {
-        'rooms_number': '0',
-        'beds_number': '0',
-        'bathrooms_number': '0',
-        'radius': '20',
-        'address': '',
-        services: []
-      },
       searchPage: {
         title: "search",
         route: "search",
@@ -54,59 +46,26 @@ export default {
   },
   methods: {
     submitResearch() {
-      fetchApartments(this.filter)
-      this.$router.push({ name: 'search', route: "search", query: this.filter });
-      this.saveFilter()
-    },
-
-    // Creo una funzione per salvare i filtri nel localStorage
-    saveFilter() {
-      localStorage.setItem('filters', JSON.stringify(this.filter));
-    },
-
-    // Creo una funzione per cancellare i filtri nel localStorage
-    deleteFilter() {
-      localStorage.removeItem('filters')
-    },
-
-    // Creo una funzione che servirà a mantere i filtri selezionati
-    loadFilter() {
-      //Recupero i filtri dal localStorage
-      const savedFilter = localStorage.getItem('filters');
-      return savedFilter ? JSON.parse(savedFilter) : null;
+      fetchApartments();
+      this.$router.push({ name: 'search', route: "search", query: store.filter});
     },
     fetchTomTomSuggestions() {
-      const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp'; // In alternativa, puoi ottenere la chiave API da un'opzione di configurazione Laravel
+      const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp';
 
-      fetch(`https://api.tomtom.com/search/2/search/${this.filter.address}.json?key=${apiKey}`)
+      fetch(`https://api.tomtom.com/search/2/search/${store.filter.address}.json?key=${apiKey}`)
         .then((response) => response.json())
         .then((data) => {
           this.suggestions = data.results;
         });
     },
     selectSuggestion(suggestion) {
-      this.filter.address = suggestion.address.freeformAddress;
+      store.filter.address = suggestion.address.freeformAddress;
       this.suggestions = [];
     },
   },
   mounted() {
     fetchServices();
-    const savedFilter = this.loadFilter();
-
-    if (savedFilter) {
-      this.filter = savedFilter;
-    }
-    // Aggiungo il listener per l'evento beforeunload 
-    //"beforeunload" E' un evento del browser che si verifica prima che una pagina venga scaricata o rinfrescata. 
-    //Viene generato quando l'utente sta per lasciare la pagina, ad esempio, facendo un refresh della pagina o chiudendo la scheda del browser.
-    window.addEventListener('beforeunload', this.deleteFilter)
   },
-
-  //
-  beforeUnmount() {
-    //Rimuovo il listener dell'evento beforeunload quando smonto il componente
-    window.removeEventListener('beforeunload', this.deleteFilter)
-  }
 }
 </script>
 
@@ -115,7 +74,7 @@ export default {
     <!-- Searchbar -->
     <div class="d-flex flex-column flex-grow-1 mb-5">
       <input class="form-control underline" type="search" name="address" @input="fetchTomTomSuggestions"
-        placeholder="Search" v-model="filter.address">
+        placeholder="Search" v-model="store.filter.address">
       <div class="position-relative">
         <ul id="address-suggestions" class="list-group position-absolute w-100 overflow-auto"
           style="max-height: 250px; z-index: 99999;">
@@ -137,7 +96,7 @@ export default {
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
           <div class="my-btn-box" v-for="(option, index) in advancedFilter.options">
             <input :key="index" type="radio" class="btn-check" :name="advancedFilter.name"
-              :id="`${advancedFilter.name}${index}`" autocomplete="off" v-model="filter[advancedFilter.name]"
+              :id="`${advancedFilter.name}${index}`" autocomplete="off" v-model="store.filter[advancedFilter.name]"
               :value="option.value" />
             <label :for="`${advancedFilter.name}${index}`" class="btn btn-outline-personal">
               {{ option.label }}
@@ -153,7 +112,7 @@ export default {
           <div class="deco-line"></div>
         </div>
         <input type="range" class="form-range" min="1" max="21" step="5" name="radius" id="radius0"
-          v-model="filter.radius">
+          v-model="store.filter.radius">
         <div class="range-dist">
           <span>0Km</span>
           <span class="ms-2">5Km</span>
@@ -168,7 +127,7 @@ export default {
     <h5 class="text-white mt-5">Servizi</h5>
     <div class=" d-flex flex-wrap pt-3">
       <div class="checkbox-wrapper-23 d-flex p-2 align-items-center" v-for="(service, i) in  store.services ">
-        <input type="checkbox" :id="`${i}`" v-model="filter.services" :value="service.id">
+        <input type="checkbox" :id="`${i}`" v-model="store.filter.services" :value="service.id">
         <label :for="`${i}`" style="--size: 30px">
           <svg viewBox="0,0,50,50">
             <path d="M5 30 L 20 45 L 45 5"></path>
