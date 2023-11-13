@@ -77,8 +77,8 @@ export default {
 </script>
 
 <template>
-	<div class="container pt-2 pb-4">
-		<h2 class="pb-3">Le nostre migliori strutture</h2>
+	<div class="container pt-2 pb-5">
+		<h2 class="pb-3 text-white fw-bold">Le nostre migliori strutture</h2>
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
@@ -118,6 +118,13 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../style/partials/variables" as *;
+
+.container {
+	background-color: rgba(255, 255, 255, 0.12);
+	padding: 0px 30px;
+	border-radius: 20px;
+	border: 2px dashed white;
+}
 
 .promo-slider-box {
 	position: relative;

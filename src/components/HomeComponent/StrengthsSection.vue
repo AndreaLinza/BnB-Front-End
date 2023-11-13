@@ -25,8 +25,8 @@ export default {
 </script>
 
 <template>
-    <div class="container pt-2 pb-4">
-        <h2 class="pb-2">I nostri punti di forza</h2>
+    <div class="container pt-5 pb-5">
+        <h2 class="pb-2 text-white fw-bold">I nostri punti di forza</h2>
         <div class="row row-cols-md-3 row-cols-1 gy-3">
             <div class="col" v-for="(card, i) in listCards" :key="i">
                 <div class="my-card-box p-4">
@@ -63,6 +63,14 @@ export default {
 
     &:hover {
         transform: translateY(-2%);
+    }
+
+    p {
+        color: $grey;
+    }
+
+    i {
+        color: $secondary-color;
     }
 }
 </style>
