@@ -98,13 +98,12 @@ export default {
     transition: ease-out .5s;
 
     &.navbar-scrolled {
-        background-color: $secondary-color;
+        background-color: $secondary-color !important;
 
-    .container {
-        background-color: $secondary-color;
-        ;
     }
-    }
+    // .container {
+    //     background-color: $secondary-color;;
+    // }
 
 
     .fake-searchbar {
