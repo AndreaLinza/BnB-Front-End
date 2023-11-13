@@ -41,7 +41,7 @@ export default {
 <template>
     <TopOffcanvas></TopOffcanvas>
 
-    <div class="container apartment-show-box">
+    <div class="container apartment-show-box margin-top-custom">
         <!--Banner appartamento-->
         <div class="apt-pres map-border">
             <img :src="fetchImageApartment(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
@@ -95,6 +95,10 @@ export default {
 
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
+
+.margin-top-custom {
+    margin-top: 150px;
+}
 
 #mappa {
     margin-top: 100px;
