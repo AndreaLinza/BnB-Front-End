@@ -51,7 +51,7 @@ export default {
   <TopOffcanvas></TopOffcanvas>
 
   <!-- Sezione appartamenti -->
-  <div class="container" v-if="store.pagination.total > 0">
+  <div class="container margin-top-custom" v-if="store.pagination.total > 0">
     <!-- <h2 class="pb-3">Le nostre migliori strutture</h2> -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.isPromoApartment }">
@@ -61,7 +61,7 @@ export default {
             <div class="d-flex align-items-start justify-content-between">
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
-            <small class="card-text fw-bold">{{ apartment.city }}</small>
+            <small class="card-text fw-bold grey-text-color">{{ apartment.city }}</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -82,7 +82,7 @@ export default {
 
   <!-- Paginazione -->
   <div class="pt-3 text-center pb-3">
-    <a class="btn btn-outline-primary m-1" @click="fetchApartments(linkPage.url)" role="button"
+    <a class="btn btn-outline-custom m-1" @click="fetchApartments(linkPage.url)" role="button"
       v-for="linkPage in store.pagination.links" v-html="linkPage.label"
       :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
   </div>
@@ -90,6 +90,31 @@ export default {
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
+
+.grey-text-color {
+  color: $grey !important;
+}
+
+.margin-top-custom {
+  margin-top: 150px;
+}
+
+.btn-outline-custom {
+  border: 2px solid $partial-secondary-color;
+  color: $partial-primary-color;
+
+  &:hover {
+    border-color: white;
+    background-color: #0f4651;
+    color: $partial-secondary-color;
+  }
+
+  &:active {
+    border-color: white;
+    background-color: #09272d;
+    color: $partial-secondary-color;
+  }
+}
 
 .card-promo-style {
   .card {
