@@ -61,7 +61,7 @@ export default {
             <div class="d-flex align-items-start justify-content-between">
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
-            <small class="card-text fw-bold">{{ apartment.city }}</small>
+            <small class="card-text fw-bold grey-text-color">{{ apartment.city }}</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -90,6 +90,10 @@ export default {
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
+
+.grey-text-color {
+  color: $grey !important;
+}
 
 .margin-top-custom {
   margin-top: 150px;
