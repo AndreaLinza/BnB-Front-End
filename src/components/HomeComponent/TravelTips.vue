@@ -34,7 +34,7 @@ export default {
                     <div class="col">
                         <div class="card-travel lighter-grey">
                             <img src="/images/Fratello1.jpg" alt="card.title">
-                            <a href="https://github.com/Pietro-Leone">
+                            <a href="https://github.com/Pietro-Leone" target="_blank">
                                 <h5 class="p-2 secondary">Payeturo <i class="fa-brands fa-github"></i></h5>
                             </a>
                         </div>
@@ -42,7 +42,7 @@ export default {
                     <div class="col">
                         <div class="card-travel">
                             <img src="/images/Sorella1.jpg" alt="card.title">
-                            <a href="https://github.com/giuliacrr">
+                            <a href="https://github.com/giuliacrr" target="_blank">
                                 <h5 class="p-2 part-secondary">Solanum <i class="fa-brands fa-github"></i></h5>
                             </a>
                         </div>
@@ -50,7 +50,7 @@ export default {
                     <div class="col">
                         <div class="card-travel lighter-grey">
                             <img src="/images/Padre1.jpg" alt="card.title">
-                            <a href="https://github.com/AndreaLinza">
+                            <a href="https://github.com/AndreaLinza" target="_blank">
                                 <h5 class="p-2 secondary">DrewDustlin <i class="fa-brands fa-github"></i></h5>
                             </a>
                         </div>
@@ -58,7 +58,7 @@ export default {
                     <div class="col">
                         <div class="card-travel">
                             <img src="/images/Madre1.jpg" alt="card.title">
-                            <a href="https://github.com/ElyPoli">
+                            <a href="https://github.com/ElyPoli" target="_blank">
                                 <h5 class="p-2 part-secondary">Grazie, Elisa <i class="fa-brands fa-github"></i></h5>
                             </a>
                         </div>
