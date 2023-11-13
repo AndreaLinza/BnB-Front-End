@@ -28,9 +28,9 @@ export default {
         <img :src="thumbfunction" class="card-img-top" :alt="card.title">
         <div class="card-body">
             <div class="d-flex align-items-start justify-content-between">
-                <h5 class="card-title">{{ card.title }}</h5>
+                <h5 class="card-title fw-bold">{{ card.title }}</h5>
             </div>
-            <p class="card-text">{{ card.city }}</p>
+            <p class="card-text text-secondary">{{ card.city }}</p>
             <!-- Pulsante per visualizzare un appartamento  -->
             <router-link class="general-btn general-btn-card" role="button"
                 :to="{ name: 'apartments.show', params: { slug: card.slug } }">
@@ -45,7 +45,7 @@ export default {
 
 .card {
     opacity: 1;
-    border-color: $primary-color;
+    border: none;
     background-color: white;
     cursor: pointer;
     transition: all .5s;

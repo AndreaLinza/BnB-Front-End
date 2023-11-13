@@ -13,7 +13,7 @@ export default {
 <template>
     <header>
         <nav class="navbar navbar-expand-lg shadow-lg">
-            <div class="container">
+            <div class="container ">
                 <!-- Logo -->
                 <router-link class="navbar-brand" :to='{ name: "home" }'><img src="../../LogoBnb_white.png" alt="LogoB'n'B"
                         style="width: 80px;"></router-link>
@@ -80,7 +80,12 @@ nav {
     position: fixed;
     width: 100%;
     z-index: 100;
-    background-color: $secondary-color !important;
+    background-color: $secondary-color;
+
+    .container {
+        background-color: $secondary-color;
+        ;
+    }
 
     .fake-searchbar {
         display: flex;

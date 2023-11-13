@@ -77,8 +77,8 @@ export default {
 </script>
 
 <template>
-	<div class="container pt-2 pb-4">
-		<h2 class="pb-3">Le nostre migliori strutture</h2>
+	<div class="container pb-4">
+		<h2 class="pb-2 pt-2 text-white fw-bold text-center">Le nostre migliori strutture</h2>
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
@@ -119,6 +119,13 @@ export default {
 <style lang="scss" scoped>
 @use "../../style/partials/variables" as *;
 
+.container {
+	background-color: rgba(255, 255, 255, 0.12);
+	padding: 0px 30px;
+	border-radius: 20px;
+	border: 2px dashed white;
+}
+
 .promo-slider-box {
 	position: relative;
 
@@ -132,7 +139,7 @@ export default {
 	.next {
 		position: absolute;
 		top: 50%;
-		right: -90px;
+		right: -98px;
 		transform: translate(-50%, -50%);
 	}
 }
@@ -146,13 +153,14 @@ export default {
 }
 
 .slider-btn {
-	color: $partial-secondary-color;
-	border: 2px solid $partial-secondary-color;
+	color: $partial-primary-color;
+	background-color: $secondary-color;
+	border: 2px solid $partial-primary-color;
 
 	&:hover {
 		color: white;
-		background-color: $secondary-color;
-		border-color: $secondary-color;
+		background-color: $partial-secondary-color;
+		border-color: $partial-primary-color;
 	}
 }
 
