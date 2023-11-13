@@ -7,13 +7,26 @@ export default {
             store,
         }
     },
+    mounted() {
+        document.addEventListener('DOMContentLoaded', () => {
+            let navbar = document.getElementById("navbar");
+
+            window.onscroll = function () {
+                if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+                    navbar.classList.add("navbar-scrolled");
+                } else {
+                    navbar.classList.remove("navbar-scrolled");
+                }
+            };
+        });
+    }
 }
 </script>
 
 <template>
     <header>
-        <nav class="navbar navbar-expand-lg shadow-lg">
-            <div class="container ">
+        <nav class="navbar navbar-expand-lg shadow-lg" id="navbar">
+            <div class="container">
                 <!-- Logo -->
                 <router-link class="navbar-brand" :to='{ name: "home" }'><img src="../../LogoBnb_white.png" alt="LogoB'n'B"
                         style="width: 80px;"></router-link>
@@ -75,17 +88,24 @@ export default {
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
-nav {
+.navbar {
 
     position: fixed;
     width: 100%;
     z-index: 100;
-    background-color: $secondary-color;
+    // background-color: rgba(22, 105, 122, 0.795) !important;
+    background-color: transparent!important;
+    transition: ease-out .5s;
+
+    &.navbar-scrolled {
+        background-color: $secondary-color;
 
     .container {
         background-color: $secondary-color;
         ;
     }
+    }
+
 
     .fake-searchbar {
         display: flex;
@@ -165,7 +185,7 @@ nav {
 
     .navbar-toggler {
         padding: 0.2rem 0.6rem;
-        background-color: $secondary-color;
+        background-color: transparent;
         border: var(--bs-border-width) solid white;
 
         &:focus {

@@ -1,4 +1,5 @@
 <script>
+import Jumbosection from '../components/HomeComponent/Jumbosection.vue';
 import PromoSlider from '../components/HomeComponent/PromoSlider.vue';
 import StrengthsSection from '../components/HomeComponent/StrengthsSection.vue';
 import TravelTips from '../components/HomeComponent/TravelTips.vue';
@@ -6,16 +7,18 @@ import TopOffcanvas from '../components/partials/TopOffcanvas.vue';
 
 export default {
     components: {
-        PromoSlider,
-        StrengthsSection,
-        TravelTips,
-        TopOffcanvas
-    },
+    PromoSlider,
+    StrengthsSection,
+    TravelTips,
+    TopOffcanvas,
+    Jumbosection
+},
 }
 </script>
 
 <template>
     <TopOffcanvas></TopOffcanvas>
+    <Jumbosection></Jumbosection>
     <PromoSlider></PromoSlider>
     <StrengthsSection></StrengthsSection>
 
