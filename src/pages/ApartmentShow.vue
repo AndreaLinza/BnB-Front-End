@@ -47,20 +47,31 @@ export default {
             <img :src="fetchImageApartment(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
         </div>
         <!--Info apt + form contatto-->
-        <div class="row">
+        <div class="row gy-4 mb-5">
             <!--Info generali-->
             <div class="col-12 col-lg-7">
-                <div class="infos mt-3">
-                    <h2>{{ apartment.title }}</h2>
-                    <span class="aubergine">{{ apartment.address }}</span>
+                <div class="infos mt-3 h-100">
+                    <div class="mb-4">
+                        <h2 class="text-white">{{ apartment.title }}</h2>
+                        <small class="text-white">{{ apartment.address }}</small>
+                    </div>
                     <!--informazioni tecniche-->
-                    <h3 class="mt-3">Informazioni generali</h3>
-                    <span class="aubergine">
-                        {{ apartment.square_meters }} m², {{ apartment.rooms_number }} stanze, {{ apartment.beds_number }}
-                        letti,
-                        {{ apartment.bathrooms_number }} bagni.
-                    </span>
-                    <h3 class="mt-3">Servizi</h3>
+                    <div class="mb-3">
+                        <h3 class="mt-3 text-white">Informazioni generali</h3>
+                        <span class="aubergine text-white">
+                            L'appartamento ha un'area di {{ apartment.square_meters }} m², comprende {{
+                                apartment.rooms_number }}
+                            stanze con {{ apartment.beds_number
+                            }}
+                            letti e
+                            {{ apartment.bathrooms_number }} bagni.<br>
+                            Tutti i servizi messi a disposizione dall'Host e il suo appartamento sono segnalati nella
+                            sezione sottostante "Servizi".<br>
+                            E' possibile anche visualizzare la posizione dell'immobile sulla
+                            <a href="#mappa" class="text-white">mappa</a> sottostante!
+                        </span>
+                    </div>
+                    <h3 class="mt-3 text-white">Servizi</h3>
                     <span class="badge bg-secondary my-1 mx-1 text-white" v-for="service in apartment.services">{{
                         service.title
                     }}</span>
@@ -72,9 +83,11 @@ export default {
             </div>
         </div>
         <!--mappa-->
-        <h3 class="mt-5 text-center">Ti troverai qui:</h3>
-        <div class="map-border">
-            <div class="mappa container-fluid">
+        <div id="mappa">
+            <h3 class="mt-5 mb-4 text-center text-white">Ti troverai qui:</h3>
+            <div class="map-border">
+                <div class="mappa container-fluid">
+                </div>
             </div>
         </div>
     </div>
@@ -83,8 +96,26 @@ export default {
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
 
+#mappa {
+    margin-top: 100px;
+}
+
 .apartment-show-box {
     margin-bottom: 5rem;
+}
+
+
+h2 {
+    font-size: 3rem;
+}
+
+h2,
+h3 {
+    margin-bottom: 0px;
+}
+
+small {
+    color: $primary-color !important;
 }
 
 h2,
@@ -93,8 +124,13 @@ span {
     color: $grey;
 }
 
+
 .infos {
-    padding: 10px;
+    padding: 20px;
+    background-color: #e99f8343;
+    border-radius: 20px;
+    border: 2px dashed white;
+
 }
 
 .apt-pres {
@@ -118,12 +154,12 @@ span {
 .mappa {
     background-image: url(https://ostellobello.com/wp-content/uploads/2022/02/mappa.png);
     width: 100%;
-    height: 200px;
+    height: 300px;
     background-position: center;
 }
 
 .bg-secondary {
-    background-color: $grey !important;
+    background-color: $secondary-color !important;
     border: 2px solid $partial-secondary-color;
 }
 </style>
