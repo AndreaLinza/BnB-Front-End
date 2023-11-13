@@ -28,7 +28,7 @@ export default {
     <footer>
         <div class="container">
 
-            <a href="/"><img class="logo py-4" src="../../public/LogoBnb_white.png" alt="LogoB'n'B"
+            <a href="/"><img class="logo py-4" src="../../LogoBnb_white.png" alt="LogoB'n'B"
                     style="width: 150px;"></a>
 
             <div class="row row-cols-lg-4 justify-content-lg-between">
