@@ -129,7 +129,7 @@ export default {
         margin-top: .5rem;
         color: $partial-primary-color;
         font-weight: bold;
-        --bs-alert-bg: #c1bfb5;
+        --bs-alert-bg: #e78562;
         --bs-alert-border-color: $secondary-color;
     }
 
