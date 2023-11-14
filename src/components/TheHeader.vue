@@ -64,7 +64,7 @@ export default {
                     </span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
                     <!-- SearchBar -->
@@ -96,16 +96,16 @@ export default {
                             <a class="nav-link" href="#">Chi Siamo</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/api/user">Area Personale</a>
-                        </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/api/user">Area Personale</a>
+            </li>
 
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 </template>
 
 
@@ -150,19 +150,19 @@ export default {
             &:hover {
                 border-color: $secondary-color;
 
-            }
+      }
 
-            button {
-                width: 100%;
-                margin-bottom: -5px;
-                background-color: transparent !important;
-                border-color: transparent;
-                border: none;
+      button {
+        width: 100%;
+        margin-bottom: -5px;
+        background-color: transparent !important;
+        border-color: transparent;
+        border: none;
 
-                img {
-                    transform: translateY(-60%);
-                    transition: ease-in-out .5s;
-                }
+        img {
+          transform: translateY(-60%);
+          transition: ease-in-out .5s;
+        }
 
                 .all-left {
                     .icon {
@@ -178,26 +178,26 @@ export default {
                         color: $secondary-color;
                     }
 
-                    img {
+          img {
 
-                        transform: translateY(0);
-                        transition: ease-in-out .5s;
-                    }
-                }
+            transform: translateY(0);
+            transition: ease-in-out .5s;
+          }
+        }
 
-                .middle-one {
-                    width: 360px;
+        .middle-one {
+          width: 360px;
 
-                    span {
-                        opacity: .5;
+          span {
+            opacity: .5;
 
-                    }
-                }
+          }
+        }
 
-                .all-right {
-                    width: 35px;
-                    height: 30px;
-                    overflow: hidden;
+        .all-right {
+          width: 35px;
+          height: 30px;
+          overflow: hidden;
 
                 }
             }
@@ -245,27 +245,32 @@ export default {
 
         }
 
-        &:focus {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
+        &.toggler-scrolled:hover{
+        border: var(--bs-border-width) solid $partial-secondary-color;
+
         }
 
-        &:hover {
+    &:focus {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
+    }
+
+    &:hover {
 
             transition: .5s;
             border-color: $secondary-color;
 
-            .img-nav {
-                transition: .5s;
-                display: none;
-            }
+      .img-nav {
+        transition: .5s;
+        display: none;
+      }
 
-            .img-nav-hover {
-                transition: .5s;
-                display: block !important;
-            }
-        }
-
+      .img-nav-hover {
+        transition: .5s;
+        display: block !important;
+      }
     }
+
+  }
 
 
 }

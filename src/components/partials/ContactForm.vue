@@ -2,77 +2,74 @@
 import axios from 'axios';
 
 export default {
-    props: {
-        apartment_id: Number,
-    },
-    data() {
-        return {
-            formData: {
-                name: "",
-                email: "",
-                message_text: "",
-                apartment_id: "",
-            },
-            error: null,
-            success: null,
-        };
-    },
-    methods: {
-        onFormSubmit() {
-            this.formData.apartment_id = this.apartment_id;
-            console.log(this.formData);
-            if (this.formData.email && this.formData.message_text) {
-                axios.post("http://localhost:8000/api/messages", this.formData)
-                    .then(resp => {
-                        this.success = true;
-                        this.error = null;
+  props: {
+    apartment_id: Number,
+  },
+  data() {
+    return {
+      formData: {
+        name: "",
+        email: "",
+        message_text: "",
+        apartment_id: "",
+      },
+      error: null,
+      success: null,
+    };
+  },
+  methods: {
+    onFormSubmit() {
+      this.formData.apartment_id = this.apartment_id;
+      console.log(this.formData);
+      if (this.formData.email && this.formData.message_text) {
+        axios.post("http://localhost:8000/api/messages", this.formData)
+          .then(resp => {
+            this.success = true;
+            this.error = null;
 
-                    })
-                    .catch(e => {
-                        this.error = `-> ${e.response?.data?.message ?? e.message}`;
-                    })
-            } else {
-                this.error = "Compila i campi obbligatori prima di inviare il form.";
-            }
-        },
+          })
+          .catch(e => {
+            this.error = `-> ${e.response?.data?.message ?? e.message}`;
+          })
+      } else {
+        this.error = "Compila i campi obbligatori prima di inviare il form.";
+      }
     },
-    mounted() {
-        console.log(this.apartment_id)
-    }
+  },
 };
 </script>
 
 <template>
-    <div class="messages-form-box mt-3">
-        <h3 class="text-center m-0">Contatta l'host!</h3>
-        <!--Error-->
-        <div class="alert my-error-alert" v-if="error">
-            Qualcosa è andato storto! {{ error }}
-        </div>
-        <form @submit.prevent="onFormSubmit" v-if="!success">
-            <div class="mb-3">
-                <label class="fw-bold">Nome</label>
-                <input type="text" class="form-control" v-model="formData.name">
-            </div>
-            <div class="mb-3">
-                <label class="fw-bold">E-mail</label>
-                <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
-            </div>
-            <div class="mb-3">
-                <label class="fw-bold">Messaggio</label>
-                <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
-            </div>
-            <!--Pulsante di invio-->
-            <div class="d-flex justify-content-center pt-1">
-                <button type="submit" class="btn my-btn-messages">Invia</button>
-            </div>
-        </form>
-
-        <!--Success-->
-        <div class="alert my-success-alert" v-else>
-            Grazie per il messaggio, l'host ti contatterà presto!
-        </div>
+  <div class="messages-form-box mt-3">
+    <h3 class="text-center m-0">Contatta l'host!</h3>
+    <!--Error-->
+    <div class="alert my-error-alert" v-if="error">
+      Qualcosa è andato storto! {{ error }}
     </div>
+    <form @submit.prevent="onFormSubmit" v-if="!success">
+      <div class="mb-3">
+        <label class="fw-bold">Nome</label>
+        <input type="text" class="form-control" v-model="formData.name">
+      </div>
+      <div class="mb-3">
+        <label class="fw-bold">E-mail</label>
+        <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
+      </div>
+      <div class="mb-3">
+        <label class="fw-bold">Messaggio</label>
+        <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
+      </div>
+      <!--Pulsante di invio-->
+      <div class="d-flex justify-content-center pt-1">
+        <button type="submit" class="btn my-btn-messages">Invia</button>
+      </div>
+    </form>
+
+    <!--Success-->
+    <div class="alert my-success-alert" v-else>
+      Grazie per il messaggio, l'host ti contatterà presto!
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -96,34 +93,34 @@ export default {
 }
 
 .messages-form-box {
-    background-color: $partial-primary-color;
-    color: $primary-color;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    padding: 1.5rem;
-    cursor: pointer;
-    transition: all .5s;
+  background-color: $partial-primary-color;
+  color: $primary-color;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all .5s;
 
-    h3 {
-        margin: 0;
-        padding-bottom: .5rem;
-        font-weight: bold;
-        color: $partial-secondary-color;
-    }
+  h3 {
+    margin: 0;
+    padding-bottom: .5rem;
+    font-weight: bold;
+    color: $partial-secondary-color;
+  }
 
     label {
         padding-bottom: .2rem;
         color: $secondary-color !important;
     }
 
-    .my-error-alert {
-        margin-top: .5rem;
-        color: $partial-primary-color;
-        font-weight: bold;
-        --bs-alert-bg: rgba(226, 87, 18, 0.8);
-        --bs-alert-border-color: $partial-secondary-color;
-    }
+  .my-error-alert {
+    margin-top: .5rem;
+    color: $partial-primary-color;
+    font-weight: bold;
+    --bs-alert-bg: rgba(226, 87, 18, 0.8);
+    --bs-alert-border-color: $partial-secondary-color;
+  }
 
     .my-success-alert {
         margin-top: .5rem;
@@ -133,16 +130,16 @@ export default {
         --bs-alert-border-color: $secondary-color;
     }
 
-    &:hover {
-        transform: scale(.98);
-    }
+  &:hover {
+    transform: scale(.98);
+  }
 }
 
 // Modifica placeholder
 .form-control::placeholder {
-    color: $partial-secondary-color;
-    position: absolute;
-    top: 25%;
-    left: 1%;
+  color: $partial-secondary-color;
+  position: absolute;
+  top: 25%;
+  left: 1%;
 }
 </style>
