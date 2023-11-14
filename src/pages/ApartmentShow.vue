@@ -23,6 +23,17 @@ export default {
           // Verifico se la risposta contiene o meno dati validi e in caso di dati non validi reindirizzo l'utente alla pagina NotFound
           if (response.data && response.data.slug) {
             this.apartment = response.data;
+
+            axios.get("https://api.ipify.org?format=json").then((response) => {
+              const ipAddress = response.data.ip;
+              const apartmentId = this.apartment.id
+
+              axios.post("http://127.0.0.1:8000/api/get-ip", {
+                ip_address: ipAddress,
+                apartment_id: apartmentId,
+              }).then((response) => { })
+            })
+
           } else {
             this.$router.push({ name: "not-found" });
           }
