@@ -50,7 +50,7 @@ export default {
             </div>
 
             <div>
-                <p class="mt-2">© 2023 Airbnb, Inc.</p>
+                <p class="mt-2">© 2023 Bee'n'Bee, Inc.</p>
             </div>
             <div>
                 <ul class="d-flex flex-wrap">
