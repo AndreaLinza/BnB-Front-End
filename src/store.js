@@ -23,6 +23,7 @@ export function fetchApartments(url) {
     })
     .then((response) => {
       store.apartments = response.data.apartments.data;
+      console.log(store.apartments)
 
       // Salvo i dati della paginazione
       delete response.data.apartments.data;
