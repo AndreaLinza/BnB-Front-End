@@ -67,8 +67,8 @@ export default {
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
             <small class="card-text fw-bold grey-text-color me-2">{{ apartment.city }}</small>
-            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{
-              apartment.distance.toFixed(2) }}Km</small>
+            <small v-if="apartment.distance !== undefined"
+              class="card-text fw-bold grey-text-color">{{ apartment.distance.toFixed(2) }}Km</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -83,7 +83,7 @@ export default {
   </div>
 
   <!-- Se la ricerca non produce risultati -->
-  <div class="container" v-else>
+  <div class="container margin-top-custom" v-else>
     <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
   </div>
 
@@ -124,8 +124,15 @@ export default {
 }
 
 .card-promo-style {
-  .card {
-    background-color: rgba(226, 87, 18, 0.2);
+  position: relative;
+
+  .card::after {
+    content: "\01F7BF";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $partial-secondary-color;
+    font-size: 2rem;
   }
 }
 
