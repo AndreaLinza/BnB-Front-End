@@ -18,19 +18,15 @@ export default {
     initializeMap() {
       tt.setProductInfo('Bee\'n\'Bee', '1.0.0');
 
-      this.map = tt.map({
+      let map = tt.map({
         key: this.apiKey,
         container: this.$refs.map,
         center: this.location,
         zoom: 17,
       });
-        var marker = new tt.Marker().setLngLat(this.location).addTo(this.map);
+        let marker = new tt.Marker().setLngLat(this.location).addTo(map);
     },
   },
-  // mounted(){
-  //   console.log(this.location);
-  //   this.initializeMap();
-  // },
   watch: {
     location: function (newLocation) {
       if (Array.isArray(newLocation) && newLocation.length === 2 && !isNaN(newLocation[0]) && !isNaN(newLocation[1])) {
