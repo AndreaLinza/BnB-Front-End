@@ -49,14 +49,16 @@ export default {
 </script>
 
 <template>
-  <div class="messages-form-box mt-3">
-    <h3 class="text-center m-0">Contatta l'host!</h3>
+  <div class="messages-form-box mt-4">
     <!--Error-->
-    <div class="alert my-error-alert" v-if="error">
-      Qualcosa è andato storto! {{ error }}
+    <div v-if="error">
+      <div class="alert my-error-alert" v-if="store.isLoadForm === false">
+        Qualcosa è andato storto! {{ error }}
+      </div>
     </div>
     <form @submit.prevent="onFormSubmit" v-if="!success">
       <div v-if="store.isLoadForm === false">
+        <h3 class="text-center m-0">Contatta l'host!</h3>
         <div class="mb-3">
           <label class="fw-bold">Nome</label>
           <input type="text" class="form-control" v-model="formData.name">
@@ -117,6 +119,9 @@ export default {
   padding: 1.5rem;
   cursor: pointer;
   transition: all .5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   h3 {
     margin: 0;

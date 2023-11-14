@@ -1,18 +1,30 @@
 <script>
+import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 export default {
-
-
+    components: {
+    TopOffcanvas
+  }
 }
 
 </script>
 
 <template>
-    <div class="container pt-5 pb-5">
-        <h1 class="m-0 pt-5 pb-5 text-center fw-bold">404 - Not Found</h1>
+    <TopOffcanvas></TopOffcanvas>
+
+    <div class="container margin-top-custom">
+        <h1 class="pt-5 text-center fs-4">Oops! Sembra che tu abbia smarrito la strada. Torna alla home e riprova!</h1>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
+
+.margin-top-custom {
+    margin-top: 150px;
+}
+
+.container {
+    margin-bottom: 5rem;
+}
 </style>

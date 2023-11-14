@@ -18,7 +18,7 @@ export default {
   },
   methods: {
 
-    changePage(linkPage){
+    changePage(linkPage) {
       window.scrollTo(0, 0);
       fetchApartments(this.$route.query, linkPage.url)
     },
@@ -63,8 +63,7 @@ export default {
 
   <!-- Sezione appartamenti -->
   <div class="container margin-top-custom" v-if="store.pagination.total > 0">
-    <!-- <h2 class="pb-3">Le nostre migliori strutture</h2> -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
       <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.isPromoApartment }">
         <div class="card h-100 pb-2 rounded">
           <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top" :alt="apartment.title">
@@ -73,11 +72,11 @@ export default {
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
             <small class="card-text fw-bold grey-text-color me-2">{{ apartment.city }}</small>
-            <small v-if="apartment.distance !== undefined"
-              class="card-text fw-bold grey-text-color">{{ apartment.distance.toFixed(2) }}Km</small>
+            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{
+              apartment.distance.toFixed(2) }}Km</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
-          <div class="text-center">
+          <div class="text-center mb-2">
             <router-link class="btn general-btn" role="button"
               :to="{ name: 'apartments.show', params: { slug: apartment.slug } }">
               Scopri di più
@@ -90,11 +89,14 @@ export default {
 
   <!-- Se la ricerca non produce risultati -->
   <div class="container margin-top-custom" v-else>
-    <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
+    <h2 class="pt-5 text-center fs-4">
+      Attualmente, nessun appartamento corrisponde alla tua ricerca, ma stiamo selezionando con cura nuove proposte per
+      garantirti il soggiorno perfetto. Continua a seguirci per scoprire le opzioni più adatte alle tue vacanze ideali.
+    </h2>
   </div>
 
   <!-- Paginazione -->
-  <div class="pt-3 text-center pb-3">
+  <div class="pt-3 text-center pb-3" v-if="store.pagination.last_page > 1">
     <a class="btn btn-outline-custom m-1" @click="changePage(linkPage)" role="button"
       v-for="linkPage in store.pagination.links" v-html="linkPage.label"
       :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
@@ -133,12 +135,19 @@ export default {
   position: relative;
 
   .card::after {
-    content: "\01F7BF";
+    content: "\2605";
     position: absolute;
     top: 10px;
     right: 10px;
     color: $partial-secondary-color;
     font-size: 2rem;
+    transition: all .5s;
+  }
+
+  &:hover {
+    .card::after {
+      color: $primary-color;
+    }
   }
 }
 
@@ -202,7 +211,7 @@ export default {
 }
 
 .active-page {
-  background-color: $secondary-color;
+  background-color: $partial-secondary-color;
   color: #fff;
 }
 </style>
