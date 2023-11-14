@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     fetchApartments(this.$route.params.filter);
+    this.fetchData('http://127.0.0.1:8000/api/apartments/');
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -62,7 +63,8 @@ export default {
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
             <small class="card-text fw-bold grey-text-color me-2">{{ apartment.city }}</small>
-            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{apartment.distance.toFixed(2)}}Km</small>
+            <small v-if="apartment.distance !== undefined"
+              class="card-text fw-bold grey-text-color">{{ apartment.distance.toFixed(2) }}Km</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -118,8 +120,15 @@ export default {
 }
 
 .card-promo-style {
-  .card {
-    background-color: rgba(226, 87, 18, 0.2);
+  position: relative;
+
+  .card::after {
+    content: "\01F7BF";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $partial-secondary-color;
+    font-size: 2rem;
   }
 }
 
