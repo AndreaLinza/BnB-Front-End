@@ -1,27 +1,5 @@
 <script>
 export default {
-    data() {
-        // return {
-        //     listTraveTips: [
-        //         {
-        //             title: "Consiglio 1",
-        //             img: "",
-        //         },
-        //         {
-        //             title: "Consiglio 2",
-        //             img: "https://picsum.photos/50/50?random=2",
-        //         },
-        //         {
-        //             title: "Consiglio 3",
-        //             img: "https://picsum.photos/50/50?random=3",
-        //         },
-        //         {
-        //             title: "Consiglio 4",
-        //             img: "https://picsum.photos/50/50?random=4",
-        //         },
-        //     ],
-        // };
-    },
 }
 </script>
 
@@ -59,7 +37,7 @@ export default {
                         <div class="card-travel">
                             <img src="/images/Madre1.jpg" alt="card.title">
                             <a href="https://github.com/ElyPoli" target="_blank">
-                                <h5 class="p-2 part-secondary">Grazie, Elisa <i class="fa-brands fa-github"></i></h5>
+                                <h5 class="p-2 part-secondary">Elisa <i class="fa-brands fa-github"></i></h5>
                             </a>
                         </div>
                     </div>
@@ -86,10 +64,15 @@ a {
     background-size: cover;
     background-repeat: no-repeat;
     border-top: 2px dashed $partial-primary-color;
+    border-bottom: 2px dashed $partial-primary-color;
+
+    h2 {
+        color: $primary-color;
+    }
 
     .overlay {
         padding: 3rem 0;
-        background-color: rgba(255, 255, 255, 0.218);
+        background-color: rgba(22, 104, 121, 0.5);
     }
 
     .secondary {
