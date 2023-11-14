@@ -80,8 +80,10 @@ export default {
     <Loader v-if="store.isLoadForm"></Loader>
 
     <!--Success-->
-    <div class="alert my-success-alert" v-if="success">
-      Grazie per il messaggio, l'host ti contatterà presto!
+    <div v-if="success">
+      <div class="alert my-success-alert" v-if="store.isLoadForm === false">
+        Grazie per il messaggio, l'host ti contatterà presto!
+      </div>
     </div>
   </div>
 </template>

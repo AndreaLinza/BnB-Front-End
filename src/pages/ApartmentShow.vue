@@ -69,7 +69,7 @@ export default {
               {{ apartment.bathrooms_number }} bagni.<br>
               Tutti i servizi messi a disposizione dall'Host e il suo appartamento sono segnalati nella
               sezione sottostante "Servizi".<br>
-              E' possibile anche visualizzare la posizione dell'immobile sulla
+              È possibile anche visualizzare la posizione dell'immobile sulla
               <a href="#mappa" class="text-white">mappa</a> sottostante!
             </span>
           </div>
