@@ -27,9 +27,9 @@ export function fetchApartments(params, url) {
       delete response.data.apartments.data;
       store.pagination = response.data.apartments;
     })
-    // .catch((error) => {
-    //   console.error("Errore nella richiesta:", error.response);
-    // });
+    .catch((error) => {
+      console.error("Errore nella richiesta:", error.response);
+    });
 }
 
 export function fetchServices() {
