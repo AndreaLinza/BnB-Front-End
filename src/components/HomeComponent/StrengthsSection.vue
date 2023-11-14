@@ -6,17 +6,17 @@ export default {
                 {
                     title: "Siamo sempre a tua disposizione, dalla prenotazione fino al check-out",
                     icon: "fa-solid fa-house",
-                    description: "Proin blandit quam non aliquet tempor. Praesent pellentesque scelerisque tristique. Nunc dictum lobortis dolor dignissim dignissim. Mauris cursus velit et justo ullamcorper imperdiet. Fusce quis sapien arcu.",
+                    description: "Pianifica la tua vacanza con tranquillità! Il nostro team è a tua disposizione in ogni fase, dalla prenotazione fino al check-out. Siamo qui per rendere il tuo soggiorno il più piacevole possibile, risolvendo ogni tua esigenza e garantendo una vacanza senza preoccupazioni.",
                 },
                 {
-                    title: "Esperti locali per case vacanse in tutta Europa",
+                    title: "Esperti locali per case vacanze in tutta Europa",
                     icon: "fa-solid fa-headphones",
-                    description: "Proin blandit quam non aliquet tempor. Praesent pellentesque scelerisque tristique. Nunc dictum lobortis dolor dignissim dignissim. Mauris cursus velit et justo ullamcorper imperdiet. Fusce quis sapien arcu.",
+                    description: "Esplora l'Europa con la sicurezza di un vero insider. Le nostre case vacanze sono selezionate con cura e gestite da esperti locali che conoscono i segreti di ogni destinazione. Affitta con fiducia e scopri autentiche gemme nascoste attraverso gli occhi di chi le conosce meglio.",
                 },
                 {
-                    title: "Sistemazioni affidabili per vacanze spesierate",
+                    title: "Sistemazioni affidabili per vacanze spensierate",
                     icon: "fa-solid fa-umbrella-beach",
-                    description: "Proin blandit quam non aliquet tempor. Praesent pellentesque scelerisque tristique. Nunc dictum lobortis dolor dignissim dignissim. Mauris cursus velit et justo ullamcorper imperdiet. Fusce quis sapien arcu.",
+                    description: "Pianifica le tue vacanze senza preoccupazioni! Offriamo sistemazioni affidabili, garantendo che il tuo soggiorno sia privo di stress e pieno di momenti indimenticabili. Scegli la tranquillità per le tue vacanze, con alloggi attentamente selezionati che offrono comfort e sicurezza in ogni destinazione.",
                 },
             ],
         };
@@ -26,7 +26,7 @@ export default {
 
 <template>
     <div class="container pt-5 pb-5">
-        <h2 class="pb-2 text-white fw-bold text-center">I nostri punti di forza</h2>
+        <h2 class="pb-4 pb-md-2 text-white fw-bold text-center">I nostri punti di forza</h2>
         <div class="row row-cols-md-3 row-cols-1 gy-3">
             <div class="col" v-for="(card, i) in listCards" :key="i">
                 <div class="my-card-box p-4">
