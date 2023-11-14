@@ -15,7 +15,7 @@ export default {
           name: 'rooms_number',
           label: 'Quantità di stanze',
           options: [
-            { label: 'Qualsiasi', value: '0' },
+            { label: 'Qualsiasi', value: '' },
             { label: '1', value: '1' },
             { label: '2', value: '2' },
             { label: '3+', value: '3' },
@@ -25,7 +25,7 @@ export default {
           name: 'beds_number',
           label: 'Quantità di letti',
           options: [
-            { label: 'Qualsiasi', value: '0' },
+            { label: 'Qualsiasi', value: '' },
             { label: '1', value: '1' },
             { label: '2', value: '2' },
             { label: '3+', value: '3' },
@@ -35,7 +35,7 @@ export default {
           name: 'bathrooms_number',
           label: 'Quantità di bagni',
           options: [
-            { label: 'Qualsiasi', value: '0' },
+            { label: 'Qualsiasi', value: '' },
             { label: '1', value: '1' },
             { label: '2', value: '2' },
             { label: '3+', value: '3' },
@@ -46,8 +46,8 @@ export default {
   },
   methods: {
     submitResearch() {
-      fetchApartments();
-      this.$router.push({ name: 'search', route: "search", query: store.filter});
+      fetchApartments(store.filter);
+      this.$router.push({ name: 'search', route: "search", query: store.filter });
     },
     fetchTomTomSuggestions() {
       const apiKey = 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp';
@@ -97,7 +97,7 @@ export default {
           <div class="my-btn-box" v-for="(option, index) in advancedFilter.options">
             <input :key="index" type="radio" class="btn-check" :name="advancedFilter.name"
               :id="`${advancedFilter.name}${index}`" autocomplete="off" v-model="store.filter[advancedFilter.name]"
-              :value="option.value" />
+              :checked="index === 0" :value="option.value" />
             <label :for="`${advancedFilter.name}${index}`" class="btn btn-outline-personal">
               {{ option.label }}
             </label>
@@ -255,7 +255,7 @@ export default {
   border-radius: 20px;
 
   .my-btn-box {
-  width: 100%;
+    width: 100%;
 
     &:first-of-type {
       label {

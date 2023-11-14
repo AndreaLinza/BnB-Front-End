@@ -29,7 +29,7 @@ export default {
 @use '../../style/partials/variables' as *;
 
 .offcanvas.offcanvas-top {
-    height: 60vh;
+    height: 710px;
 }
 
 // =====================

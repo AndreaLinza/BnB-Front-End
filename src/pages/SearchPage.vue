@@ -39,8 +39,12 @@ export default {
     fetchApartments,
   },
   mounted() {
-    fetchApartments(this.$route.params.filter);
-    this.fetchData('http://127.0.0.1:8000/api/apartments/');
+    setTimeout(() => {
+      if (store.apartments.length === 0) {
+        fetchApartments(this.$route.query)
+      }
+    }, 1000);
+    // this.mountedData()
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -79,13 +83,13 @@ export default {
   </div>
 
   <!-- Se la ricerca non produce risultati -->
-  <div class="container" v-else>
+  <div class="container margin-top-custom" v-else>
     <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
   </div>
 
   <!-- Paginazione -->
   <div class="pt-3 text-center pb-3">
-    <a class="btn btn-outline-custom m-1" @click="fetchApartments(linkPage.url)" role="button"
+    <a class="btn btn-outline-custom m-1" @click="fetchApartments(this.$route.query, linkPage.url)" role="button"
       v-for="linkPage in store.pagination.links" v-html="linkPage.label"
       :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
   </div>
