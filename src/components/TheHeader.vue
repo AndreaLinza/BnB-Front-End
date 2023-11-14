@@ -11,15 +11,19 @@ export default {
         document.addEventListener('DOMContentLoaded', () => {
             let navbar = document.getElementById("navbar");
             let underbar = document.querySelector(".underbar");
-            let navlinks = document.querySelectorAll(".nav-link")
+            let navLinks = document.querySelectorAll(".nav-link");
+            let navImg = document.querySelector('.img-nav-hover')
+            let searchImg = document.getElementById('search-img')
 
 
             window.onscroll = function () {
                 if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
                     navbar.classList.add("navbar-scrolled");
                     underbar.classList.add('underbar-scrolled')
-                    navlinks.forEach(navlink => {
-                        navlink.classList.add('nav-link-scrolled')
+                    navImg.src = '../../navicon-rose.png'
+                    searchImg.src = '../../transition-navicon-rose.png'
+                    navLinks.forEach(navLink => {
+                        navLink.classList.add('nav-link-scrolled')
 
                     })
 
@@ -27,9 +31,10 @@ export default {
                 } else {
                     navbar.classList.remove("navbar-scrolled");
                     underbar.classList.remove('underbar-scrolled')
-
-                    navlinks.forEach(navlink =>{
-                        navlink.classList.remove('nav-link-scrolled')
+                    navImg.src = '../../navicon-blue.png'
+                    searchImg.src = '../../transition-navicon-blue.png'
+                    navLinks.forEach(navLink =>{
+                        navLink.classList.remove('nav-link-scrolled')
 
                     })
 
@@ -52,7 +57,7 @@ export default {
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="h-100"><img class="img-nav" src="../../navicon-white.png" style="width:40px" alt="navicon">
-                        <img class="d-none img-nav-hover" src="../../navicon-blue.png" style="width:40px" alt="navicon">
+                        <img class="d-none img-nav-hover img-nav-scrolled" src="../../navicon-blue.png" style="width:40px" alt="navicon">
                     </span>
                 </button>
 
@@ -71,7 +76,7 @@ export default {
                                     <div class="text-white"><span>Cerca qui!</span></div>
                                 </div>
                                 <div class="all-right">
-                                    <img class="d-none d-lg-block" src="../../transition-navicon-blue.png" alt="navicon"
+                                    <img class="d-none d-lg-block" src="../../transition-navicon-blue.png" id="search-img" alt="navicon"
                                         style="width: 30px;">
                                 </div>
                             </button>
@@ -115,6 +120,16 @@ export default {
     background-color: transparent !important;
     transition: ease-out .5s;
 
+    // .navbar-brand{
+    //     padding:.3rem ;
+    //     border-radius: 50%;
+    //     transition: .5s;
+
+    // }
+    // .navbar-brand:hover{
+    //     transition: .5s;
+    //     box-shadow: 0 250px rgb(255, 255, 255);
+    // }
     &.navbar-scrolled {
         background-color: $secondary-color !important;
 
