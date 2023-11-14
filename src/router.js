@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import{createApp} from 'vue';
 
 import HomePage from "./pages/Home.vue";
 import SearchPage from "./pages/SearchPage.vue";
 import ApartmentShowPage from "./pages/ApartmentShow.vue";
 import NotFound from "./pages/NotFound.vue";
+
+
 
 const routes = [
   {  //HOME
@@ -32,5 +35,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+const app = createApp({})
+app.use(router);
+
+router.beforeEach((to,from,next) => {
+  window.scrollTo(0,0);
+  next();
+})
+
+
+app.mount('#app');
 
 export { router };

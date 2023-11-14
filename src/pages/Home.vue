@@ -6,13 +6,16 @@ import TravelTips from '../components/HomeComponent/TravelTips.vue';
 import TopOffcanvas from '../components/partials/TopOffcanvas.vue';
 
 export default {
+    created() {
+        window.scrollTo(0, 0);
+    },
     components: {
-    PromoSlider,
-    StrengthsSection,
-    TravelTips,
-    TopOffcanvas,
-    Jumbosection
-},
+        PromoSlider,
+        StrengthsSection,
+        TravelTips,
+        TopOffcanvas,
+        Jumbosection
+    },
 }
 </script>
 

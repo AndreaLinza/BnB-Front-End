@@ -4,6 +4,9 @@ import TheFooter from './components/TheFooter.vue';
 
 
 export default {
+    created() {
+        window.scrollTo(0, 0);
+    },
 
     components: {
     TheHeader,
