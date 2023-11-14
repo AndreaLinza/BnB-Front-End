@@ -6,6 +6,7 @@ export const store = reactive({
   services: [],
   promoList: [],
   pagination: {},
+  isLoadForm: false,
   filter: {
     // rooms_number: "",
     // beds_number: "",
@@ -18,7 +19,7 @@ export const store = reactive({
 
 export function fetchApartments(params, url) {
   axios
-    .get((url ?? "http://127.0.0.1:8000/api/apartments"), {params: params})
+    .get((url ?? "http://127.0.0.1:8000/api/apartments"), { params: params })
     .then((response) => {
       store.apartments = response.data.apartments.data;
       console.log(store.apartments)

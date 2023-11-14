@@ -1,12 +1,18 @@
 <script>
 import axios from 'axios';
+import Loader from './Loader.vue';
+import { store } from "../../store";
 
 export default {
+  components: {
+    Loader,
+  },
   props: {
     apartment_id: Number,
   },
   data() {
     return {
+      store,
       formData: {
         name: "",
         email: "",
@@ -19,6 +25,7 @@ export default {
   },
   methods: {
     onFormSubmit() {
+      store.isLoadForm = true;
       this.formData.apartment_id = this.apartment_id;
       console.log(this.formData);
       if (this.formData.email && this.formData.message_text) {
@@ -34,6 +41,9 @@ export default {
       } else {
         this.error = "Compila i campi obbligatori prima di inviare il form.";
       }
+      setTimeout(() => {
+        store.isLoadForm = false;
+      }, 5000)
     },
   },
 };
@@ -47,22 +57,30 @@ export default {
       Qualcosa è andato storto! {{ error }}
     </div>
     <form @submit.prevent="onFormSubmit" v-if="!success">
-      <div class="mb-3">
-        <label class="fw-bold">Nome</label>
-        <input type="text" class="form-control" v-model="formData.name">
+      <div v-if="store.isLoadForm === false">
+        <div class="mb-3">
+          <label class="fw-bold">Nome</label>
+          <input type="text" class="form-control" v-model="formData.name">
+        </div>
+        <div class="mb-3">
+          <label class="fw-bold">E-mail</label>
+          <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
+        </div>
+        <div class="mb-3">
+          <label class="fw-bold">Messaggio</label>
+          <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
+        </div>
+        <!--Pulsante di invio-->
+        <div class="d-flex justify-content-center pt-1">
+          <button type="submit" class="btn my-btn-messages">Invia</button>
+        </div>
       </div>
-      <div class="mb-3">
-        <label class="fw-bold">E-mail</label>
-        <input type="text" class="form-control" v-model="formData.email" required placeholder="*">
+      <!--Loader-->
+      <div class="d-flex justify-content-center mt-custom">
+        <Loader v-if="store.isLoadForm">
+        </Loader>
       </div>
-      <div class="mb-3">
-        <label class="fw-bold">Messaggio</label>
-        <textarea class="form-control" v-model="formData.message_text" required placeholder="*"></textarea>
-      </div>
-      <!--Pulsante di invio-->
-      <div class="d-flex justify-content-center pt-1">
-        <button type="submit" class="btn my-btn-messages">Invia</button>
-      </div>
+
     </form>
 
     <!--Success-->
@@ -75,21 +93,25 @@ export default {
 <style scoped lang="scss">
 @use "../../style/partials/variables" as *;
 
+.mt-custom {
+  margin-top: 120px;
+}
+
 .my-btn-messages {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #e55812be;
-    --bs-btn-border-color: #e55812be;
-    --bs-btn-hover-color: white;
-    --bs-btn-hover-bg: #16697a;
-    --bs-btn-hover-border-color: #16697a;
-    --bs-btn-focus-shadow-rgb: 49, 132, 253;
-    --bs-btn-active-color: #e55812;
-    --bs-btn-active-bg: #16697a;
-    --bs-btn-active-border-color: #e55812;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #16697a;
-    --bs-btn-disabled-bg: white;
-    --bs-btn-disabled-border-color: #e55812be;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #e55812be;
+  --bs-btn-border-color: #e55812be;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: #16697a;
+  --bs-btn-hover-border-color: #16697a;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #e55812;
+  --bs-btn-active-bg: #16697a;
+  --bs-btn-active-border-color: #e55812;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #16697a;
+  --bs-btn-disabled-bg: white;
+  --bs-btn-disabled-border-color: #e55812be;
 }
 
 .messages-form-box {
@@ -109,10 +131,10 @@ export default {
     color: $partial-secondary-color;
   }
 
-    label {
-        padding-bottom: .2rem;
-        color: $secondary-color !important;
-    }
+  label {
+    padding-bottom: .2rem;
+    color: $secondary-color !important;
+  }
 
   .my-error-alert {
     margin-top: .5rem;
@@ -122,13 +144,13 @@ export default {
     --bs-alert-border-color: $partial-secondary-color;
   }
 
-    .my-success-alert {
-        margin-top: .5rem;
-        color: $partial-primary-color;
-        font-weight: bold;
-        --bs-alert-bg: #e78562;
-        --bs-alert-border-color: $secondary-color;
-    }
+  .my-success-alert {
+    margin-top: .5rem;
+    color: $partial-primary-color;
+    font-weight: bold;
+    --bs-alert-bg: #e78562;
+    --bs-alert-border-color: $secondary-color;
+  }
 
   &:hover {
     transform: scale(.98);
