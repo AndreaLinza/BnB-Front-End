@@ -57,7 +57,7 @@ export default {
     <!--Banner appartamento-->
     <div class="apt-pres map-border">
       <span v-if="apartment.sponsorships && apartment.sponsorships.length > 0">&#9733;</span>
-      <img :src="fetchImageApartment(apartment)" class="img-fluid show-img" alt="{{ apartment.slug }}">
+      <img :src="fetchImageApartment(apartment)" class="img-fluid show-img" :alt="apartment.slug">
     </div>
     <!--Info apt + form contatto-->
     <div class="row gy-4 mb-5">
