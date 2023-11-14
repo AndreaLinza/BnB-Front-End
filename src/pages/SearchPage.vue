@@ -1,19 +1,16 @@
 <script>
 import axios from "axios";
-import { store , fetchApartments } from "../store";
-import Filters from '../components/partials/Filters.vue';
+import { store, fetchApartments } from "../store";
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 export default {
   components: {
-    Filters,
     TopOffcanvas
   },
   data() {
     return {
       store,
-      filterFromURL: this.$route.query,
-      filter: {
+      sponsor: {
         sponsorships: 1,
       },
       promoApartment: [],
@@ -21,10 +18,10 @@ export default {
   },
   methods: {
     fetchData(url) {
-      axios.get(url, { params: this.filter }).then((response) => {
-        this.promoApartment = response.data.apartments;
+      axios.get(url, { params: this.sponsor }).then((response) => {
+        this.promoApartment = response.data.apartments.data;
 
-        // Aggiungi la seguente riga per applicare il background rosso
+        // Applico la classe per gli appartamenti in promozione
         this.applyClassToPromoApartment();
       });
     },
@@ -42,13 +39,7 @@ export default {
     fetchApartments,
   },
   mounted() {
-    if (store.apartments.length === 0) {
-      fetchApartments(this.filterFromURL)
-    }
-    this.fetchData('http://127.0.0.1:8000/api/apartments/');
-    if (store.apartments.length <= 0) {
-      
-    }
+    fetchApartments();
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -60,7 +51,7 @@ export default {
   <TopOffcanvas></TopOffcanvas>
 
   <!-- Sezione appartamenti -->
-  <div class="container" v-if="store.apartments.length > 0">
+  <div class="container margin-top-custom" v-if="store.pagination.total > 0">
     <!-- <h2 class="pb-3">Le nostre migliori strutture</h2> -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3">
       <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.isPromoApartment }">
@@ -70,7 +61,7 @@ export default {
             <div class="d-flex align-items-start justify-content-between">
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
-            <small class="card-text fw-bold">{{ apartment.city }}</small>
+            <small class="card-text fw-bold grey-text-color">{{ apartment.city }}</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -88,10 +79,42 @@ export default {
   <div class="container" v-else>
     <h2 class="pb-3">Nessun nostro appartamento corrisponde alla tua ricerca</h2>
   </div>
+
+  <!-- Paginazione -->
+  <div class="pt-3 text-center pb-3">
+    <a class="btn btn-outline-custom m-1" @click="fetchApartments(linkPage.url)" role="button"
+      v-for="linkPage in store.pagination.links" v-html="linkPage.label"
+      :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
+
+.grey-text-color {
+  color: $grey !important;
+}
+
+.margin-top-custom {
+  margin-top: 150px;
+}
+
+.btn-outline-custom {
+  border: 2px solid $partial-secondary-color;
+  color: $partial-primary-color;
+
+  &:hover {
+    border-color: white;
+    background-color: #0f4651;
+    color: $partial-secondary-color;
+  }
+
+  &:active {
+    border-color: white;
+    background-color: #09272d;
+    color: $partial-secondary-color;
+  }
+}
 
 .card-promo-style {
   .card {
@@ -156,5 +179,10 @@ export default {
     border-color: #a33f0d;
     color: #a33f0d;
   }
+}
+
+.active-page {
+  background-color: $secondary-color;
+  color: #fff;
 }
 </style>

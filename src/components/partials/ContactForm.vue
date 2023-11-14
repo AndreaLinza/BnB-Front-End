@@ -76,20 +76,20 @@ export default {
 @use "../../style/partials/variables" as *;
 
 .my-btn-messages {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #e55812be;
-  --bs-btn-border-color: #e55812be;
-  --bs-btn-hover-color: #e55812;
-  --bs-btn-hover-bg: #553e4e;
-  --bs-btn-hover-border-color: #e55812;
-  --bs-btn-focus-shadow-rgb: 49, 132, 253;
-  --bs-btn-active-color: #e55812;
-  --bs-btn-active-bg: #553e4e;
-  --bs-btn-active-border-color: #e55812;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #553e4e;
-  --bs-btn-disabled-bg: #e55812be;
-  --bs-btn-disabled-border-color: #e55812be;
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #e55812be;
+    --bs-btn-border-color: #e55812be;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: #16697a;
+    --bs-btn-hover-border-color: #16697a;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #e55812;
+    --bs-btn-active-bg: #16697a;
+    --bs-btn-active-border-color: #e55812;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #16697a;
+    --bs-btn-disabled-bg: white;
+    --bs-btn-disabled-border-color: #e55812be;
 }
 
 .messages-form-box {
@@ -109,9 +109,10 @@ export default {
     color: $partial-secondary-color;
   }
 
-  label {
-    padding-bottom: .2rem;
-  }
+    label {
+        padding-bottom: .2rem;
+        color: $secondary-color !important;
+    }
 
   .my-error-alert {
     margin-top: .5rem;
@@ -121,13 +122,13 @@ export default {
     --bs-alert-border-color: $partial-secondary-color;
   }
 
-  .my-success-alert {
-    margin-top: .5rem;
-    color: $partial-primary-color;
-    font-weight: bold;
-    --bs-alert-bg: #c1bfb5;
-    --bs-alert-border-color: $secondary-color;
-  }
+    .my-success-alert {
+        margin-top: .5rem;
+        color: $partial-primary-color;
+        font-weight: bold;
+        --bs-alert-bg: #e78562;
+        --bs-alert-border-color: $secondary-color;
+    }
 
   &:hover {
     transform: scale(.98);

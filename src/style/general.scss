@@ -10,7 +10,8 @@ body{
     display: flex;
     flex-direction: column;
     overflow: auto!important;
-    background-color: $primary-color!important;
+    background: rgb(164,199,207);
+    background: linear-gradient(180deg, rgba(164,199,207,1) 0%, rgba(121,162,171,1) 27%, rgba(22,105,122,1) 51%, rgba(44,44,44,1) 75%, rgba(0,0,0,1) 88%);
     //background-image: url('/blurry-gradient-haikei\(1\).svg');
     // background-image: url('/blurry-gradient-haikei\(2\).svg');
     //background-image: url('/blurry-gradient-haikei\(3\).svg');
