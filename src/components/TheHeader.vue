@@ -11,6 +11,7 @@ export default {
         document.addEventListener('DOMContentLoaded', () => {
             let navbar = document.getElementById("navbar");
             let underbar = document.querySelector(".underbar");
+            let toggler = document.querySelector(".navbar-toggler");
             let navLinks = document.querySelectorAll(".nav-link");
             let navImg = document.querySelector('.img-nav-hover')
             let searchImg = document.getElementById('search-img')
@@ -20,6 +21,7 @@ export default {
                 if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
                     navbar.classList.add("navbar-scrolled");
                     underbar.classList.add('underbar-scrolled')
+                    toggler.classList.add('toggler-scrolled')
                     navImg.src = '../../navicon-rose.png'
                     searchImg.src = '../../transition-navicon-rose.png'
                     navLinks.forEach(navLink => {
@@ -31,6 +33,7 @@ export default {
                 } else {
                     navbar.classList.remove("navbar-scrolled");
                     underbar.classList.remove('underbar-scrolled')
+                    toggler.classList.remove('toggler-scrolled')
                     navImg.src = '../../navicon-blue.png'
                     searchImg.src = '../../transition-navicon-blue.png'
                     navLinks.forEach(navLink =>{
@@ -236,6 +239,11 @@ export default {
         padding: 0.2rem 0.6rem;
         background-color: transparent;
         border: var(--bs-border-width) solid white;
+
+        &.toggler-scrolled:hover{
+        border: var(--bs-border-width) solid $partial-secondary-color;
+
+        }
 
         &:focus {
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.705)
