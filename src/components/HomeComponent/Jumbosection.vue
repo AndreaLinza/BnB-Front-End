@@ -17,7 +17,10 @@ export default {
 
         <div class="jumbo">
             <div class="container content">
-                <h2 class="fw-bold display-3">Benvenuti sul nostro sito</h2>
+                <h2 class="fw-bold display-3 text-center">
+                    <span class="text-uppercase">BoolBnb</span><br>
+                    <span class="fs-1">Dove il tuo soggiorno diventa un'avventura!</span>
+                </h2>
             </div>
         </div>
         <img src="../../../img/pexels-binyamin-mellish-106399.jpg" alt="">
@@ -50,6 +53,7 @@ section {
         .content{
             display: flex;
             align-items: center;
+            justify-content: center;
             height: 100%;
             h2{
                 color: rgba(255, 255, 255, 0.699);

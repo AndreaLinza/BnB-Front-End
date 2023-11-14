@@ -77,8 +77,8 @@ export default {
 </script>
 
 <template>
-	<div class="container pb-4">
-		<h2 class="pb-2 pt-2 text-white fw-bold text-center">Le nostre migliori strutture</h2>
+	<div class="container pb-4 pt-4" v-if="slidePromoList.length > 0">
+		<h2 class="pb-2 text-white fw-bold text-center">Le nostre migliori strutture</h2>
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
