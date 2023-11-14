@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     fetchApartments(this.$route.params.filter);
+    this.fetchData('http://127.0.0.1:8000/api/apartments/');
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -119,8 +120,15 @@ export default {
 }
 
 .card-promo-style {
-  .card {
-    background-color: rgba(226, 87, 18, 0.2);
+  position: relative;
+
+  .card::after {
+    content: "\01F7BF";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $partial-secondary-color;
+    font-size: 2rem;
   }
 }
 
