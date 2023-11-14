@@ -18,7 +18,7 @@ export default {
 
 
             window.onscroll = function () {
-                if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+                if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
                     navbar.classList.add("navbar-scrolled");
                     underbar.classList.add('underbar-scrolled')
                     toggler.classList.add('toggler-scrolled')
