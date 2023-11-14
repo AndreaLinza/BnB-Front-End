@@ -49,6 +49,7 @@ export default {
         fetchApartments(this.$route.query)
       }
     }, 1000);
+    this.fetchData('http://127.0.0.1:8000/api/apartments/');
     // this.mountedData()
   },
   updated() {
