@@ -25,28 +25,24 @@ export default {
         center: this.location,
         zoom: 17,
       });
-      setTimeout(() => {
-
         this.marker = new tt.Marker().setLngLat(this.location).addTo(this.map);
-      }, 5000);
     },
   },
   mounted(){
-    setTimeout(() => {
-      console.log(this.marker);
-    }, 15000);
+    console.log(this.location);
+    this.initializeMap();
   },
-  watch: {
-    location: function (newLocation) {
-      if (Array.isArray(newLocation) && newLocation.length === 2 && !isNaN(newLocation[0]) && !isNaN(newLocation[1])) {
-        // Rimuovi il marker precedente se esiste
-        if (this.marker) {
-          this.marker.remove();
-        }
-        this.initializeMap();
-      }
-    }
-  }
+  // watch: {
+  //   location: function (newLocation) {
+  //     if (Array.isArray(newLocation) && newLocation.length === 2 && !isNaN(newLocation[0]) && !isNaN(newLocation[1])) {
+  //       // Rimuovi il marker precedente se esiste
+  //       if (this.marker) {
+  //         this.marker.remove();
+  //       }
+  //       this.initializeMap();
+  //     }
+  //   }
+  // }
 };
 </script>
 

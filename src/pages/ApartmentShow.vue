@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       apartment: {},
+      location: [9.28177000, 46.12340000]
     };
   },
   methods: {
@@ -88,9 +89,10 @@ export default {
     <div id="mappa">
       <h3 class="mt-5 mb-4 text-center text-white">Ti troverai qui:</h3>
       <div class="map-border">
-        <div class="mappa container-fluid">
-          <Map :location="[apartment.longitude, apartment.latitude]"></Map>
-        </div>
+
+          <!-- <Map :location="[apartment.longitude, apartment.latitude]"></Map> -->
+          <Map :location="location"></Map>
+
       </div>
     </div>
   </div>
@@ -156,13 +158,6 @@ span {
   padding: 15px;
   background-color: $secondary-color;
   border: 2px solid $partial-secondary-color;
-}
-
-.mappa {
-  background-image: url(https://ostellobello.com/wp-content/uploads/2022/02/mappa.png);
-  width: 100%;
-  height: 300px;
-  background-position: center;
 }
 
 .bg-secondary {
