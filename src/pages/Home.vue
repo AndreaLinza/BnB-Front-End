@@ -65,13 +65,6 @@ export default {
 @use "../style/partials/variables" as *;
 
 
-// ======OFFCANVAS======
-.offcanvas.offcanvas-top {
-    height: 60vh;
-}
-
-// =====================
-
 .offcanvas-top {
     background-color: transparent;
     border-bottom: none !important;
