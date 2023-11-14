@@ -39,7 +39,12 @@ export default {
     fetchApartments,
   },
   mounted() {
-    fetchApartments(this.$route.params.filter);
+    setTimeout(() => {
+      if (store.apartments.length === 0) {
+        fetchApartments(this.$route.query)
+      }
+    }, 1000);
+    // this.mountedData()
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -62,7 +67,8 @@ export default {
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
             <small class="card-text fw-bold grey-text-color me-2">{{ apartment.city }}</small>
-            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{apartment.distance.toFixed(2)}}Km</small>
+            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{
+              apartment.distance.toFixed(2) }}Km</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">
@@ -83,7 +89,7 @@ export default {
 
   <!-- Paginazione -->
   <div class="pt-3 text-center pb-3">
-    <a class="btn btn-outline-custom m-1" @click="fetchApartments(linkPage.url)" role="button"
+    <a class="btn btn-outline-custom m-1" @click="fetchApartments(this.$route.query, linkPage.url)" role="button"
       v-for="linkPage in store.pagination.links" v-html="linkPage.label"
       :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
   </div>
