@@ -11,7 +11,6 @@ export default {
   data() {
     return {
       apiKey: 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp',
-      map: null,
     };
   },
   methods: {
