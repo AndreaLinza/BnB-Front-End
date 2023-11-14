@@ -33,7 +33,6 @@ export default {
           .then(resp => {
             this.success = true;
             this.error = null;
-
           })
           .catch(e => {
             this.error = `-> ${e.response?.data?.message ?? e.message}`;
@@ -75,16 +74,13 @@ export default {
           <button type="submit" class="btn my-btn-messages">Invia</button>
         </div>
       </div>
-      <!--Loader-->
-      <div class="d-flex justify-content-center mt-custom">
-        <Loader v-if="store.isLoadForm">
-        </Loader>
-      </div>
-
     </form>
 
+    <!--Loader-->
+    <Loader v-if="store.isLoadForm"></Loader>
+
     <!--Success-->
-    <div class="alert my-success-alert" v-else>
+    <div class="alert my-success-alert" v-if="success">
       Grazie per il messaggio, l'host ti contatterà presto!
     </div>
   </div>
@@ -92,10 +88,6 @@ export default {
 
 <style scoped lang="scss">
 @use "../../style/partials/variables" as *;
-
-.mt-custom {
-  margin-top: 120px;
-}
 
 .my-btn-messages {
   --bs-btn-color: #fff;
