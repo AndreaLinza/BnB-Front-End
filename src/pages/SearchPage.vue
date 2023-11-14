@@ -17,6 +17,11 @@ export default {
     }
   },
   methods: {
+
+    changePage(linkPage){
+      window.scrollTo(0, 0);
+      fetchApartments(this.$route.query, linkPage.url)
+    },
     fetchData(url) {
       axios.get(url, { params: this.sponsor }).then((response) => {
         this.promoApartment = response.data.apartments.data;
@@ -89,7 +94,7 @@ export default {
 
   <!-- Paginazione -->
   <div class="pt-3 text-center pb-3">
-    <a class="btn btn-outline-custom m-1" @click="fetchApartments(this.$route.query, linkPage.url)" role="button"
+    <a class="btn btn-outline-custom m-1" @click="changePage(linkPage)" role="button"
       v-for="linkPage in store.pagination.links" v-html="linkPage.label"
       :class="{ 'active-page': linkPage.label == store.pagination.current_page }"></a>
   </div>
