@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       apartment: {},
-      location: [9.28177000, 46.12340000]
     };
   },
   methods: {
@@ -90,8 +89,7 @@ export default {
       <h3 class="mt-5 mb-4 text-center text-white">Ti troverai qui:</h3>
       <div class="map-border">
 
-          <!-- <Map :location="[apartment.longitude, apartment.latitude]"></Map> -->
-          <Map :location="location"></Map>
+        <Map :location="[apartment.longitude, apartment.latitude]"></Map>
 
       </div>
     </div>

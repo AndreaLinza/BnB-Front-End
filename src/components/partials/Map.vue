@@ -12,7 +12,6 @@ export default {
     return {
       apiKey: 'O8G3nbrrFXgXG05YvxpNGd9inXNQbAJp',
       map: null,
-      marker: null,
     };
   },
   methods: {
@@ -25,24 +24,20 @@ export default {
         center: this.location,
         zoom: 17,
       });
-        this.marker = new tt.Marker().setLngLat(this.location).addTo(this.map);
+        var marker = new tt.Marker().setLngLat(this.location).addTo(this.map);
     },
   },
-  mounted(){
-    console.log(this.location);
-    this.initializeMap();
-  },
-  // watch: {
-  //   location: function (newLocation) {
-  //     if (Array.isArray(newLocation) && newLocation.length === 2 && !isNaN(newLocation[0]) && !isNaN(newLocation[1])) {
-  //       // Rimuovi il marker precedente se esiste
-  //       if (this.marker) {
-  //         this.marker.remove();
-  //       }
-  //       this.initializeMap();
-  //     }
-  //   }
-  // }
+  // mounted(){
+  //   console.log(this.location);
+  //   this.initializeMap();
+  // },
+  watch: {
+    location: function (newLocation) {
+      if (Array.isArray(newLocation) && newLocation.length === 2 && !isNaN(newLocation[0]) && !isNaN(newLocation[1])) {
+        this.initializeMap();
+      }
+    }
+  }
 };
 </script>
 
