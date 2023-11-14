@@ -39,7 +39,7 @@ export default {
     fetchApartments,
   },
   mounted() {
-    fetchApartments();
+    fetchApartments(this.$route.params.filter);
   },
   updated() {
     this.applyClassToPromoApartment();
@@ -61,7 +61,8 @@ export default {
             <div class="d-flex align-items-start justify-content-between">
               <h5 class="card-title">{{ apartment.title }}</h5>
             </div>
-            <small class="card-text fw-bold grey-text-color">{{ apartment.city }}</small>
+            <small class="card-text fw-bold grey-text-color me-2">{{ apartment.city }}</small>
+            <small v-if="apartment.distance !== undefined" class="card-text fw-bold grey-text-color">{{apartment.distance.toFixed(2)}}Km</small>
           </div>
           <!-- Pulsante per visualizzare un appartamento  -->
           <div class="text-center">

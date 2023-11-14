@@ -114,7 +114,7 @@ export default {
         <input type="range" class="form-range" min="1" max="21" step="5" name="radius" id="radius0"
           v-model="store.filter.radius">
         <div class="range-dist">
-          <span>0Km</span>
+          <span>>1Km</span>
           <span class="ms-2">5Km</span>
           <span class="ms-3">10km</span>
           <span class="ms-2">15km</span>
