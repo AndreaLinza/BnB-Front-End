@@ -64,6 +64,7 @@ export default {
                 </ul>
             </div>
         </div>
+        Freepik
     </footer>
 </template>
 
@@ -75,7 +76,8 @@ footer {
 
     color: white;
     padding: 2rem 0;
-    background-color: $grey;
+    margin-top: 5rem;
+    //background-color: $grey;
 
     .logo {
         margin-left: 50%;

@@ -14,11 +14,10 @@ export default {
 
 <template>
     <section>
-
         <div class="jumbo">
             <div class="container content">
                 <h2 class="fw-bold display-3 text-center">
-                    <span class="text-uppercase">BoolBnb</span><br>
+                    <span class="text-uppercase">Bee'n'Bee</span><br>
                     <span class="fs-1">Dove il tuo soggiorno diventa un'avventura!</span>
                 </h2>
             </div>
