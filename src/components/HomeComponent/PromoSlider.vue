@@ -82,7 +82,7 @@ export default {
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
-				<div class="row row-cols-1 row-cols-md-3 gy-4 justify-content-center">
+				<div class="row row-cols-3 justify-content-center">
 					<div v-for="(card, i) in visibleSlide" :key="i" class="col">
 						<ApartmentCard :card="card" :thumbfunction="fetchImageApartment(card)" :movingCard="movingCard">
 						</ApartmentCard>

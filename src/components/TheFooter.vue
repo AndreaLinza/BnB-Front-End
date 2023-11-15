@@ -27,20 +27,19 @@ export default {
 <template>
     <footer>
         <div class="container">
-
-            <a href="/"><img class="logo py-4" src="../../LogoBnb_white.png" alt="LogoB'n'B"
-                    style="width: 150px;"></a>
-
+            <a href="/"><img class="logo py-4 mb-4" src="../../LogoBnb_white.png" alt="LogoB'n'B" style="width: 150px;"></a>
             <div class="row row-cols-lg-4 justify-content-lg-between">
                 <div class="col-12" v-for="list in footerList">
-                    <h4 class="fw-bold mt-4">{{ list.title }}</h4>
-                    <ul v-for="link in list.link">
-                        <li><a href="#">{{ link }}</a></li>
-                    </ul>
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <h4 class="fw-bold mt-4">{{ list.title }}</h4>
+                            <ul v-for="link in list.link">
+                                <li><a href="#">{{ link }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <hr class="d-lg-none m-auto">
                 </div>
-
-                
             </div>
             <hr class="d-none d-lg-block">
             <div class="mt-4">
@@ -48,7 +47,6 @@ export default {
                         (IT)</span></button>
                 <button>€ <span>EUR</span></button>
             </div>
-
             <div>
                 <p class="mt-2">© 2023 Bee'n'Bee, Inc.</p>
             </div>
@@ -64,7 +62,6 @@ export default {
                 </ul>
             </div>
         </div>
-        Freepik
     </footer>
 </template>
 
@@ -73,11 +70,9 @@ export default {
 @use '../style/partials/variables' as *;
 
 footer {
-
     color: white;
     padding: 2rem 0;
-    margin-top: 5rem;
-    //background-color: $grey;
+    margin-top: 4rem;
 
     .logo {
         margin-left: 50%;
@@ -90,6 +85,7 @@ footer {
         li {
             padding: .3rem .5rem;
             list-style: none;
+            cursor: pointer;
 
             a {
                 text-decoration: none;
@@ -103,7 +99,7 @@ footer {
     }
 
     button {
-        padding-left:0;
+        padding-left: 0;
         padding-right: 0.5rem;
         color: white;
         background-color: transparent;
@@ -113,7 +109,5 @@ footer {
             text-decoration: underline;
         }
     }
-
-
 }
 </style>
