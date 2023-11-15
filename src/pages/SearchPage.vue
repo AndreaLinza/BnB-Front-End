@@ -1,11 +1,13 @@
 <script>
 import axios from "axios";
+import Loader from '../components/partials/Loader.vue';
 import { store, fetchApartments } from "../store";
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 export default {
   components: {
-    TopOffcanvas
+    TopOffcanvas,
+    Loader,
   },
   data() {
     return {
@@ -17,7 +19,6 @@ export default {
     }
   },
   methods: {
-
     changePage(linkPage) {
       window.scrollTo(0, 0);
       fetchApartments(this.$route.query, linkPage.url)
@@ -44,6 +45,10 @@ export default {
     fetchApartments,
   },
   mounted() {
+    store.isLoadForm = true;
+    setTimeout(() => {
+        store.isLoadForm = false;
+      }, 5000)
     setTimeout(() => {
       if (store.apartments.length === 0) {
         fetchApartments(this.$route.query)
@@ -89,7 +94,11 @@ export default {
 
   <!-- Se la ricerca non produce risultati -->
   <div class="container margin-top-custom" v-else>
-    <h2 class="pt-5 text-center fs-4">
+
+    <!--Loader-->
+    <Loader v-if="store.isLoadForm"></Loader>
+
+    <h2 class="pt-5 text-center fs-4" v-if="store.isLoadForm === false">
       Attualmente, nessun appartamento corrisponde alla tua ricerca, ma stiamo selezionando con cura nuove proposte per
       garantirti il soggiorno perfetto. Continua a seguirci per scoprire le opzioni più adatte alle tue vacanze ideali.
     </h2>
