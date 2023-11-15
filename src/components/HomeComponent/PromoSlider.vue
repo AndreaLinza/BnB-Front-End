@@ -78,7 +78,8 @@ export default {
 
 <template>
 	<div class="container pb-4 pt-4" v-if="slidePromoList.length > 0">
-		<h2 class="pb-2 text-white fw-bold text-center">Le nostre migliori strutture</h2>
+		<h2 class="pb-2 text-white fw-bold text-center"><i class="fa-solid fa-star"></i> Le nostre migliori strutture <i
+				class="fa-solid fa-star"></i></h2>
 		<!-- Sezione carosello per dispositivi più grandi di 769px -->
 		<div class="slider-container">
 			<div class="promo-slider-box">
