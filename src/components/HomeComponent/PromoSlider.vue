@@ -125,6 +125,9 @@ export default {
 	border-radius: 20px;
 	border: 2px dashed white;
 	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .promo-slider-box {
@@ -147,6 +150,7 @@ export default {
 
 .slider-container {
 	display: none;
+	width: 91%;
 }
 
 .card-container {
@@ -165,7 +169,7 @@ export default {
 	}
 }
 
-@media (min-width: 769px) {
+@media (min-width: 820px) {
 	.slider-container {
 		display: block;
 	}
