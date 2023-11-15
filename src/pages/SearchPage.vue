@@ -113,12 +113,15 @@ export default {
 }
 
 .card-promo-style {
-  position: relative;
 
-  .card::after {
+  .card-body {
+    position: relative;
+  }
+
+  .card-body::after {
     content: "\2605";
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: 10px;
     color: $partial-secondary-color;
     font-size: 2rem;
@@ -126,8 +129,8 @@ export default {
   }
 
   &:hover {
-    .card::after {
-      color: $primary-color;
+    .card-body::after {
+      color: $secondary-color;
     }
   }
 }
@@ -164,6 +167,10 @@ export default {
 
     img {
       filter: brightness(.8);
+    }
+
+    .card-title {
+      color: $partial-secondary-color;
     }
   }
 }
