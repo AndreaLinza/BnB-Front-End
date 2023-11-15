@@ -8,11 +8,7 @@ export const store = reactive({
   pagination: {},
   isLoadForm: false,
   filter: {
-    // rooms_number: "",
-    // beds_number: "",
-    // bathrooms_number: "",
     radius: "20",
-    // address: "",
     services: [],
   },
 });

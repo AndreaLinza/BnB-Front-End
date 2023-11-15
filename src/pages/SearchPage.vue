@@ -1,60 +1,37 @@
 <script>
 import axios from "axios";
+import Loader from '../components/partials/Loader.vue';
 import { store, fetchApartments } from "../store";
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
 
 export default {
   components: {
-    TopOffcanvas
+    TopOffcanvas,
+    Loader,
   },
   data() {
     return {
       store,
-      sponsor: {
-        sponsorships: 1,
-      },
-      promoApartment: [],
     }
   },
   methods: {
-
     changePage(linkPage) {
       window.scrollTo(0, 0);
       fetchApartments(this.$route.query, linkPage.url)
     },
-    fetchData(url) {
-      axios.get(url, { params: this.sponsor }).then((response) => {
-        this.promoApartment = response.data.apartments.data;
-
-        // Applico la classe per gli appartamenti in promozione
-        this.applyClassToPromoApartment();
-      });
-    },
-    applyClassToPromoApartment() {
-      // Itera attraverso tutti gli appartamenti
-      store.apartments.forEach((apartment) => {
-        // Se l'appartamento è presente in promoApartment aggiungo una classe
-        for (const promo of this.promoApartment) {
-          if (promo.id === apartment.id) {
-            apartment.isPromoApartment = true;
-          }
-        }
-      });
-    },
     fetchApartments,
   },
   mounted() {
+    store.isLoadForm = true;
+    setTimeout(() => {
+        store.isLoadForm = false;
+      }, 5000)
     setTimeout(() => {
       if (store.apartments.length === 0) {
         fetchApartments(this.$route.query)
       }
     }, 1000);
-    this.fetchData('http://127.0.0.1:8000/api/apartments/');
-    // this.mountedData()
   },
-  updated() {
-    this.applyClassToPromoApartment();
-  }
 }
 </script>
 
@@ -64,7 +41,7 @@ export default {
   <!-- Sezione appartamenti -->
   <div class="container margin-top-custom" v-if="store.pagination.total > 0">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
-      <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.isPromoApartment }">
+      <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.sponsorships.length !== 0 }">
         <div class="card h-100 pb-2 rounded">
           <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top" :alt="apartment.title">
           <div class="card-body">
@@ -89,7 +66,11 @@ export default {
 
   <!-- Se la ricerca non produce risultati -->
   <div class="container margin-top-custom" v-else>
-    <h2 class="pt-5 text-center fs-4">
+
+    <!--Loader-->
+    <Loader v-if="store.isLoadForm"></Loader>
+
+    <h2 class="pt-5 text-center fs-4" v-if="store.isLoadForm === false">
       Attualmente, nessun appartamento corrisponde alla tua ricerca, ma stiamo selezionando con cura nuove proposte per
       garantirti il soggiorno perfetto. Continua a seguirci per scoprire le opzioni più adatte alle tue vacanze ideali.
     </h2>
