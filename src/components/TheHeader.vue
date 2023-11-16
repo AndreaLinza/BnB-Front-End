@@ -8,17 +8,40 @@ export default {
     }
   },
   mounted() {
+    const toggler = document.querySelector(".navbar-toggler");
+    const navbar = document.getElementById("navbar");
+    const underbar = document.querySelector(".underbar");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const navImg = document.querySelector('.img-nav-hover')
+    const searchImg = document.getElementById('search-img')
+
+    let isClicked = false;
+
+    toggler.addEventListener('click', function () {
+      navbar.classList.toggle('navbar-clicked')
+      isClicked = !isClicked;
+      if (isClicked) {
+        underbar.classList.add('underbar-scrolled')
+        toggler.classList.add('toggler-scrolled')
+        navImg.src = '../../navicon-rose.png'
+        searchImg.src = '../../transition-navicon-rose.png'
+        navLinks.forEach(navLink => {
+          navLink.classList.add('nav-link-scrolled')
+        })
+      }
+      else {
+        underbar.classList.remove('underbar-scrolled')
+        toggler.classList.remove('toggler-scrolled')
+        navImg.src = '../../navicon-blue.png'
+        searchImg.src = '../../transition-navicon-blue.png'
+        navLinks.forEach(navLink => {
+          navLink.classList.remove('nav-link-scrolled')
+        })
+      }
+    })
     document.addEventListener('DOMContentLoaded', () => {
-      let navbar = document.getElementById("navbar");
-      let underbar = document.querySelector(".underbar");
-      let toggler = document.querySelector(".navbar-toggler");
-      let navLinks = document.querySelectorAll(".nav-link");
-      let navImg = document.querySelector('.img-nav-hover')
-      let searchImg = document.getElementById('search-img')
-
-
       window.onscroll = function () {
-        if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
           navbar.classList.add("navbar-scrolled");
           underbar.classList.add('underbar-scrolled')
           toggler.classList.add('toggler-scrolled')
@@ -87,7 +110,7 @@ export default {
           </div>
 
           <!-- Link -->
-          <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0 text-center text-start-lg" style="width: 190px">
+          <ul class="navbar-nav mb-2 mb-lg-0 flex-shrink-0 text-center text-start-lg">
             <li class="nav-item">
               <router-link class="nav-link active" aria-current="page" :to='{ name: "home" }'>Home</router-link>
             </li>
@@ -118,6 +141,10 @@ export default {
   // background-color: rgba(22, 105, 122, 0.795) !important;
   background-color: transparent !important;
   transition: ease-out .5s;
+
+  &.navbar-clicked {
+    background-color: #16697aaf !important;
+  }
 
   // .navbar-brand{
   //     padding:.3rem ;

@@ -64,7 +64,6 @@ export default {
                 </ul>
             </div>
         </div>
-        Freepik
     </footer>
 </template>
 
