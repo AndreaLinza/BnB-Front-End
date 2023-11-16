@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 import Loader from '../components/partials/Loader.vue';
 import { store, fetchApartments } from "../store";
 import TopOffcanvas from "../components/partials/TopOffcanvas.vue";
@@ -24,8 +23,8 @@ export default {
   mounted() {
     store.isLoadForm = true;
     setTimeout(() => {
-        store.isLoadForm = false;
-      }, 5000)
+      store.isLoadForm = false;
+    }, 5000)
     setTimeout(() => {
       if (store.apartments.length === 0) {
         fetchApartments(this.$route.query)
@@ -41,7 +40,8 @@ export default {
   <!-- Sezione appartamenti -->
   <div class="container margin-top-custom" v-if="store.pagination.total > 0">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
-      <div class="col" v-for="apartment in store.apartments" :class="{ 'card-promo-style': apartment.sponsorships.length !== 0 }">
+      <div class="col" v-for="apartment in store.apartments"
+        :class="{ 'card-promo-style': apartment.sponsorships.length !== 0 }">
         <div class="card h-100 pb-2 rounded">
           <img :src="`http://127.0.0.1:8000/storage/${apartment.thumbnail}`" class="card-img-top" :alt="apartment.title">
           <div class="card-body">
@@ -113,12 +113,15 @@ export default {
 }
 
 .card-promo-style {
-  position: relative;
 
-  .card::after {
+  .card-body {
+    position: relative;
+  }
+
+  .card-body::after {
     content: "\2605";
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: 10px;
     color: $partial-secondary-color;
     font-size: 2rem;
@@ -126,8 +129,8 @@ export default {
   }
 
   &:hover {
-    .card::after {
-      color: $primary-color;
+    .card-body::after {
+      color: $secondary-color;
     }
   }
 }
@@ -164,6 +167,10 @@ export default {
 
     img {
       filter: brightness(.8);
+    }
+
+    .card-title {
+      color: $partial-secondary-color;
     }
   }
 }

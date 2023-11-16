@@ -49,10 +49,7 @@ export default {
           searchImg.src = '../../transition-navicon-rose.png'
           navLinks.forEach(navLink => {
             navLink.classList.add('nav-link-scrolled')
-
           })
-
-
         } else {
           navbar.classList.remove("navbar-scrolled");
           underbar.classList.remove('underbar-scrolled')
@@ -61,10 +58,7 @@ export default {
           searchImg.src = '../../transition-navicon-blue.png'
           navLinks.forEach(navLink => {
             navLink.classList.remove('nav-link-scrolled')
-
           })
-
-
         }
       };
     });
@@ -88,8 +82,6 @@ export default {
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
           <!-- SearchBar -->
           <div class="fake-searchbar">
             <div class="underbar">
@@ -114,12 +106,9 @@ export default {
             <li class="nav-item">
               <router-link class="nav-link active" aria-current="page" :to='{ name: "home" }'>Home</router-link>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="http://127.0.0.1:8000/api/user">Area Personale</a>
             </li>
-
-
           </ul>
         </div>
       </div>
@@ -127,14 +116,16 @@ export default {
   </header>
 </template>
 
-
-
-
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
 
-.navbar {
+// .navbar-collapse.show {
+//   background-color: #16697aba;
+//   border-radius: 10px;
+//   box-shadow: 0 0 10px rgba(22, 105, 122, 0.7);
+// }
 
+.navbar {
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -158,7 +149,6 @@ export default {
   // }
   &.navbar-scrolled {
     background-color: $secondary-color !important;
-
   }
 
   .fake-searchbar {
@@ -172,7 +162,6 @@ export default {
 
       &:hover {
         border-color: $secondary-color;
-
       }
 
       button {
@@ -191,7 +180,6 @@ export default {
           .icon {
             color: #fff;
             transition: .5s;
-
           }
         }
 
@@ -202,7 +190,6 @@ export default {
           }
 
           img {
-
             transform: translateY(0);
             transition: ease-in-out .5s;
           }
@@ -213,7 +200,6 @@ export default {
 
           span {
             opacity: .5;
-
           }
         }
 
@@ -221,7 +207,6 @@ export default {
           width: 35px;
           height: 30px;
           overflow: hidden;
-
         }
       }
 
@@ -234,12 +219,8 @@ export default {
           transition: .5s ease-out;
           color: $partial-secondary-color !important;
         }
-
-
       }
-
     }
-
   }
 
   //===============Right-Section-Navbar====================//
@@ -256,8 +237,6 @@ export default {
       transition: .5s;
       color: $partial-secondary-color !important;
     }
-
-
   }
 
   .navbar-toggler {
@@ -267,12 +246,10 @@ export default {
 
     &.toggler-scrolled:hover {
       border: var(--bs-border-width) solid $partial-secondary-color;
-
     }
 
     &.toggler-scrolled:hover {
       border: var(--bs-border-width) solid $partial-secondary-color;
-
     }
 
     &:focus {
@@ -280,7 +257,6 @@ export default {
     }
 
     &:hover {
-
       transition: .5s;
       border-color: $secondary-color;
 
@@ -294,9 +270,6 @@ export default {
         display: block !important;
       }
     }
-
   }
-
-
 }
 </style>
