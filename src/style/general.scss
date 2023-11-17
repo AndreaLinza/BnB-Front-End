@@ -1,1 +1,37 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+//@import '@fortawesome/fontawesome-free/css/all.min.css';
+//@import './partials/variables';
+
+@use "./partials/variables" as *;
+@import "bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto!important;
+    background: rgb(164,199,207);
+    background: linear-gradient(180deg, rgba(164,199,207,1) 0%, rgba(121,162,171,1) 27%, rgba(22,105,122,1) 51%, rgba(44,44,44,1) 75%, rgba(0,0,0,1) 88%);
+}
+#app {
+    display: contents;
+}
+
+.general-btn{
+    text-decoration: none;
+    background-color: transparent;
+    border:none;
+    border-radius: 30px;
+    border: 2px solid $partial-secondary-color;
+    color:#fff;
+    padding: 5px 15px;
+    margin-top:10px;
+    &:hover{
+        background-color: #1b8397;
+    }
+    &:focus {
+        background-color: #0f4651;
+        border-color: #a33f0d;
+        color:#a33f0d;
+    }
+}
